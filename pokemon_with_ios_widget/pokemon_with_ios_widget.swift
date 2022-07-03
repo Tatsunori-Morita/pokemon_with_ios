@@ -43,8 +43,17 @@ struct SimpleEntry: TimelineEntry {
 struct pokemon_with_ios_widgetEntryView : View {
     var entry: Provider.Entry
 
+    private let url = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png")
+
     var body: some View {
-        Text(entry.date, style: .time)
+        Group {
+            if let imageData = try! Data(contentsOf: url!),
+               let image = UIImage(data: imageData) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+            }
+        }
     }
 }
 

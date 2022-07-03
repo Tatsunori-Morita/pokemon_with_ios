@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    private let url = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png")
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        AsyncImage(url: url) { image in
+            image.resizable().scaledToFit()
+        } placeholder: {
+            ProgressView()
+        }
     }
 }
 

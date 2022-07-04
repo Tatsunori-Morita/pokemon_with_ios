@@ -11,43 +11,41 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+        SimpleEntry(date: Date(), number: 1, configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+        let entry = SimpleEntry(date: Date(), number: 1, configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+        let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
+        // 15 min * 96 times = 24 hours
+        for _ in 0 ..< 96 {
+            let entry = SimpleEntry(date: futureDate, number: Int.random(in: 1 ... 151), configuration: configuration)
             entries.append(entry)
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let timeline = Timeline(entries: entries, policy: .after(futureDate))
         completion(timeline)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
-    let date: Date
+    var date: Date
+    let number: Int
     let configuration: ConfigurationIntent
 }
 
 struct pokemon_with_ios_widgetEntryView : View {
     var entry: Provider.Entry
 
-    private let url = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png")
-
     var body: some View {
-        Group {
-            if let imageData = try! Data(contentsOf: url!),
+        VStack {
+            if let imageData = try! Data(contentsOf: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(entry.number).png")!),
                let image = UIImage(data: imageData) {
                 Image(uiImage: image)
                     .resizable()
@@ -72,7 +70,7 @@ struct pokemon_with_ios_widget: Widget {
 
 struct pokemon_with_ios_widget_Previews: PreviewProvider {
     static var previews: some View {
-        pokemon_with_ios_widgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        pokemon_with_ios_widgetEntryView(entry: SimpleEntry(date: Date(), number: 1, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

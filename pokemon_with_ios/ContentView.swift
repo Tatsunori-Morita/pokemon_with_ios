@@ -8,13 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let url = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png")
+    @State private var isDarkMode = true
+    @State private var selectedUpdatePeriod = UpdatePeriod.hour
+
+    private enum UpdatePeriod {
+        case hour
+        case twelve
+        case twentyFour
+    }
+
+    private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
 
     var body: some View {
-        AsyncImage(url: url) { image in
-            image.resizable().scaledToFit()
-        } placeholder: {
-            ProgressView()
+        NavigationView {
+            List {
+                Toggle("ダークモード", isOn: $isDarkMode)
+                HStack {
+                    Text("バージョン")
+                    Spacer()
+                    Text(version)
+                }
+                Picker("更新頻度", selection: $selectedUpdatePeriod) {
+                    Text("1時間").tag(UpdatePeriod.hour)
+                    Text("12時間").tag(UpdatePeriod.twelve)
+                    Text("24時間").tag(UpdatePeriod.twentyFour)
+                }
+            }
+            .navigationTitle("Setting")
         }
     }
 }

@@ -62,6 +62,7 @@ struct pokemon_with_ios_widget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             pokemon_with_ios_widgetEntryView(entry: entry)
+                .background(.white)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")

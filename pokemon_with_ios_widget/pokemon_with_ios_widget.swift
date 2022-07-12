@@ -10,33 +10,37 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), number: 1, configuration: ConfigurationIntent())
+
+    func placeholder(in context: Context) -> PokemonEntry {
+        PokemonEntry(date: Date(), pokemonEntryViewModel: PokemonEntryViewModel(), configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), number: 1, configuration: configuration)
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (PokemonEntry) -> ()) {
+        let entry = PokemonEntry(date: Date(), pokemonEntryViewModel: PokemonEntryViewModel(), configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        let number = Int.random(in: 1 ... 151)
+        let viewModel = PokemonApiService(number: number)
 
-        let currentDate = Date()
-        let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
-        // 15 min * 96 times = 24 hours
-        for _ in 0 ..< 96 {
-            let entry = SimpleEntry(date: futureDate, number: Int.random(in: 1 ... 151), configuration: configuration)
-            entries.append(entry)
+        viewModel.fetchPokemon { pokemon in
+            let currentDate = Date()
+            let entry = PokemonEntry(
+                date: currentDate,
+                pokemonEntryViewModel: PokemonEntryViewModel(pokemon: pokemon),
+                configuration: configuration)
+
+            let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
+            let timeline = Timeline(entries: [entry], policy: .after(futureDate))
+            completion(timeline)
         }
-        let timeline = Timeline(entries: entries, policy: .after(futureDate))
-        completion(timeline)
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct PokemonEntry: TimelineEntry {
     var date: Date
-    let number: Int
+    var pokemonEntryViewModel: PokemonEntryViewModel
     let configuration: ConfigurationIntent
 }
 
@@ -45,12 +49,15 @@ struct pokemon_with_ios_widgetEntryView : View {
 
     var body: some View {
         VStack {
-            if let imageData = try! Data(contentsOf: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(entry.number).png")!),
+            if let url = URL(string: entry.pokemonEntryViewModel.getFrontDefault),
+               let imageData = try! Data(contentsOf: url),
                let image = UIImage(data: imageData) {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
             }
+            Text(entry.pokemonEntryViewModel.getName)
+                .foregroundColor(.black)
         }
     }
 }
@@ -71,7 +78,11 @@ struct pokemon_with_ios_widget: Widget {
 
 struct pokemon_with_ios_widget_Previews: PreviewProvider {
     static var previews: some View {
-        pokemon_with_ios_widgetEntryView(entry: SimpleEntry(date: Date(), number: 1, configuration: ConfigurationIntent()))
+        pokemon_with_ios_widgetEntryView(
+            entry: PokemonEntry(
+                date: Date(),
+                pokemonEntryViewModel: PokemonEntryViewModel(),
+                configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

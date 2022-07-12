@@ -42,6 +42,17 @@ struct Pokemon: Codable {
         case pastTypes = "past_types"
         case species, sprites, stats, types, weight
     }
+
+    public var getId: String {
+        guard let value = id else {
+            return ""
+        }
+        return value.description
+    }
+
+    public var getName: String {
+        name ?? ""
+    }
 }
 
 // MARK: - Ability

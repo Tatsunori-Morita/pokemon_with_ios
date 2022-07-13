@@ -8,9 +8,9 @@
 import Foundation
 
 class PokemonEntryViewModel {
-    private var _pokemon: Pokemon!
+    private var _pokemon: Pokemon
 
-    init(pokemon: Pokemon? = nil) {
+    init(pokemon: Pokemon) {
         _pokemon = pokemon
     }
 
@@ -29,7 +29,7 @@ class PokemonEntryViewModel {
     }
 
     public var getFrontDefault: String {
-        guard let pokemon = _pokemon, let value = pokemon.sprites?.getFrontDefault else {
+        guard let value = _pokemon.sprites?.getFrontDefault else {
             return ""
         }
         return value

@@ -12,11 +12,11 @@ import Intents
 struct Provider: IntentTimelineProvider {
 
     func placeholder(in context: Context) -> PokemonEntry {
-        PokemonEntry(date: Date(), pokemonEntryViewModel: PokemonEntryViewModel(), configuration: ConfigurationIntent())
+        PokemonEntry(date: Date(), pokemonEntryViewModel: PokemonEntryViewModel(pokemon: loadData()), configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (PokemonEntry) -> ()) {
-        let entry = PokemonEntry(date: Date(), pokemonEntryViewModel: PokemonEntryViewModel(), configuration: configuration)
+        let entry = PokemonEntry(date: Date(), pokemonEntryViewModel: PokemonEntryViewModel(pokemon: loadData()), configuration: configuration)
         completion(entry)
     }
 
@@ -47,17 +47,53 @@ struct PokemonEntry: TimelineEntry {
 struct pokemon_with_ios_widgetEntryView : View {
     var entry: Provider.Entry
 
+    @Environment(\.widgetFamily) var family
+
     var body: some View {
-        VStack {
-            if let url = URL(string: entry.pokemonEntryViewModel.getFrontDefault),
-               let imageData = try! Data(contentsOf: url),
-               let image = UIImage(data: imageData) {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
+        switch family {
+        case .systemMedium:
+            VStack {
+                if let url = URL(string: entry.pokemonEntryViewModel.getFrontDefault),
+                   let imageData = try! Data(contentsOf: url),
+                   let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                }
+                Text(entry.pokemonEntryViewModel.getName)
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(.black)
+                    .padding(.bottom)
             }
-            Text(entry.pokemonEntryViewModel.getName)
-                .foregroundColor(.black)
+            .ignoresSafeArea()
+        case .systemLarge:
+            VStack {
+                if let url = URL(string: entry.pokemonEntryViewModel.getFrontDefault),
+                   let imageData = try! Data(contentsOf: url),
+                   let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                }
+                Text(entry.pokemonEntryViewModel.getName)
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(.black)
+                    .padding(.bottom)
+            }
+        default:
+            VStack {
+                if let url = URL(string: entry.pokemonEntryViewModel.getFrontDefault),
+                   let imageData = try! Data(contentsOf: url),
+                   let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                }
+                Text(entry.pokemonEntryViewModel.getName)
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(.black)
+                    .padding(.bottom)
+            }
         }
     }
 }
@@ -73,16 +109,34 @@ struct pokemon_with_ios_widget: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
+//        .supportedFamilies([.systemSmall])
     }
 }
 
 struct pokemon_with_ios_widget_Previews: PreviewProvider {
     static var previews: some View {
-        pokemon_with_ios_widgetEntryView(
-            entry: PokemonEntry(
-                date: Date(),
-                pokemonEntryViewModel: PokemonEntryViewModel(),
-                configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        Group {
+            pokemon_with_ios_widgetEntryView(
+                entry: PokemonEntry(
+                    date: Date(),
+                    pokemonEntryViewModel: PokemonEntryViewModel(pokemon: loadData()),
+                    configuration: ConfigurationIntent()))
+            .background(.white)
+//            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        }
     }
+}
+
+func loadData() -> Pokemon {
+    guard let url = Bundle.main.url(forResource: "Pokemon", withExtension: "json") else {
+        fatalError()
+    }
+
+    guard
+        let data = try? Data(contentsOf: url),
+        let pokemon = try? JSONDecoder().decode(Pokemon.self, from: data)
+    else {
+        fatalError()
+    }
+    return pokemon
 }

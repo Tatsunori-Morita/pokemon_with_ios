@@ -53,6 +53,14 @@ struct Pokemon: Codable {
     public var getName: String {
         name ?? ""
     }
+
+    public var getHeight: Int {
+        height ?? 0
+    }
+
+    public var getWeight: Int {
+        weight ?? 0
+    }
 }
 
 // MARK: - Ability

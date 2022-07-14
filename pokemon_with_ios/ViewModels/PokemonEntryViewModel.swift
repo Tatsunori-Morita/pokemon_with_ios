@@ -18,7 +18,7 @@ class PokemonEntryViewModel {
         guard let value = _pokemon.id else {
             return ""
         }
-        return value.description
+        return String(format: "%03d", value)
     }
 
     public var getName: String {
@@ -33,5 +33,15 @@ class PokemonEntryViewModel {
             return ""
         }
         return value
+    }
+
+    public var getHeight: String {
+        let value = Double(_pokemon.getHeight) / 10
+        return String(format: "%.1f", value)
+    }
+
+    public var getWeight: String {
+        let value = Double(_pokemon.getWeight) / 10
+        return String(format: "%.1f", value)
     }
 }

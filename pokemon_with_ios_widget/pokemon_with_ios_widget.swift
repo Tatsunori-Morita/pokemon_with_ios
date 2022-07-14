@@ -50,9 +50,29 @@ struct pokemon_with_ios_widgetEntryView : View {
     @Environment(\.widgetFamily) var family
 
     var body: some View {
-        switch family {
-        case .systemMedium:
-            VStack {
+        VStack {
+            HStack {
+                VStack(alignment: .leading, spacing: 15) {
+                    Text("No.\(entry.pokemonEntryViewModel.getId)")
+                        .foregroundColor(.black)
+                    Text(entry.pokemonEntryViewModel.getName)
+                        .foregroundColor(.black)
+                    Text("ねずみポケモン")
+                        .foregroundColor(.black)
+                    HStack {
+                        Text("たかさ")
+                            .foregroundColor(.black)
+                        Text("\(entry.pokemonEntryViewModel.getHeight)m")
+                            .foregroundColor(.black)
+                    }
+                    HStack {
+                        Text("おもさ")
+                            .foregroundColor(.black)
+                        Text("\(entry.pokemonEntryViewModel.getWeight)kg")
+                            .foregroundColor(.black)
+                    }
+                }
+
                 if let url = URL(string: entry.pokemonEntryViewModel.getFrontDefault),
                    let imageData = try! Data(contentsOf: url),
                    let image = UIImage(data: imageData) {
@@ -60,41 +80,16 @@ struct pokemon_with_ios_widgetEntryView : View {
                         .resizable()
                         .scaledToFit()
                 }
-                Text(entry.pokemonEntryViewModel.getName)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.black)
-                    .padding(.bottom)
             }
-            .ignoresSafeArea()
-        case .systemLarge:
-            VStack {
-                if let url = URL(string: entry.pokemonEntryViewModel.getFrontDefault),
-                   let imageData = try! Data(contentsOf: url),
-                   let image = UIImage(data: imageData) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                }
-                Text(entry.pokemonEntryViewModel.getName)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.black)
-                    .padding(.bottom)
-            }
-        default:
-            VStack {
-                if let url = URL(string: entry.pokemonEntryViewModel.getFrontDefault),
-                   let imageData = try! Data(contentsOf: url),
-                   let image = UIImage(data: imageData) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                }
-                Text(entry.pokemonEntryViewModel.getName)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.black)
-                    .padding(.bottom)
-            }
+
+            Spacer()
+            Divider()
+            Spacer()
+
+            Text("ほっぺたの　でんきぶくろから　でんきを　ピリピリ　だしているときは　あいてを　けいかいしている　あいず。")
+                .foregroundColor(.black)
         }
+        .padding(30)
     }
 }
 
@@ -109,7 +104,7 @@ struct pokemon_with_ios_widget: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
-//        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemLarge])
     }
 }
 
@@ -122,7 +117,7 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
                     pokemonEntryViewModel: PokemonEntryViewModel(pokemon: loadData()),
                     configuration: ConfigurationIntent()))
             .background(.white)
-//            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
     }
 }

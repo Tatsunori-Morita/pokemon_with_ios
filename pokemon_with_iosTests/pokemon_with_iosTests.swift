@@ -19,11 +19,24 @@ class pokemon_with_iosTests: XCTestCase {
     }
 
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+        let e = expectation(description: "PokemonApiService")
+        let viewModel = PokemonApiService(number: 25)
+        viewModel.fetchPokemonSpecies { species in
+            guard let generas = species.genera else { return }
+            let genera = generas.filter { $0.language?.name == "ja"}.first
+            print(genera?.genus)
+
+            guard let names = species.names else { return }
+            let name = names.filter { $0.language?.name == "ja" }.first
+            print(name?.name)
+
+            guard let flavorTextEntries = species.flavorTextEntries else { return }
+            let flavorTextEntry = flavorTextEntries.filter { $0.language?.name == "ja" }.last
+            print(flavorTextEntry?.flavorText)
+
+            e.fulfill()
+        }
+        waitForExpectations(timeout: 5.0, handler: nil)
     }
 
     func testPerformanceExample() throws {

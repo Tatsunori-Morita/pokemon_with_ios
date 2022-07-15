@@ -8,10 +8,12 @@
 import Foundation
 
 class PokemonEntryViewModel {
-    private var _pokemon: Pokemon
+    private let _pokemon: Pokemon
+    private let _pokemonSpecies: PokemonSpecies
 
-    init(pokemon: Pokemon) {
+    init(pokemon: Pokemon, pokemonSpecies: PokemonSpecies) {
         _pokemon = pokemon
+        _pokemonSpecies = pokemonSpecies
     }
 
     public var getId: String {
@@ -22,10 +24,13 @@ class PokemonEntryViewModel {
     }
 
     public var getName: String {
-        guard let value = _pokemon.name else {
+        guard
+            let names = _pokemonSpecies.names,
+            let name = names.filter({ $0.language?.name == "ja" }).first
+        else {
             return ""
         }
-        return value
+        return name.getName
     }
 
     public var getFrontDefault: String {
@@ -43,5 +48,25 @@ class PokemonEntryViewModel {
     public var getWeight: String {
         let value = Double(_pokemon.getWeight) / 10
         return String(format: "%.1f", value)
+    }
+
+    public var getGenera: String {
+        guard
+            let generas = _pokemonSpecies.genera,
+            let genera = generas.filter({ $0.language?.name == "ja"}).first
+        else {
+            return ""
+        }
+        return genera.getGenus
+    }
+
+    public var getFlavorTextEntry: String {
+        guard
+            let flavorTextEntries = _pokemonSpecies.flavorTextEntries,
+            let flavorTextEntry = flavorTextEntries.filter({ $0.language?.name == "ja" }).last
+        else {
+            return ""
+        }
+        return flavorTextEntry.getFlavorText
     }
 }

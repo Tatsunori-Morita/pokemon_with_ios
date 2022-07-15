@@ -12,11 +12,21 @@ import Intents
 struct Provider: IntentTimelineProvider {
 
     func placeholder(in context: Context) -> PokemonEntry {
-        PokemonEntry(date: Date(), pokemonEntryViewModel: PokemonEntryViewModel(pokemon: loadData()), configuration: ConfigurationIntent())
+        PokemonEntry(
+            date: Date(),
+            pokemonEntryViewModel: PokemonEntryViewModel(
+                pokemon: loadPokemonData(),
+                pokemonSpecies: loadPokemonSpeciesData()),
+            configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (PokemonEntry) -> ()) {
-        let entry = PokemonEntry(date: Date(), pokemonEntryViewModel: PokemonEntryViewModel(pokemon: loadData()), configuration: configuration)
+        let entry = PokemonEntry(
+            date: Date(),
+            pokemonEntryViewModel: PokemonEntryViewModel(
+                pokemon: loadPokemonData(),
+                pokemonSpecies: loadPokemonSpeciesData()),
+            configuration: configuration)
         completion(entry)
     }
 
@@ -25,15 +35,19 @@ struct Provider: IntentTimelineProvider {
         let viewModel = PokemonApiService(number: number)
 
         viewModel.fetchPokemon { pokemon in
-            let currentDate = Date()
-            let entry = PokemonEntry(
-                date: currentDate,
-                pokemonEntryViewModel: PokemonEntryViewModel(pokemon: pokemon),
-                configuration: configuration)
+            viewModel.fetchPokemonSpecies { pokemonSpecies in
+                let currentDate = Date()
+                let entry = PokemonEntry(
+                    date: currentDate,
+                    pokemonEntryViewModel: PokemonEntryViewModel(
+                        pokemon: pokemon,
+                        pokemonSpecies: pokemonSpecies),
+                    configuration: configuration)
 
-            let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
-            let timeline = Timeline(entries: [entry], policy: .after(futureDate))
-            completion(timeline)
+                let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
+                let timeline = Timeline(entries: [entry], policy: .after(futureDate))
+                completion(timeline)
+            }
         }
     }
 }
@@ -57,7 +71,7 @@ struct pokemon_with_ios_widgetEntryView : View {
                         .foregroundColor(.black)
                     Text(entry.pokemonEntryViewModel.getName)
                         .foregroundColor(.black)
-                    Text("ねずみポケモン")
+                    Text(entry.pokemonEntryViewModel.getGenera)
                         .foregroundColor(.black)
                     HStack {
                         Text("たかさ")
@@ -86,7 +100,7 @@ struct pokemon_with_ios_widgetEntryView : View {
             Divider()
             Spacer()
 
-            Text("ほっぺたの　でんきぶくろから　でんきを　ピリピリ　だしているときは　あいてを　けいかいしている　あいず。")
+            Text(entry.pokemonEntryViewModel.getFlavorTextEntry)
                 .foregroundColor(.black)
         }
         .padding(30)
@@ -114,7 +128,9 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
                     date: Date(),
-                    pokemonEntryViewModel: PokemonEntryViewModel(pokemon: loadData()),
+                    pokemonEntryViewModel: PokemonEntryViewModel(
+                        pokemon: loadPokemonData(),
+                        pokemonSpecies: loadPokemonSpeciesData()),
                     configuration: ConfigurationIntent()))
             .background(.white)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
@@ -122,7 +138,7 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
     }
 }
 
-func loadData() -> Pokemon {
+func loadPokemonData() -> Pokemon {
     guard let url = Bundle.main.url(forResource: "Pokemon", withExtension: "json") else {
         fatalError()
     }
@@ -134,4 +150,18 @@ func loadData() -> Pokemon {
         fatalError()
     }
     return pokemon
+}
+
+func loadPokemonSpeciesData() -> PokemonSpecies {
+    guard let url = Bundle.main.url(forResource: "PokemonSpecies", withExtension: "json") else {
+        fatalError()
+    }
+
+    guard
+        let data = try? Data(contentsOf: url),
+        let pokemonSpecies = try? JSONDecoder().decode(PokemonSpecies.self, from: data)
+    else {
+        fatalError()
+    }
+    return pokemonSpecies
 }

@@ -15,8 +15,8 @@ struct Provider: IntentTimelineProvider {
         PokemonEntry(
             date: Date(),
             pokemonEntryViewModel: PokemonEntryViewModel(
-                pokemon: loadPokemonData(),
-                pokemonSpecies: loadPokemonSpeciesData()),
+                pokemon: LocalDataManager.shared.loadPokemonData(),
+                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()),
             configuration: ConfigurationIntent())
     }
 
@@ -24,8 +24,8 @@ struct Provider: IntentTimelineProvider {
         let entry = PokemonEntry(
             date: Date(),
             pokemonEntryViewModel: PokemonEntryViewModel(
-                pokemon: loadPokemonData(),
-                pokemonSpecies: loadPokemonSpeciesData()),
+                pokemon: LocalDataManager.shared.loadPokemonData(),
+                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()),
             configuration: configuration)
         completion(entry)
     }
@@ -64,55 +64,13 @@ struct pokemon_with_ios_widgetEntryView : View {
     @Environment(\.widgetFamily) var family
 
     var body: some View {
-        VStack {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("No.\(entry.pokemonEntryViewModel.getId)")
-                        .foregroundColor(.black)
-                        .bold()
-                    Text(entry.pokemonEntryViewModel.getName)
-                        .foregroundColor(.black)
-                        .font(.system(size: 24))
-                        .bold()
-                        .padding(.bottom, 10)
-                    Text(entry.pokemonEntryViewModel.getGenera)
-                        .foregroundColor(.black)
-                    HStack {
-                        Text("たかさ:")
-                            .bold()
-                            .foregroundColor(.black)
-                        Text("\(entry.pokemonEntryViewModel.getHeight)m")
-                            .foregroundColor(.black)
-                    }
-                    HStack {
-                        Text("おもさ:")
-                            .bold()
-                            .foregroundColor(.black)
-                        Text("\(entry.pokemonEntryViewModel.getWeight)kg")
-                            .foregroundColor(.black)
-                    }
-                }
-
-                if let url = URL(string: entry.pokemonEntryViewModel.getFrontDefault),
-                   let imageData = try! Data(contentsOf: url),
-                   let image = UIImage(data: imageData) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                }
-            }
-            .padding(.top, 30)
-            .padding(.leading, 30)
-            .padding(.trailing, 30)
-
-            Divider()
-
-            Text(entry.pokemonEntryViewModel.getFlavorTextEntry)
-                .font(.system(size: 20))
-                .lineSpacing(8)
-                .foregroundColor(.black)
-                .padding(.top)
-            Spacer()
+        switch family {
+        case .systemMedium:
+            WidgetMedium(pokemonEntryViewModel: entry.pokemonEntryViewModel)
+        case .systemLarge:
+            WidgetLarge(pokemonEntryViewModel: entry.pokemonEntryViewModel)
+        default:
+            fatalError()
         }
     }
 }
@@ -128,7 +86,7 @@ struct pokemon_with_ios_widget: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
-        .supportedFamilies([.systemLarge])
+        .supportedFamilies([.systemMedium, .systemLarge])
     }
 }
 
@@ -139,39 +97,20 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
                 entry: PokemonEntry(
                     date: Date(),
                     pokemonEntryViewModel: PokemonEntryViewModel(
-                        pokemon: loadPokemonData(),
-                        pokemonSpecies: loadPokemonSpeciesData()),
+                        pokemon: LocalDataManager.shared.loadPokemonData(),
+                        pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()),
+                    configuration: ConfigurationIntent()))
+            .background(.white)
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+            pokemon_with_ios_widgetEntryView(
+                entry: PokemonEntry(
+                    date: Date(),
+                    pokemonEntryViewModel: PokemonEntryViewModel(
+                        pokemon: LocalDataManager.shared.loadPokemonData(),
+                        pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()),
                     configuration: ConfigurationIntent()))
             .background(.white)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
     }
-}
-
-func loadPokemonData() -> Pokemon {
-    guard let url = Bundle.main.url(forResource: "Pokemon", withExtension: "json") else {
-        fatalError()
-    }
-
-    guard
-        let data = try? Data(contentsOf: url),
-        let pokemon = try? JSONDecoder().decode(Pokemon.self, from: data)
-    else {
-        fatalError()
-    }
-    return pokemon
-}
-
-func loadPokemonSpeciesData() -> PokemonSpecies {
-    guard let url = Bundle.main.url(forResource: "PokemonSpecies", withExtension: "json") else {
-        fatalError()
-    }
-
-    guard
-        let data = try? Data(contentsOf: url),
-        let pokemonSpecies = try? JSONDecoder().decode(PokemonSpecies.self, from: data)
-    else {
-        fatalError()
-    }
-    return pokemonSpecies
 }

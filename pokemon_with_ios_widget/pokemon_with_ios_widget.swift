@@ -65,8 +65,8 @@ struct pokemon_with_ios_widgetEntryView : View {
 
     var body: some View {
         VStack {
-            HStack {
-                VStack(alignment: .leading, spacing: 15) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 5) {
                     Text("No.\(entry.pokemonEntryViewModel.getId)")
                         .foregroundColor(.black)
                     Text(entry.pokemonEntryViewModel.getName)
@@ -95,15 +95,17 @@ struct pokemon_with_ios_widgetEntryView : View {
                         .scaledToFit()
                 }
             }
+            .padding(.top, 30)
+            .padding(.leading, 30)
+            .padding(.trailing, 30)
 
-            Spacer()
             Divider()
-            Spacer()
 
             Text(entry.pokemonEntryViewModel.getFlavorTextEntry)
                 .foregroundColor(.black)
+                .padding(.top)
+            Spacer()
         }
-        .padding(30)
     }
 }
 

@@ -353,6 +353,10 @@ struct OfficialArtwork: Codable {
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
     }
+
+    public var getFrontDefault: String {
+        frontDefault ?? ""
+    }
 }
 
 // MARK: - Stat

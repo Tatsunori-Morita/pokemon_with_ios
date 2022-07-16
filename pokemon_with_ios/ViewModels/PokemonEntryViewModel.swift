@@ -34,7 +34,7 @@ class PokemonEntryViewModel {
     }
 
     public var getFrontDefault: String {
-        guard let value = _pokemon.sprites?.getFrontDefault else {
+        guard let value = _pokemon.sprites?.other?.officialArtwork?.getFrontDefault else {
             return ""
         }
         return value

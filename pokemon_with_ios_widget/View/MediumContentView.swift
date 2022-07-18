@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct WidgetMedium: View {
+struct MediumContentView: View {
     let pokemonEntryViewModel: PokemonEntryViewModel
 
     var body: some View {
         VStack {
-            ContentWidget(pokemonEntryViewModel: pokemonEntryViewModel)
+            CommonContentView(pokemonEntryViewModel: pokemonEntryViewModel)
                 .padding(.bottom, 30)
         }
     }
@@ -20,7 +20,7 @@ struct WidgetMedium: View {
 
 struct WidgetMedium_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetMedium(
+        MediumContentView(
             pokemonEntryViewModel: PokemonEntryViewModel(
                 pokemon: LocalDataManager.shared.loadPokemonData(),
                 pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()))

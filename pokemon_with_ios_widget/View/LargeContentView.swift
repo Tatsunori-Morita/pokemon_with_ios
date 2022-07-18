@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct WidgetLarge: View {
+struct LargeContentView: View {
     let pokemonEntryViewModel: PokemonEntryViewModel
     
     var body: some View {
         VStack {
-            ContentWidget(pokemonEntryViewModel: pokemonEntryViewModel)
+            CommonContentView(pokemonEntryViewModel: pokemonEntryViewModel)
             Divider()
             Text(pokemonEntryViewModel.getFlavorTextEntry)
                 .font(.system(size: 20))
@@ -26,7 +26,7 @@ struct WidgetLarge: View {
 
 struct WidgetLarge_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetLarge(
+        LargeContentView(
             pokemonEntryViewModel: PokemonEntryViewModel(
                 pokemon: LocalDataManager.shared.loadPokemonData(),
                 pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()))

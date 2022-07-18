@@ -66,9 +66,9 @@ struct pokemon_with_ios_widgetEntryView : View {
     var body: some View {
         switch family {
         case .systemMedium:
-            WidgetMedium(pokemonEntryViewModel: entry.pokemonEntryViewModel)
+            MediumContentView(pokemonEntryViewModel: entry.pokemonEntryViewModel)
         case .systemLarge:
-            WidgetLarge(pokemonEntryViewModel: entry.pokemonEntryViewModel)
+            LargeContentView(pokemonEntryViewModel: entry.pokemonEntryViewModel)
         default:
             fatalError()
         }

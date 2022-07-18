@@ -22,12 +22,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                Toggle("ダークモード", isOn: $isDarkMode)
-                HStack {
-                    Text("バージョン")
-                    Spacer()
-                    Text(version)
-                }
                 Picker("更新頻度", selection: $selectedUpdatePeriod) {
                     Text("1時間").tag(UpdatePeriod.hour)
                     Text("12時間").tag(UpdatePeriod.twelve)

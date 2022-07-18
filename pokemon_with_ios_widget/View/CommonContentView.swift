@@ -11,7 +11,8 @@ struct CommonContentView: View {
     let pokemonEntryViewModel: PokemonEntryViewModel
     
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .center) {
+            Spacer()
             VStack(alignment: .leading, spacing: 5) {
                 Text("No.\(pokemonEntryViewModel.getId)")
                     .foregroundColor(.black)
@@ -46,6 +47,7 @@ struct CommonContentView: View {
                     .resizable()
                     .scaledToFit()
             }
+            Spacer()
         }
         .padding(.top, 30)
         .padding(.leading, 30)

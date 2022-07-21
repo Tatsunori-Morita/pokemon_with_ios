@@ -22,10 +22,10 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                Picker("更新頻度", selection: $selectedUpdatePeriod) {
-                    Text("1時間").tag(UpdatePeriod.hour)
-                    Text("12時間").tag(UpdatePeriod.twelve)
-                    Text("24時間").tag(UpdatePeriod.twentyFour)
+                HStack {
+                    Text("バージョン")
+                    Spacer()
+                    Text(version)
                 }
             }
             .navigationTitle("Setting")

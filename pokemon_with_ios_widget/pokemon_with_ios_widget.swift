@@ -82,7 +82,7 @@ struct pokemon_with_ios_widget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             pokemon_with_ios_widgetEntryView(entry: entry)
-                .background(.white)
+                .background(Color.layout)
         }
         .configurationDisplayName("Pokemon WITH")
         .description("かわいいポケモンをランダム表示します。")
@@ -100,7 +100,7 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
                         pokemon: LocalDataManager.shared.loadPokemonData(),
                         pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()),
                     configuration: ConfigurationIntent()))
-            .background(.white)
+            .background(Color.layout)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(

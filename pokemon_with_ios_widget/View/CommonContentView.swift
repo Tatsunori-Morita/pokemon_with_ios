@@ -15,26 +15,26 @@ struct CommonContentView: View {
             Spacer()
             VStack(alignment: .leading, spacing: 5) {
                 Text("No.\(pokemonEntryViewModel.getId)")
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.text)
                     .bold()
                 Text(pokemonEntryViewModel.getName)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.text)
                     .font(.system(size: 24))
                     .bold()
                     .padding(.bottom, 10)
                 Text(pokemonEntryViewModel.getGenera)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.text)
                 HStack {
                     Text("たかさ:")
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.text)
                     Text("\(pokemonEntryViewModel.getHeight)m")
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.text)
                 }
                 HStack {
                     Text("おもさ:")
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.text)
                     Text("\(pokemonEntryViewModel.getWeight)kg")
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.text)
                 }
             }
 

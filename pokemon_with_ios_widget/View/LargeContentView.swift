@@ -17,7 +17,7 @@ struct LargeContentView: View {
             Text(pokemonEntryViewModel.getFlavorTextEntry)
                 .font(.system(size: 20))
                 .lineSpacing(8)
-                .foregroundColor(.black)
+                .foregroundColor(Color.text)
                 .padding(.top)
             Spacer()
         }

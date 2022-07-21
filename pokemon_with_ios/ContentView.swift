@@ -24,8 +24,10 @@ struct ContentView: View {
             List {
                 HStack {
                     Text("バージョン")
+                        .foregroundColor(Color.text)
                     Spacer()
                     Text(version)
+                        .foregroundColor(Color.text)
                 }
             }
             .navigationTitle("Setting")

@@ -23,6 +23,7 @@ struct WidgetMedium_Previews: PreviewProvider {
         MediumContentView(
             pokemonEntryViewModel: PokemonEntryViewModel(
                 pokemon: LocalDataManager.shared.loadPokemonData(),
-                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()))
+                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
+                pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()))
     }
 }

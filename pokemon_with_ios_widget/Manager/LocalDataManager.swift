@@ -37,4 +37,18 @@ struct LocalDataManager {
         }
         return pokemonSpecies
     }
+
+    public func loadPokemonTypesData() -> [PokemonType] {
+        guard let url = Bundle.main.url(forResource: "PokemonTypes", withExtension: "json") else {
+            fatalError()
+        }
+
+        guard
+            let data = try? Data(contentsOf: url),
+            let pokemonTypes = try? JSONDecoder().decode([PokemonType].self, from: data)
+        else {
+            fatalError()
+        }
+        return pokemonTypes
+    }
 }

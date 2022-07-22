@@ -16,7 +16,8 @@ struct Provider: IntentTimelineProvider {
             date: Date(),
             pokemonEntryViewModel: PokemonEntryViewModel(
                 pokemon: LocalDataManager.shared.loadPokemonData(),
-                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()),
+                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
+                pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()),
             configuration: ConfigurationIntent())
     }
 
@@ -25,28 +26,45 @@ struct Provider: IntentTimelineProvider {
             date: Date(),
             pokemonEntryViewModel: PokemonEntryViewModel(
                 pokemon: LocalDataManager.shared.loadPokemonData(),
-                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()),
+                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
+                pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()),
             configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         let number = Int.random(in: 1 ... 898)
-        let viewModel = PokemonApiService(number: number)
+        let apiService = PokemonApiService(number: number)
 
-        viewModel.fetchPokemon { pokemon in
-            viewModel.fetchPokemonSpecies { pokemonSpecies in
-                let currentDate = Date()
-                let entry = PokemonEntry(
-                    date: currentDate,
-                    pokemonEntryViewModel: PokemonEntryViewModel(
-                        pokemon: pokemon,
-                        pokemonSpecies: pokemonSpecies),
-                    configuration: configuration)
+        apiService.fetchPokemon { pokemon in
+            var pokemonTypes: [PokemonType] = []
+            apiService.fetchPokemonSpecies { pokemonSpecies in
+                guard let typeElements = pokemon.types else { return }
+                let pokemonTypesGroup = DispatchGroup()
+                typeElements.forEach { typeElement in
+                    pokemonTypesGroup.enter()
+                    if let url = typeElement.type?.url {
+                        apiService.fetchPokemonType(url: url) { type in
+                            pokemonTypes.append(type)
+                            pokemonTypesGroup.leave()
+                        }
+                    }
+                }
 
-                let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
-                let timeline = Timeline(entries: [entry], policy: .after(futureDate))
-                completion(timeline)
+                pokemonTypesGroup.notify(queue: .main) {
+                    let currentDate = Date()
+                    let entry = PokemonEntry(
+                        date: currentDate,
+                        pokemonEntryViewModel: PokemonEntryViewModel(
+                            pokemon: pokemon,
+                            pokemonSpecies: pokemonSpecies,
+                            pokemonTypes: pokemonTypes),
+                        configuration: configuration)
+
+                    let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
+                    let timeline = Timeline(entries: [entry], policy: .after(futureDate))
+                    completion(timeline)
+                }
             }
         }
     }
@@ -98,7 +116,8 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
                     date: Date(),
                     pokemonEntryViewModel: PokemonEntryViewModel(
                         pokemon: LocalDataManager.shared.loadPokemonData(),
-                        pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()),
+                        pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
+                        pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()),
                     configuration: ConfigurationIntent()))
             .background(Color.layout)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
@@ -107,7 +126,8 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
                     date: Date(),
                     pokemonEntryViewModel: PokemonEntryViewModel(
                         pokemon: LocalDataManager.shared.loadPokemonData(),
-                        pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()),
+                        pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
+                        pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()),
                     configuration: ConfigurationIntent()))
             .background(.white)
             .previewContext(WidgetPreviewContext(family: .systemLarge))

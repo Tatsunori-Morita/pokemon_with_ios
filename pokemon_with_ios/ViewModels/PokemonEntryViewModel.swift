@@ -10,10 +10,12 @@ import Foundation
 class PokemonEntryViewModel {
     private let _pokemon: Pokemon
     private let _pokemonSpecies: PokemonSpecies
+    private let _pokemonTypes: [PokemonType]
 
-    init(pokemon: Pokemon, pokemonSpecies: PokemonSpecies) {
+    init(pokemon: Pokemon, pokemonSpecies: PokemonSpecies, pokemonTypes: [PokemonType]) {
         _pokemon = pokemon
         _pokemonSpecies = pokemonSpecies
+        _pokemonTypes = pokemonTypes
     }
 
     public var getId: String {
@@ -68,5 +70,15 @@ class PokemonEntryViewModel {
             return ""
         }
         return flavorTextEntry.getFlavorText
+    }
+
+    public var getTypeNames: String {
+        var arry: [String] = []
+        _pokemonTypes.forEach { pokemonType in
+            if let typeName = pokemonType.names?.filter({ $0.language?.name == "ja" }).first {
+                arry.append(typeName.getName)
+            }
+        }
+        return arry.joined(separator: "/")
     }
 }

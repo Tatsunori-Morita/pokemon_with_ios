@@ -36,6 +36,17 @@ class PokemonApiService {
         }
     }
 
+    public func fetchPokemonType(url: String, completion: @escaping (PokemonType) -> ()) {
+        _fetchPokemonType(url: url) { result in
+            switch result {
+            case .success(let pokemonType):
+                completion(pokemonType)
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+
     private func _fetchPokemon(completion: @escaping (Result<Pokemon, Error>) -> ()) {
         APIManager.get(url: "https://pokeapi.co/api/v2/pokemon/\(_number)", completion: { result in
             switch result {
@@ -58,6 +69,22 @@ class PokemonApiService {
             case .success(let data):
                 do {
                     let result = try JSONDecoder().decode(PokemonSpecies.self, from: data!)
+                    completion(.success(result))
+                } catch let jsonError {
+                    completion(.failure(jsonError))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
+    }
+
+    private func _fetchPokemonType(url: String, completion: @escaping (Result<PokemonType, Error>) -> ()) {
+        APIManager.get(url: url, completion: { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let result = try JSONDecoder().decode(PokemonType.self, from: data!)
                     completion(.success(result))
                 } catch let jsonError {
                     completion(.failure(jsonError))

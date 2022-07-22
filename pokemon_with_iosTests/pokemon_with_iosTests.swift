@@ -20,22 +20,38 @@ class pokemon_with_iosTests: XCTestCase {
 
     func testExample() throws {
         let e = expectation(description: "PokemonApiService")
-        let viewModel = PokemonApiService(number: 25)
-        viewModel.fetchPokemonSpecies { species in
-            guard let generas = species.genera else { return }
-            let genera = generas.filter { $0.language?.name == "ja"}.first
-            print(genera?.genus)
+        let viewModel = PokemonApiService(number: 1)
+//        viewModel.fetchPokemonSpecies { species in
+//            guard let generas = species.genera else { return }
+//            let genera = generas.filter { $0.language?.name == "ja"}.first
+//            print(genera?.genus)
+//
+//            guard let names = species.names else { return }
+//            let name = names.filter { $0.language?.name == "ja" }.first
+//            print(name?.name)
+//
+//            guard let flavorTextEntries = species.flavorTextEntries else { return }
+//            let flavorTextEntry = flavorTextEntries.filter { $0.language?.name == "ja" }.last
+//            print(flavorTextEntry?.flavorText)
+//
+//            e.fulfill()
+//        }
 
-            guard let names = species.names else { return }
-            let name = names.filter { $0.language?.name == "ja" }.first
-            print(name?.name)
+        viewModel.fetchPokemon { pokemon in
+            guard let typeElements = pokemon.types else { return }
 
-            guard let flavorTextEntries = species.flavorTextEntries else { return }
-            let flavorTextEntry = flavorTextEntries.filter { $0.language?.name == "ja" }.last
-            print(flavorTextEntry?.flavorText)
-
+            typeElements.forEach { typeElement in
+                if let url = typeElement.type?.url {
+                    viewModel.fetchPokemonType(url: url) { type in
+                        guard let names = type.names else { return }
+                        let name = names.filter { $0.language?.name == "ja" }.first
+                        print(name)
+                    }
+                }
+            }
             e.fulfill()
         }
+
         waitForExpectations(timeout: 5.0, handler: nil)
     }
 

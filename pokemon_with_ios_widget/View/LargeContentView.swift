@@ -29,6 +29,7 @@ struct WidgetLarge_Previews: PreviewProvider {
         LargeContentView(
             pokemonEntryViewModel: PokemonEntryViewModel(
                 pokemon: LocalDataManager.shared.loadPokemonData(),
-                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()))
+                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
+                pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()))
     }
 }

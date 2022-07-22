@@ -40,18 +40,27 @@ struct CommonContentView: View {
 
             Spacer()
 
-            if let url = URL(string: pokemonEntryViewModel.getFrontDefault),
-               let imageData = try! Data(contentsOf: url),
-               let image = UIImage(data: imageData) {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
+            VStack {
+                if let url = URL(string: pokemonEntryViewModel.getFrontDefault),
+                   let imageData = try! Data(contentsOf: url),
+                   let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                }
+                Text(pokemonEntryViewModel.getTypeNames)
+                    .font(.system(size: 12))
+                    .bold()
+                    .padding(5)
+                    .foregroundColor(Color.layout)
+                    .background(Color.text)
+                    .cornerRadius(10)
             }
             Spacer()
         }
-        .padding(.top, 30)
-        .padding(.leading, 30)
-        .padding(.trailing, 30)
+        .padding(.top, 20)
+        .padding(.leading, 20)
+        .padding(.trailing, 20)
     }
 }
 
@@ -59,6 +68,7 @@ struct ContentWidget_Previews: PreviewProvider {
     static var previews: some View {
         CommonContentView(pokemonEntryViewModel: PokemonEntryViewModel(
             pokemon: LocalDataManager.shared.loadPokemonData(),
-            pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData()))
+            pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
+            pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()))
     }
 }

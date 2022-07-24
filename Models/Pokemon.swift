@@ -381,3 +381,7 @@ struct TypeElement: Codable {
     let slot: Int?
     let type: Species?
 }
+
+extension Pokemon {
+    public static let identifier = String(describing: Pokemon.self)
+}

@@ -15,9 +15,9 @@ struct Provider: IntentTimelineProvider {
         PokemonEntry(
             date: Date(),
             pokemonEntryViewModel: PokemonEntryViewModel(
-                pokemon: LocalDataManager.shared.loadPokemonData(),
-                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
-                pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()),
+                pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+                pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)),
             configuration: ConfigurationIntent())
     }
 
@@ -25,26 +25,26 @@ struct Provider: IntentTimelineProvider {
         let entry = PokemonEntry(
             date: Date(),
             pokemonEntryViewModel: PokemonEntryViewModel(
-                pokemon: LocalDataManager.shared.loadPokemonData(),
-                pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
-                pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()),
+                pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+                pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)),
             configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let number = Int.random(in: 1 ... 898)
+        let number = Int.random(in: 1 ... PokemonApiService.POKEMON_AMOUNT)
         let apiService = PokemonApiService(number: number)
 
-        apiService.fetchPokemon { pokemon in
+        apiService.fetch(url: apiService.pokemonURL) { (pokemon: Pokemon) in
             var pokemonTypes: [PokemonType] = []
-            apiService.fetchPokemonSpecies { pokemonSpecies in
+            apiService.fetch(url: apiService.pokemonSpeciesURL) { (pokemonSpecies: PokemonSpecies) in
                 guard let typeElements = pokemon.types else { return }
                 let pokemonTypesGroup = DispatchGroup()
                 typeElements.forEach { typeElement in
                     pokemonTypesGroup.enter()
                     if let url = typeElement.type?.url {
-                        apiService.fetchPokemonType(url: url) { type in
+                        apiService.fetch(url: url) { (type: PokemonType) in
                             pokemonTypes.append(type)
                             pokemonTypesGroup.leave()
                         }
@@ -115,9 +115,9 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
                 entry: PokemonEntry(
                     date: Date(),
                     pokemonEntryViewModel: PokemonEntryViewModel(
-                        pokemon: LocalDataManager.shared.loadPokemonData(),
-                        pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
-                        pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()),
+                        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+                        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)),
                     configuration: ConfigurationIntent()))
             .background(Color.layout)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
@@ -125,9 +125,9 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
                 entry: PokemonEntry(
                     date: Date(),
                     pokemonEntryViewModel: PokemonEntryViewModel(
-                        pokemon: LocalDataManager.shared.loadPokemonData(),
-                        pokemonSpecies: LocalDataManager.shared.loadPokemonSpeciesData(),
-                        pokemonTypes: LocalDataManager.shared.loadPokemonTypesData()),
+                        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+                        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)),
                     configuration: ConfigurationIntent()))
             .background(.white)
             .previewContext(WidgetPreviewContext(family: .systemLarge))

@@ -14,7 +14,6 @@ struct PokemonSpecies: Codable {
     let evolutionChain: EvolutionChain?
     let evolvesFromSpecies: Species?
     let flavorTextEntries: [FlavorTextEntry]?
-//    let formDescriptions: [JSONAny]
     let formsSwitchable: Bool?
     let genderRate: Int?
     let genera: [Genus]?
@@ -38,7 +37,6 @@ struct PokemonSpecies: Codable {
         case evolutionChain = "evolution_chain"
         case evolvesFromSpecies = "evolves_from_species"
         case flavorTextEntries = "flavor_text_entries"
-//        case formDescriptions = "form_descriptions"
         case formsSwitchable = "forms_switchable"
         case genderRate = "gender_rate"
         case genera, generation
@@ -56,12 +54,6 @@ struct PokemonSpecies: Codable {
         case shape, varieties
     }
 }
-
-// MARK: - Color
-//struct Info: Codable {
-//    let name: String?
-//    let url: String?
-//}
 
 // MARK: - EvolutionChain
 struct EvolutionChain: Codable {
@@ -135,4 +127,8 @@ struct Variety: Codable {
         case isDefault = "is_default"
         case pokemon
     }
+}
+
+extension PokemonSpecies {
+    public static let identifier = String(describing: PokemonSpecies.self)
 }

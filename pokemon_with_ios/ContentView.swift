@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isDarkMode = true
-    @State private var selectedUpdatePeriod = UpdatePeriod.hour
+//    @State private var isDarkMode = true
+//    @State private var selectedUpdatePeriod = UpdatePeriod.hour
 
-    private enum UpdatePeriod {
-        case hour
-        case twelve
-        case twentyFour
-    }
+//    private enum UpdatePeriod {
+//        case hour
+//        case twelve
+//        case twentyFour
+//    }
 
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
 
@@ -23,7 +23,7 @@ struct ContentView: View {
         NavigationView {
             List {
                 HStack {
-                    Text("バージョン")
+                    Text("Version")
                         .foregroundColor(Color.text)
                     Spacer()
                     Text(version)
@@ -37,6 +37,11 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group {
+            ContentView()
+                .environment(\.locale, .init(identifier: "en"))
+            ContentView()
+                .environment(\.locale, .init(identifier: "ja"))
+        }
     }
 }

@@ -45,6 +45,14 @@
 		0E7A11F9288A5EFE001D8006 /* PokemonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A11F7288A5EFE001D8006 /* PokemonType.swift */; };
 		0E7A11FA288A5EFE001D8006 /* PokemonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A11F7288A5EFE001D8006 /* PokemonType.swift */; };
 		0E7A11FB288A5EFE001D8006 /* PokemonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A11F7288A5EFE001D8006 /* PokemonType.swift */; };
+		0E87BCA7288EC7C900F9D490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCAC288EC7C900F9D490 /* Localizable.strings */; };
+		0E87BCA8288EC7C900F9D490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCAC288EC7C900F9D490 /* Localizable.strings */; };
+		0E87BCA9288EC7C900F9D490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCAC288EC7C900F9D490 /* Localizable.strings */; };
+		0E87BCAA288EC7C900F9D490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCAC288EC7C900F9D490 /* Localizable.strings */; };
+		0E87BCB4288EDA3200F9D490 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */; };
+		0E87BCB5288EDA3200F9D490 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */; };
+		0E87BCB6288EDA3200F9D490 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */; };
+		0E87BCB7288EDA3200F9D490 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */; };
 		0E95E6C928897F2400F05B05 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E95E6C828897F2400F05B05 /* Color.xcassets */; };
 		0E95E6CA28897F2400F05B05 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E95E6C828897F2400F05B05 /* Color.xcassets */; };
 		0E95E6CB28897F2400F05B05 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E95E6C828897F2400F05B05 /* Color.xcassets */; };
@@ -149,6 +157,10 @@
 		0E5CF6982884FF9F00AC7BE1 /* CommonContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonContentView.swift; sourceTree = "<group>"; };
 		0E78E978287F02B50070EED0 /* Pokemon.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Pokemon.json; sourceTree = "<group>"; };
 		0E7A11F7288A5EFE001D8006 /* PokemonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonType.swift; sourceTree = "<group>"; };
+		0E87BCAB288EC7C900F9D490 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E87BCAD288EC7CB00F9D490 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E87BCB8288EDA3200F9D490 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0E87BCBA288EDA3400F9D490 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E95E6C828897F2400F05B05 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		0E95E6D3288992DE00F05B05 /* extension_color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension_color.swift; sourceTree = "<group>"; };
 		0E9D80DC288A7EFA009D93A4 /* PokemonType.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PokemonType.json; sourceTree = "<group>"; };
@@ -219,6 +231,8 @@
 		0E45E1F0287075DE00285D2A = {
 			isa = PBXGroup;
 			children = (
+				0E87BCAC288EC7C900F9D490 /* Localizable.strings */,
+				0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */,
 				0ED2DD42287680450082D4C4 /* API */,
 				0ED2DD36287678A70082D4C4 /* ViewModels */,
 				0ED2DD37287678B10082D4C4 /* Models */,
@@ -468,6 +482,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 0E45E1F0287075DE00285D2A;
 			packageReferences = (
@@ -491,8 +506,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EE7AA072880D8E200A3CBD5 /* PokemonSpecies.json in Resources */,
+				0E87BCB4288EDA3200F9D490 /* InfoPlist.strings in Resources */,
 				0E78E979287F02B50070EED0 /* Pokemon.json in Resources */,
 				0E95E6C928897F2400F05B05 /* Color.xcassets in Resources */,
+				0E87BCA7288EC7C900F9D490 /* Localizable.strings in Resources */,
 				0E45E204287075E300285D2A /* Preview Assets.xcassets in Resources */,
 				0E45E201287075E200285D2A /* Assets.xcassets in Resources */,
 				0E9D80DD288A7EFA009D93A4 /* PokemonType.json in Resources */,
@@ -503,6 +520,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E87BCA8288EC7C900F9D490 /* Localizable.strings in Resources */,
+				0E87BCB5288EDA3200F9D490 /* InfoPlist.strings in Resources */,
 				0EE7AA082880D8E200A3CBD5 /* PokemonSpecies.json in Resources */,
 				0E78E97A287F02B50070EED0 /* Pokemon.json in Resources */,
 				0E95E6CA28897F2400F05B05 /* Color.xcassets in Resources */,
@@ -514,6 +533,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E87BCA9288EC7C900F9D490 /* Localizable.strings in Resources */,
+				0E87BCB6288EDA3200F9D490 /* InfoPlist.strings in Resources */,
 				0EE7AA092880D8E200A3CBD5 /* PokemonSpecies.json in Resources */,
 				0E78E97B287F02B50070EED0 /* Pokemon.json in Resources */,
 				0E95E6CB28897F2400F05B05 /* Color.xcassets in Resources */,
@@ -526,6 +547,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E45E23528707A0100285D2A /* Assets.xcassets in Resources */,
+				0E87BCB7288EDA3200F9D490 /* InfoPlist.strings in Resources */,
+				0E87BCAA288EC7C900F9D490 /* Localizable.strings in Resources */,
 				0E95E6CC28897F2400F05B05 /* Color.xcassets in Resources */,
 				0E78E97C287F02B50070EED0 /* Pokemon.json in Resources */,
 				0EE7AA0A2880D8E200A3CBD5 /* PokemonSpecies.json in Resources */,
@@ -635,6 +658,27 @@
 			targetProxy = 0E45E23928707A0100285D2A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0E87BCAC288EC7C900F9D490 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E87BCAB288EC7C900F9D490 /* en */,
+				0E87BCAD288EC7CB00F9D490 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E87BCB8288EDA3200F9D490 /* en */,
+				0E87BCBA288EDA3400F9D490 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0E45E21B287075E300285D2A /* Debug */ = {
@@ -763,7 +807,7 @@
 				DEVELOPMENT_TEAM = MSDQFFFB37;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "ポケモンWITH";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokemon WITH";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -794,7 +838,7 @@
 				DEVELOPMENT_TEAM = MSDQFFFB37;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "ポケモンWITH";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokemon WITH";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -901,7 +945,7 @@
 				DEVELOPMENT_TEAM = MSDQFFFB37;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pokemon_with_ios_widget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "ポケモンWITH";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokemon WITH";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -928,7 +972,7 @@
 				DEVELOPMENT_TEAM = MSDQFFFB37;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pokemon_with_ios_widget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "ポケモンWITH";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokemon WITH";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

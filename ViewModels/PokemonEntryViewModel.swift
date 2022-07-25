@@ -11,11 +11,17 @@ class PokemonEntryViewModel {
     private let _pokemon: Pokemon
     private let _pokemonSpecies: PokemonSpecies
     private let _pokemonTypes: [PokemonType]
+    let _language: String
 
     init(pokemon: Pokemon, pokemonSpecies: PokemonSpecies, pokemonTypes: [PokemonType]) {
         _pokemon = pokemon
         _pokemonSpecies = pokemonSpecies
         _pokemonTypes = pokemonTypes
+        guard let locale = Locale.preferredLanguages.first else {
+            _language = "en"
+            return
+        }
+        _language = Locale(identifier: locale).languageCode == "ja" ? "ja" : "en"
     }
 
     public var getId: String {
@@ -28,7 +34,7 @@ class PokemonEntryViewModel {
     public var getName: String {
         guard
             let names = _pokemonSpecies.names,
-            let name = names.filter({ $0.language?.name == "ja" }).first
+            let name = names.filter({ $0.language?.name == _language }).first
         else {
             return ""
         }
@@ -55,7 +61,7 @@ class PokemonEntryViewModel {
     public var getGenera: String {
         guard
             let generas = _pokemonSpecies.genera,
-            let genera = generas.filter({ $0.language?.name == "ja"}).first
+            let genera = generas.filter({ $0.language?.name == _language }).first
         else {
             return ""
         }
@@ -65,7 +71,7 @@ class PokemonEntryViewModel {
     public var getFlavorTextEntry: String {
         guard
             let flavorTextEntries = _pokemonSpecies.flavorTextEntries,
-            let flavorTextEntry = flavorTextEntries.filter({ $0.language?.name == "ja" }).last
+            let flavorTextEntry = flavorTextEntries.filter({ $0.language?.name == _language }).last
         else {
             return ""
         }
@@ -75,7 +81,7 @@ class PokemonEntryViewModel {
     public var getTypeNames: String {
         var arry: [String] = []
         _pokemonTypes.forEach { pokemonType in
-            if let typeName = pokemonType.names?.filter({ $0.language?.name == "ja" }).first {
+            if let typeName = pokemonType.names?.filter({ $0.language?.name == _language }).first {
                 arry.append(typeName.getName)
             }
         }

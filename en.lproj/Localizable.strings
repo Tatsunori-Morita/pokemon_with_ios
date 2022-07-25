@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  pokemon_with_ios
+
+  Created by Tatsunori on 2022/07/25.
+  
+*/
+
+"Setting" = "Setting";
+"Version" = "Version";
+"Height" = "Height:";
+"Weight" = "Weight:";
+"configurationDisplayName" = "Pokemon WITH";
+"description" = "Randomly display cute Pokemon.";

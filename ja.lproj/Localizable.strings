@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  pokemon_with_ios
+
+  Created by Tatsunori on 2022/07/25.
+  
+*/
+
+"Setting" = "設定";
+"Version" = "バージョン";
+"Height" = "たかさ:";
+"Weight" = "おもさ:";
+"configurationDisplayName" = "ポケモン WITH";
+"description" = "かわいいポケモンをランダム表示します。";

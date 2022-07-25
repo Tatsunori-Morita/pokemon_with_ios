@@ -26,10 +26,19 @@ struct LargeContentView: View {
 
 struct WidgetLarge_Previews: PreviewProvider {
     static var previews: some View {
-        LargeContentView(
-            pokemonEntryViewModel: PokemonEntryViewModel(
-                pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-                pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+        Group {
+            LargeContentView(
+                pokemonEntryViewModel: PokemonEntryViewModel(
+                    pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                    pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
                 pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)))
+            .environment(\.locale, .init(identifier: "en"))
+            LargeContentView(
+                pokemonEntryViewModel: PokemonEntryViewModel(
+                    pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                    pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+                    pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)))
+            .environment(\.locale, .init(identifier: "ja"))
+        }
     }
 }

@@ -102,8 +102,8 @@ struct pokemon_with_ios_widget: Widget {
             pokemon_with_ios_widgetEntryView(entry: entry)
                 .background(Color.layout)
         }
-        .configurationDisplayName("Pokemon WITH")
-        .description("かわいいポケモンをランダム表示します。")
+        .configurationDisplayName("configurationDisplayName")
+        .description("description")
         .supportedFamilies([.systemMedium, .systemLarge])
     }
 }

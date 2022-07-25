@@ -20,10 +20,19 @@ struct MediumContentView: View {
 
 struct WidgetMedium_Previews: PreviewProvider {
     static var previews: some View {
-        MediumContentView(
-            pokemonEntryViewModel: PokemonEntryViewModel(
-                pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-                pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-                pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)))
+        Group {
+            MediumContentView(
+                pokemonEntryViewModel: PokemonEntryViewModel(
+                    pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                    pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+                    pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)))
+            .environment(\.locale, .init(identifier: "en"))
+            MediumContentView(
+                pokemonEntryViewModel: PokemonEntryViewModel(
+                    pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                    pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+                    pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)))
+            .environment(\.locale, .init(identifier: "ja"))
+        }
     }
 }

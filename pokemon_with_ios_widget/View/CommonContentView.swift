@@ -25,13 +25,13 @@ struct CommonContentView: View {
                 Text(pokemonEntryViewModel.getGenera)
                     .foregroundColor(Color.text)
                 HStack {
-                    Text("たかさ:")
+                    Text("Height")
                         .foregroundColor(Color.text)
                     Text("\(pokemonEntryViewModel.getHeight)m")
                         .foregroundColor(Color.text)
                 }
                 HStack {
-                    Text("おもさ:")
+                    Text("Weight")
                         .foregroundColor(Color.text)
                     Text("\(pokemonEntryViewModel.getWeight)kg")
                         .foregroundColor(Color.text)
@@ -66,9 +66,17 @@ struct CommonContentView: View {
 
 struct ContentWidget_Previews: PreviewProvider {
     static var previews: some View {
-        CommonContentView(pokemonEntryViewModel: PokemonEntryViewModel(
-            pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-            pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+        Group {
+            CommonContentView(pokemonEntryViewModel: PokemonEntryViewModel(
+                pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
             pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)))
+            .environment(\.locale, .init(identifier: "en"))
+            CommonContentView(pokemonEntryViewModel: PokemonEntryViewModel(
+                pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+                pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+                pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)))
+            .environment(\.locale, .init(identifier: "ja"))
+        }
     }
 }

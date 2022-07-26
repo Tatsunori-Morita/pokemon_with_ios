@@ -1,6 +1,10 @@
 # Pokémon WITH  
 
-https://img.shields.io/badge/iOS-15.5-blue
+
+![iOS](https://img.shields.io/badge/iOS-15.5-blue)
+![Swift](https://img.shields.io/badge/Swift-5.6.1-blue)
+![SPM](https://img.shields.io/badge/SPM-Supported-blue)
+![Xcode](https://img.shields.io/badge/Xcode-13.4.1-blue)
 
 Pokémon WITH is an iOS Widget app that uses the Pokémon api.  
 By adding pokemon with to your widget, you can always see cute Pokemon images, names, heights, weights, types and descriptions on your iPhone.  

@@ -7,11 +7,12 @@ Pokemon will be displayed randomly every 15 minutes.
 Let's go on an adventure with a nostalgic Pokemon or a Pokemon you haven't seen yet.  
 
 ## Main Features
-- Supports large and medium size widgets.  
-- The medium size widget displays the Pokemon name, image, height, weight, and type.  
-- A description is also displayed on the large widget.  
-- Supports dark light mode depending on the terminal settings.  
-- Supports Japanese / English display by terminal settings.  
+| | Features                                                                          |
+| ------------- |---------------------------------------------------------------------|
+|:ballot_box_with_check:| Supports large and medium size widgets.                                           |
+|:ballot_box_with_check:| The medium size widget displays the Pokemon name, image, height, weight, and type.|
+|:ballot_box_with_check:| A description is also displayed on the large widget.                              |
+|:ballot_box_with_check:| Supports Japanese / English display by terminal settings.                         |
 
 ## Usage
 Download the project and build it on your device.  

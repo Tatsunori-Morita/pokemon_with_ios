@@ -807,7 +807,7 @@
 				DEVELOPMENT_TEAM = MSDQFFFB37;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Pokemon WITH";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokémon WITH";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -838,7 +838,7 @@
 				DEVELOPMENT_TEAM = MSDQFFFB37;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Pokemon WITH";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokémon WITH";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -945,7 +945,7 @@
 				DEVELOPMENT_TEAM = MSDQFFFB37;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pokemon_with_ios_widget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Pokemon WITH";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokémon WITH";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -972,7 +972,7 @@
 				DEVELOPMENT_TEAM = MSDQFFFB37;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pokemon_with_ios_widget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Pokemon WITH";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokémon WITH";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

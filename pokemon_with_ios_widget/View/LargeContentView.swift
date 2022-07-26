@@ -18,7 +18,9 @@ struct LargeContentView: View {
                 .font(.system(size: 20))
                 .lineSpacing(8)
                 .foregroundColor(Color.text)
-                .padding(.top)
+                .padding(.top, 10)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
             Spacer()
         }
     }

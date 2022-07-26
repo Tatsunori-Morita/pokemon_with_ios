@@ -10,5 +10,5 @@
 "Version" = "Version";
 "Height" = "Height:";
 "Weight" = "Weight:";
-"configurationDisplayName" = "Pokemon WITH";
-"description" = "Randomly display cute Pokemon.";
+"configurationDisplayName" = "Pokémon WITH";
+"description" = "Randomly display cute Pokémon.";

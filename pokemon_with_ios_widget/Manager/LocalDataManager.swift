@@ -11,6 +11,8 @@ import SwiftUI
 struct LocalDataManager {
     public static let shared = LocalDataManager()
 
+    private init() {}
+
     public func load<T: Decodable>(_ filename: String) -> T {
         guard let url = Bundle.main.url(forResource: filename, withExtension: "json") else {
             fatalError()

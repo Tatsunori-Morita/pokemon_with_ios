@@ -218,6 +218,7 @@
 		0E02B5322882FD1E00CD9CBE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0E45E231287079FF00285D2A /* pokemon_with_ios_widget.swift */,
 				0E02B5332882FD8400CD9CBE /* LargeContentView.swift */,
 				0E02B53E288304E500CD9CBE /* MediumContentView.swift */,
 				0E5CF6982884FF9F00AC7BE1 /* CommonContentView.swift */,
@@ -240,7 +241,6 @@
 				0E87BCAC288EC7C900F9D490 /* Localizable.strings */,
 				0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */,
 				0ED2DD42287680450082D4C4 /* API */,
-				0ED2DD36287678A70082D4C4 /* ViewModels */,
 				0ED2DD37287678B10082D4C4 /* Models */,
 				0E95E6CD2889810D00F05B05 /* extension */,
 				0E45E1FB287075DE00285D2A /* pokemon_with_ios */,
@@ -266,8 +266,7 @@
 		0E45E1FB287075DE00285D2A /* pokemon_with_ios */ = {
 			isa = PBXGroup;
 			children = (
-				0E45E1FC287075DE00285D2A /* pokemon_with_iosApp.swift */,
-				0E45E1FE287075DE00285D2A /* ContentView.swift */,
+				0E49C5E0289AB6A6005DB9B1 /* View */,
 				0E45E200287075E200285D2A /* Assets.xcassets */,
 				0E45E202287075E300285D2A /* Preview Content */,
 			);
@@ -314,13 +313,22 @@
 				0E02B5382882FFBA00CD9CBE /* Manager */,
 				0E78E977287F01F60070EED0 /* Json */,
 				0E02B5322882FD1E00CD9CBE /* View */,
-				0E45E231287079FF00285D2A /* pokemon_with_ios_widget.swift */,
+				0ED2DD36287678A70082D4C4 /* ViewModels */,
 				0E45E233287079FF00285D2A /* pokemon_with_ios_widget.intentdefinition */,
 				0E45E23428707A0100285D2A /* Assets.xcassets */,
 				0E95E6C828897F2400F05B05 /* Color.xcassets */,
 				0E45E23628707A0100285D2A /* Info.plist */,
 			);
 			path = pokemon_with_ios_widget;
+			sourceTree = "<group>";
+		};
+		0E49C5E0289AB6A6005DB9B1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E45E1FC287075DE00285D2A /* pokemon_with_iosApp.swift */,
+				0E45E1FE287075DE00285D2A /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0E78E977287F01F60070EED0 /* Json */ = {

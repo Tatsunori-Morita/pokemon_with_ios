@@ -8,32 +8,33 @@
 import SwiftUI
 
 struct CommonContentView: View {
-    let pokemonEntryViewModel: PokemonEntryViewModel
+//    let pokemonEntryViewModel: PokemonEntryViewModel
+    let viewHelper: ViewHelper
     
     var body: some View {
         HStack(alignment: .center) {
             Spacer()
             VStack(alignment: .leading, spacing: 5) {
-                Text("No.\(pokemonEntryViewModel.getId)")
+                Text("No.\(viewHelper.getId)")
                     .foregroundColor(Color.text)
                     .bold()
-                Text(pokemonEntryViewModel.getName)
+                Text(viewHelper.getName)
                     .foregroundColor(Color.text)
                     .font(.system(size: 24))
                     .bold()
                     .padding(.bottom, 10)
-                Text(pokemonEntryViewModel.getGenera)
+                Text(viewHelper.getGenera)
                     .foregroundColor(Color.text)
                 HStack {
                     Text("Height")
                         .foregroundColor(Color.text)
-                    Text("\(pokemonEntryViewModel.getHeight)m")
+                    Text("\(viewHelper.getHeight)m")
                         .foregroundColor(Color.text)
                 }
                 HStack {
                     Text("Weight")
                         .foregroundColor(Color.text)
-                    Text("\(pokemonEntryViewModel.getWeight)kg")
+                    Text("\(viewHelper.getWeight)kg")
                         .foregroundColor(Color.text)
                 }
             }
@@ -41,14 +42,10 @@ struct CommonContentView: View {
             Spacer()
 
             VStack {
-                if let url = URL(string: pokemonEntryViewModel.getFrontDefault),
-                   let imageData = try! Data(contentsOf: url),
-                   let image = UIImage(data: imageData) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                }
-                Text(pokemonEntryViewModel.getTypeNames)
+                viewHelper.getImage
+                    .resizable()
+                    .scaledToFit()
+                Text(viewHelper.getTypeNames)
                     .font(.system(size: 12))
                     .bold()
                     .padding(5)
@@ -67,15 +64,17 @@ struct CommonContentView: View {
 struct ContentWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CommonContentView(pokemonEntryViewModel: PokemonEntryViewModel(
+            CommonContentView(viewHelper: ViewHelper(
+                pokemonEntryViewModel: PokemonEntryViewModel(
                 pokemon: LocalDataManager.shared.load(Pokemon.identifier),
                 pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-            pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)))
+            pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))))
             .environment(\.locale, .init(identifier: "en"))
-            CommonContentView(pokemonEntryViewModel: PokemonEntryViewModel(
+            CommonContentView(viewHelper: ViewHelper(
+                pokemonEntryViewModel: PokemonEntryViewModel(
                 pokemon: LocalDataManager.shared.load(Pokemon.identifier),
                 pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-                pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)))
+            pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))))
             .environment(\.locale, .init(identifier: "ja"))
         }
     }

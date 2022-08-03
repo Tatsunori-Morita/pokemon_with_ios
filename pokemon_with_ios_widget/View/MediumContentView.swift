@@ -12,7 +12,8 @@ struct MediumContentView: View {
 
     var body: some View {
         VStack {
-            CommonContentView(pokemonEntryViewModel: pokemonEntryViewModel)
+            CommonContentView(viewHelper: ViewHelper(
+                pokemonEntryViewModel: pokemonEntryViewModel))
                 .padding(.bottom, 30)
         }
     }

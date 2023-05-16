@@ -17,11 +17,11 @@ class PokemonEntryViewModel {
         _pokemon = pokemon
         _pokemonSpecies = pokemonSpecies
         _pokemonTypes = pokemonTypes
-        guard let locale = Locale.preferredLanguages.first else {
-            _language = "en"
-            return
-        }
-        _language = Locale(identifier: locale).languageCode == "ja" ? "ja" : "en"
+//        guard let locale = Locale.preferredLanguages.first else {
+//            _language = "en"
+//            return
+//        }
+        _language = "ja" //Locale(identifier: locale).languageCode == "ja" ? "ja" : "en"
     }
 
     public var getId: String {
@@ -29,6 +29,13 @@ class PokemonEntryViewModel {
             return ""
         }
         return String(format: "%03d", value)
+    }
+
+    public var id: Int {
+        guard let value = _pokemon.id else {
+            return 0
+        }
+        return value
     }
 
     public var getName: String {
@@ -53,9 +60,21 @@ class PokemonEntryViewModel {
         return String(format: "%.1f", value)
     }
 
+    public var height: Int {
+//        let value = Double(_pokemon.getHeight) / 10
+//        return String(format: "%.1f", value)
+        _pokemon.getHeight
+    }
+
     public var getWeight: String {
         let value = Double(_pokemon.getWeight) / 10
         return String(format: "%.1f", value)
+    }
+
+    public var weight: Int {
+//        let value = Double(_pokemon.getWeight) / 10
+//        return String(format: "%.1f", value)
+        _pokemon.getWeight
     }
 
     public var getGenera: String {

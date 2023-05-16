@@ -53,13 +53,24 @@ struct Provider: IntentTimelineProvider {
 
                 pokemonTypesGroup.notify(queue: .main) {
                     let currentDate = Date()
+                    let viewModel = PokemonEntryViewModel(
+                        pokemon: pokemon,
+                        pokemonSpecies: pokemonSpecies,
+                        pokemonTypes: pokemonTypes)
                     let entry = PokemonEntry(
                         date: currentDate,
-                        pokemonEntryViewModel: PokemonEntryViewModel(
-                            pokemon: pokemon,
-                            pokemonSpecies: pokemonSpecies,
-                            pokemonTypes: pokemonTypes),
+                        pokemonEntryViewModel: viewModel,
                         configuration: configuration)
+
+                    let id = PokemonEntity.IdValue(id: viewModel.id)
+                    let name = PokemonEntity.NameValue(name: viewModel.getName)
+                    let weight = PokemonEntity.WeightValue(weight: viewModel.weight)
+                    let height = PokemonEntity.HeightValue(height: viewModel.height)
+                    let genera = PokemonEntity.GeneraValue(genera: viewModel.getGenera)
+                    let flavorTextEntry = PokemonEntity.FlavorTextEntryValue(flavorTextEntry: viewModel.getFlavorTextEntry)
+                    let frontDefault = PokemonEntity.FrontDefaultValue(frontDefault: viewModel.getFrontDefault)
+                    let entity = PokemonEntity(id: id, name: name, weight: weight, height: height, genera: genera, flavorTextEntry: flavorTextEntry, frontDefault: frontDefault)
+                    RealmManger.shared.add(entity: entity)
 
                     let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
                     let timeline = Timeline(entries: [entry], policy: .after(futureDate))

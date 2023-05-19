@@ -70,7 +70,7 @@ struct Provider: IntentTimelineProvider {
                     let flavorTextEntry = PokemonEntity.FlavorTextEntryValue(flavorTextEntry: viewModel.getFlavorTextEntry)
                     let frontDefault = PokemonEntity.FrontDefaultValue(frontDefault: viewModel.getFrontDefault)
                     let entity = PokemonEntity(id: id, name: name, weight: weight, height: height, genera: genera, flavorTextEntry: flavorTextEntry, frontDefault: frontDefault)
-                    let repository: IRepository = RealmManger()
+                    let repository: IRepository = RealmRepository()
                     repository.add(entity: entity)
 
                     let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!

@@ -85,10 +85,10 @@
 		0EB9C4B529FFA29B00817997 /* PokemonRealmDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B329FFA29A00817997 /* PokemonRealmDataObject.swift */; };
 		0EB9C4B629FFA29B00817997 /* PokemonRealmDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B329FFA29A00817997 /* PokemonRealmDataObject.swift */; };
 		0EB9C4B729FFA29B00817997 /* PokemonRealmDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B329FFA29A00817997 /* PokemonRealmDataObject.swift */; };
-		0EB9C4B929FFA34B00817997 /* RealmManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B829FFA34B00817997 /* RealmManger.swift */; };
-		0EB9C4BA29FFA34B00817997 /* RealmManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B829FFA34B00817997 /* RealmManger.swift */; };
-		0EB9C4BB29FFA34B00817997 /* RealmManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B829FFA34B00817997 /* RealmManger.swift */; };
-		0EB9C4BC29FFA34B00817997 /* RealmManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B829FFA34B00817997 /* RealmManger.swift */; };
+		0EB9C4B929FFA34B00817997 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B829FFA34B00817997 /* RealmRepository.swift */; };
+		0EB9C4BA29FFA34B00817997 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B829FFA34B00817997 /* RealmRepository.swift */; };
+		0EB9C4BB29FFA34B00817997 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B829FFA34B00817997 /* RealmRepository.swift */; };
+		0EB9C4BC29FFA34B00817997 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9C4B829FFA34B00817997 /* RealmRepository.swift */; };
 		0EBB024D2877FDB50001B5E1 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB024C2877FDB50001B5E1 /* Pokemon.swift */; };
 		0EBB024E2877FDB50001B5E1 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB024C2877FDB50001B5E1 /* Pokemon.swift */; };
 		0EBB024F2877FDB50001B5E1 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB024C2877FDB50001B5E1 /* Pokemon.swift */; };
@@ -194,7 +194,7 @@
 		0E9E15422A122E00003ACDE8 /* PokemonEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonEntity.swift; sourceTree = "<group>"; };
 		0EB8E6AB2A16F59A00E643C1 /* IRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRepository.swift; sourceTree = "<group>"; };
 		0EB9C4B329FFA29A00817997 /* PokemonRealmDataObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonRealmDataObject.swift; sourceTree = "<group>"; };
-		0EB9C4B829FFA34B00817997 /* RealmManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManger.swift; sourceTree = "<group>"; };
+		0EB9C4B829FFA34B00817997 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		0EBB024C2877FDB50001B5E1 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		0EBF3D89287D5B07002A8CCF /* PokemonEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonEntryViewModel.swift; sourceTree = "<group>"; };
 		0ED2DD3A287679320082D4C4 /* PokemonApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonApiService.swift; sourceTree = "<group>"; };
@@ -410,7 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				0EAE1AA52A138438009D0529 /* DataObjects */,
-				0EB9C4B829FFA34B00817997 /* RealmManger.swift */,
+				0EB9C4B829FFA34B00817997 /* RealmRepository.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -664,7 +664,7 @@
 				0E45E23828707A0100285D2A /* pokemon_with_ios_widget.intentdefinition in Sources */,
 				0ED2DD44287680570082D4C4 /* APIManager.swift in Sources */,
 				0E02B53A2882FFD100CD9CBE /* LocalDataManager.swift in Sources */,
-				0EB9C4B929FFA34B00817997 /* RealmManger.swift in Sources */,
+				0EB9C4B929FFA34B00817997 /* RealmRepository.swift in Sources */,
 				0E5CF6992884FF9F00AC7BE1 /* CommonContentView.swift in Sources */,
 				0ED2DD3B287679320082D4C4 /* PokemonApiService.swift in Sources */,
 				0E4E5A81289A4B9300F0B646 /* ViewHepler.swift in Sources */,
@@ -688,7 +688,7 @@
 				0E02B53B2882FFD100CD9CBE /* LocalDataManager.swift in Sources */,
 				0E95E6D5288992DE00F05B05 /* Extension_color.swift in Sources */,
 				0EB9C4B529FFA29B00817997 /* PokemonRealmDataObject.swift in Sources */,
-				0EB9C4BA29FFA34B00817997 /* RealmManger.swift in Sources */,
+				0EB9C4BA29FFA34B00817997 /* RealmRepository.swift in Sources */,
 				0E7A11F9288A5EFE001D8006 /* PokemonType.swift in Sources */,
 				0E02B540288304E500CD9CBE /* MediumContentView.swift in Sources */,
 				0ED2DD45287680570082D4C4 /* APIManager.swift in Sources */,
@@ -716,7 +716,7 @@
 				0ED2DD46287680570082D4C4 /* APIManager.swift in Sources */,
 				0E02B541288304E500CD9CBE /* MediumContentView.swift in Sources */,
 				0E5CF69B2884FF9F00AC7BE1 /* CommonContentView.swift in Sources */,
-				0EB9C4BB29FFA34B00817997 /* RealmManger.swift in Sources */,
+				0EB9C4BB29FFA34B00817997 /* RealmRepository.swift in Sources */,
 				0EB8E6AE2A16F5D300E643C1 /* IRepository.swift in Sources */,
 				0E7A11FA288A5EFE001D8006 /* PokemonType.swift in Sources */,
 				0E02B5362882FD8400CD9CBE /* LargeContentView.swift in Sources */,
@@ -741,7 +741,7 @@
 				0ED2DD47287680570082D4C4 /* APIManager.swift in Sources */,
 				0E02B542288304E500CD9CBE /* MediumContentView.swift in Sources */,
 				0E5CF69C2884FF9F00AC7BE1 /* CommonContentView.swift in Sources */,
-				0EB9C4BC29FFA34B00817997 /* RealmManger.swift in Sources */,
+				0EB9C4BC29FFA34B00817997 /* RealmRepository.swift in Sources */,
 				0EB8E6AF2A16F5D400E643C1 /* IRepository.swift in Sources */,
 				0E7A11FB288A5EFE001D8006 /* PokemonType.swift in Sources */,
 				0E02B5372882FD8400CD9CBE /* LargeContentView.swift in Sources */,

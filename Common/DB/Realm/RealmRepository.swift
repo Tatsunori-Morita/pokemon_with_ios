@@ -1,5 +1,5 @@
 //
-//  RealmManger.swift
+//  RealmRepository.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2023/05/01.
@@ -8,7 +8,7 @@
 import RealmSwift
 import Foundation
 
-class RealmManger: IRepository {
+class RealmRepository: IRepository {
     private let _realm: Realm
 
     init() {

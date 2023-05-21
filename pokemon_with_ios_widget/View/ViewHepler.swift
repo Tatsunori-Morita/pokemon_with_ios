@@ -20,11 +20,11 @@ struct ViewHelper {
     }
 
     public var getName: String {
-        _pokemonEntryViewModel.getName
+        _pokemonEntryViewModel.getJaName
     }
 
     public var getGenera: String {
-        _pokemonEntryViewModel.getGenera
+        _pokemonEntryViewModel.getJaGenera
     }
 
     public var getHeight: String {

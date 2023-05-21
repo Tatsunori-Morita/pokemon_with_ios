@@ -38,10 +38,20 @@ class PokemonEntryViewModel {
         return value
     }
 
-    public var getName: String {
+    public var getJaName: String {
         guard
             let names = _pokemonSpecies.names,
-            let name = names.filter({ $0.language?.name == _language }).first
+            let name = names.filter({ $0.language?.name == "ja" }).first
+        else {
+            return ""
+        }
+        return name.getName
+    }
+
+    public var getEnName: String {
+        guard
+            let names = _pokemonSpecies.names,
+            let name = names.filter({ $0.language?.name == "en" }).first
         else {
             return ""
         }
@@ -77,20 +87,40 @@ class PokemonEntryViewModel {
         _pokemon.getWeight
     }
 
-    public var getGenera: String {
+    public var getJaGenera: String {
         guard
             let generas = _pokemonSpecies.genera,
-            let genera = generas.filter({ $0.language?.name == _language }).first
+            let genera = generas.filter({ $0.language?.name == "ja" }).first
         else {
             return ""
         }
         return genera.getGenus
     }
 
-    public var getFlavorTextEntry: String {
+    public var getEnGenera: String {
+        guard
+            let generas = _pokemonSpecies.genera,
+            let genera = generas.filter({ $0.language?.name == "en" }).first
+        else {
+            return ""
+        }
+        return genera.getGenus
+    }
+
+    public var getJaFlavorTextEntry: String {
         guard
             let flavorTextEntries = _pokemonSpecies.flavorTextEntries,
-            let flavorTextEntry = flavorTextEntries.filter({ $0.language?.name == _language }).last
+            let flavorTextEntry = flavorTextEntries.filter({ $0.language?.name == "ja" }).last
+        else {
+            return ""
+        }
+        return flavorTextEntry.getFlavorText
+    }
+
+    public var getEnFlavorTextEntry: String {
+        guard
+            let flavorTextEntries = _pokemonSpecies.flavorTextEntries,
+            let flavorTextEntry = flavorTextEntries.filter({ $0.language?.name == "en" }).last
         else {
             return ""
         }

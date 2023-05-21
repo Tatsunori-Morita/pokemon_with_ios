@@ -9,23 +9,27 @@ import Foundation
 
 class PokemonEntity {
     private let _idValue: IdValue
-    private let _nameValue: NameValue
+    private let _nameValues: [NameValue]
     private let _weightValue: WeightValue
     private let _heightValue: HeightValue
-    private let _generaValue: GeneraValue
-    private let _flavorTextEntryValue: FlavorTextEntryValue
+    private let _generaValues: [GenusValue]
+    private let _flavorTextEntryValues: [FlavorTextEntryValue]
     private let _frontDefaultValue: FrontDefaultValue
 
     public var id: Int {
         _idValue.id
     }
 
+    public var idValue: IdValue {
+        _idValue
+    }
+
     public var formatedId: String {
         _idValue.formatedId
     }
 
-    public var name: String {
-        _nameValue.name
+    public var names: [NameValue] {
+        _nameValues
     }
 
     public var weight: Int {
@@ -36,25 +40,25 @@ class PokemonEntity {
         _heightValue.height
     }
 
-    public var genera: String {
-        _generaValue.genera
+    public var genera: [GenusValue] {
+        _generaValues
     }
 
-    public var flavorTextEntry: String {
-        _flavorTextEntryValue.flavorTextEntry
+    public var flavorTextEntries: [FlavorTextEntryValue] {
+        _flavorTextEntryValues
     }
 
     public var frontDefault: String {
         _frontDefaultValue.frontDefault
     }
 
-    init(id: IdValue, name: NameValue, weight: WeightValue, height: HeightValue, genera: GeneraValue, flavorTextEntry: FlavorTextEntryValue, frontDefault: FrontDefaultValue) {
+    init(id: IdValue, names: [NameValue], weight: WeightValue, height: HeightValue, genera: [GenusValue], flavorTextEntries: [FlavorTextEntryValue], frontDefault: FrontDefaultValue) {
         _idValue = id
-        _nameValue = name
+        _nameValues = names
         _weightValue = weight
         _heightValue = height
-        _generaValue = genera
-        _flavorTextEntryValue = flavorTextEntry
+        _generaValues = genera
+        _flavorTextEntryValues = flavorTextEntries
         _frontDefaultValue = frontDefault
     }
 
@@ -77,18 +81,39 @@ class PokemonEntity {
         }
     }
 
+    class LanguageValue {
+        private let _language: String
+
+        public var language: String {
+            _language
+        }
+
+        init(language: String) {
+            if (language.isEmpty) {
+                fatalError("言語が設定されていません")
+            }
+            _language = language
+        }
+    }
+
     class NameValue {
         private let _name: String
+        private let _language: LanguageValue
 
         public var name: String {
             _name
         }
 
-        init(name: String) {
+        public var language: String {
+            _language.language
+        }
+
+        init(name: String, language: LanguageValue) {
             if (name.isEmpty) {
                 fatalError("名前が設定されていません")
             }
             _name = name
+            _language = language
         }
     }
 
@@ -122,33 +147,45 @@ class PokemonEntity {
         }
     }
 
-    class GeneraValue {
-        private let _genera: String
+    class GenusValue {
+        private let _genus: String
+        private let _language: LanguageValue
 
-        public var genera: String {
-            _genera
+        public var genus: String {
+            _genus
         }
 
-        init(genera: String) {
-            if genera.isEmpty {
+        public var language: String {
+            _language.language
+        }
+
+        init(genus: String, language: LanguageValue) {
+            if genus.isEmpty {
                 fatalError("ジャンルが設定されていません")
             }
-            _genera = genera
+            _genus = genus
+            _language = language
         }
     }
 
     class FlavorTextEntryValue {
         private let _flavorTextEntry: String
+        private let _language: LanguageValue
 
         public var flavorTextEntry: String {
             _flavorTextEntry
         }
 
-        init(flavorTextEntry: String) {
+        public var language: String {
+            _language.language
+        }
+
+        init(flavorTextEntry: String, language: LanguageValue) {
             if flavorTextEntry.isEmpty {
                 fatalError("説明分が設定されていません")
             }
             _flavorTextEntry = flavorTextEntry
+            _language = language
         }
     }
 

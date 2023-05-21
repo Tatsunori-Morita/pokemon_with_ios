@@ -62,14 +62,19 @@ struct Provider: IntentTimelineProvider {
                         pokemonEntryViewModel: viewModel,
                         configuration: configuration)
 
+                    let ja = PokemonEntity.LanguageValue(language: "ja")
+                    let en = PokemonEntity.LanguageValue(language: "en")
                     let id = PokemonEntity.IdValue(id: viewModel.id)
-                    let name = PokemonEntity.NameValue(name: viewModel.getName)
+                    let jaName = PokemonEntity.NameValue(name: viewModel.getJaName, language: ja)
+                    let enName = PokemonEntity.NameValue(name: viewModel.getEnName, language: en)
                     let weight = PokemonEntity.WeightValue(weight: viewModel.weight)
                     let height = PokemonEntity.HeightValue(height: viewModel.height)
-                    let genera = PokemonEntity.GeneraValue(genera: viewModel.getGenera)
-                    let flavorTextEntry = PokemonEntity.FlavorTextEntryValue(flavorTextEntry: viewModel.getFlavorTextEntry)
+                    let jaGenera = PokemonEntity.GenusValue(genus: viewModel.getJaGenera, language: ja)
+                    let enGenera = PokemonEntity.GenusValue(genus: viewModel.getEnGenera, language: en)
+                    let jaFlavorTextEntry = PokemonEntity.FlavorTextEntryValue(flavorTextEntry: viewModel.getJaFlavorTextEntry, language: ja)
+                    let enFlavorTextEntry = PokemonEntity.FlavorTextEntryValue(flavorTextEntry: viewModel.getEnFlavorTextEntry, language: en)
                     let frontDefault = PokemonEntity.FrontDefaultValue(frontDefault: viewModel.getFrontDefault)
-                    let entity = PokemonEntity(id: id, name: name, weight: weight, height: height, genera: genera, flavorTextEntry: flavorTextEntry, frontDefault: frontDefault)
+                    let entity = PokemonEntity(id: id, names: [jaName, enName], weight: weight, height: height, genera: [jaGenera, enGenera], flavorTextEntries: [jaFlavorTextEntry, enFlavorTextEntry], frontDefault: frontDefault)
                     let repository: IRepository = RealmRepository()
                     repository.add(entity: entity)
 

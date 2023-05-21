@@ -20,8 +20,7 @@ struct ContentView: View {
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
 
     var body: some View {
-//        let _ = RealmManger.shared.print()
-//        let _ = RealmManger.shared.add(pokemon: PokemonEntity(id: PokemonDomain.IdDomain(id: "111"), name: PokemonEntity.NameDomain(name: "aaaaaaa")))
+        let _ = RealmRepository()
         NavigationView {
             List {
                 HStack {

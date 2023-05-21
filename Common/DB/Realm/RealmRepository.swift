@@ -16,12 +16,13 @@ class RealmRepository: IRepository {
         let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.tatsunori.morita.pokemon-with-ios")!
         config.fileURL = url.appendingPathComponent("db.realm")
         _realm = try! Realm(configuration: config)
+        print()
     }
 
     public func add(entity: PokemonEntity) {
-        let dataObject = PokemonRealmDataObject(entity: entity)
+        let model = PokemonRealmModel(entity: entity)
         try! _realm.write {
-            _realm.add(dataObject)
+            _realm.add(model)
         }
     }
 

@@ -15,7 +15,7 @@ struct LargeContentView: View {
             CommonContentView(viewHelper: ViewHelper(
                 pokemonEntryViewModel: pokemonEntryViewModel))
             Divider()
-            Text(pokemonEntryViewModel.getFlavorTextEntry)
+            Text(pokemonEntryViewModel.getJaFlavorTextEntry)
                 .font(.system(size: 20))
                 .lineSpacing(8)
                 .foregroundColor(Color.text)

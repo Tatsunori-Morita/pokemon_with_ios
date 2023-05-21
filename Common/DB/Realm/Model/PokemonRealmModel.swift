@@ -35,6 +35,18 @@ class PokemonRealmModel: Object {
         self.frontDefault = entity.frontDefault
         self.officialArtwork = OfficialArtworkRealmModel(entity: entity)
     }
+
+    public func createPokemonEntity() -> PokemonEntity {
+        let id = PokemonEntity.IdValue(id: self.no)
+        let names = names.map { PokemonEntity.NameValue(name: $0.name, language: PokemonEntity.LanguageValue(language: $0.language)) }
+        let weight = PokemonEntity.WeightValue(weight: weight)
+        let height = PokemonEntity.HeightValue(height: height)
+        let genera = genera.map { PokemonEntity.GenusValue(genus: $0.genus, language: PokemonEntity.LanguageValue(language: $0.language))}
+        let flavorTextEntries = flavorTextEntries.map { PokemonEntity.FlavorTextEntryValue(flavorTextEntry: $0.flavorText, language: PokemonEntity.LanguageValue(language: $0.language)) }
+        let frontDefault = PokemonEntity.FrontDefaultValue(frontDefault: frontDefault)
+        let entity = PokemonEntity(id: id, names: Array(names), weight: weight, height: height, genera: Array(genera), flavorTextEntries: Array(flavorTextEntries), frontDefault: frontDefault)
+        return entity
+    }
 }
 
 class NameRealmModel: Object {

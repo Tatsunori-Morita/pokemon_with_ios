@@ -7,4 +7,7 @@
 
 protocol IRepository {
     func add(entity: PokemonEntity)
+    func getEntityBy(no: PokemonEntity.IdValue) -> PokemonEntity?
+    func select() -> [PokemonEntity]
+    func delete(entity: PokemonEntity)
 }

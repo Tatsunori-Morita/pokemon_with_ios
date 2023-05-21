@@ -34,6 +34,13 @@ struct Provider: IntentTimelineProvider {
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         let number = Int.random(in: 1 ... PokemonApiService.POKEMON_AMOUNT)
+
+        let repository: IRepository = RealmRepository()
+        let entity = repository.getEntityBy(no: PokemonEntity.IdValue(id: number))
+        if let entity = entity {
+            repository.delete(entity: entity)
+        }
+
         let apiService = PokemonApiService(number: number)
 
         apiService.fetch(url: apiService.pokemonURL) { (pokemon: Pokemon) in
@@ -75,7 +82,7 @@ struct Provider: IntentTimelineProvider {
                     let enFlavorTextEntry = PokemonEntity.FlavorTextEntryValue(flavorTextEntry: viewModel.getEnFlavorTextEntry, language: en)
                     let frontDefault = PokemonEntity.FrontDefaultValue(frontDefault: viewModel.getFrontDefault)
                     let entity = PokemonEntity(id: id, names: [jaName, enName], weight: weight, height: height, genera: [jaGenera, enGenera], flavorTextEntries: [jaFlavorTextEntry, enFlavorTextEntry], frontDefault: frontDefault)
-                    let repository: IRepository = RealmRepository()
+
                     repository.add(entity: entity)
 
                     let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!

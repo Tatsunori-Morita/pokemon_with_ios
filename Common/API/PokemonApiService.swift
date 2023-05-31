@@ -12,6 +12,7 @@ final class PokemonApiService {
     public static let POKEMON_URL = "https://pokeapi.co/api/v2/pokemon/"
     public static let POKEMON_SPECIES_URL = "https://pokeapi.co/api/v2/pokemon-species/"
     private let _number: Int
+    private let api: IAPIManager = APIManager()
 
     public var pokemonURL: String {
         PokemonApiService.POKEMON_URL + _number.description
@@ -37,7 +38,7 @@ final class PokemonApiService {
     }
 
     private func _fetch<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> ()) {
-        APIManager.get(url: url, completion: { result in
+        api.get(url: url, param: nil, headers: [:], completion: { result in
             switch result {
             case .success(let data):
                 do {

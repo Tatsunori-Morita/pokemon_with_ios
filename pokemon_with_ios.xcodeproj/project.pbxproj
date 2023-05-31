@@ -270,6 +270,14 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		0E1080432A27528D00E94515 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				0ED2DD43287680570082D4C4 /* APIAlamofireManager.swift */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
 		0E45E1F0287075DE00285D2A = {
 			isa = PBXGroup;
 			children = (
@@ -450,10 +458,10 @@
 		0ED2DD42287680450082D4C4 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				0ED2DD43287680570082D4C4 /* APIAlamofireManager.swift */,
-				0ED2DD3A287679320082D4C4 /* PokemonApiService.swift */,
+				0E1080432A27528D00E94515 /* Alamofire */,
 				0E9E15482A123706003ACDE8 /* DataObjects */,
 				0E10803E2A2750F000E94515 /* IAPIManager.swift */,
+				0ED2DD3A287679320082D4C4 /* PokemonApiService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";

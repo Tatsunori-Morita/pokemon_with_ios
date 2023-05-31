@@ -106,10 +106,10 @@
 		0ED2DD3D287679320082D4C4 /* PokemonApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD3A287679320082D4C4 /* PokemonApiService.swift */; };
 		0ED2DD3E287679320082D4C4 /* PokemonApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD3A287679320082D4C4 /* PokemonApiService.swift */; };
 		0ED2DD4128767ACE0082D4C4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED2DD4028767ACE0082D4C4 /* Alamofire */; };
-		0ED2DD44287680570082D4C4 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD43287680570082D4C4 /* APIManager.swift */; };
-		0ED2DD45287680570082D4C4 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD43287680570082D4C4 /* APIManager.swift */; };
-		0ED2DD46287680570082D4C4 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD43287680570082D4C4 /* APIManager.swift */; };
-		0ED2DD47287680570082D4C4 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD43287680570082D4C4 /* APIManager.swift */; };
+		0ED2DD44287680570082D4C4 /* APIAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD43287680570082D4C4 /* APIAlamofireManager.swift */; };
+		0ED2DD45287680570082D4C4 /* APIAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD43287680570082D4C4 /* APIAlamofireManager.swift */; };
+		0ED2DD46287680570082D4C4 /* APIAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD43287680570082D4C4 /* APIAlamofireManager.swift */; };
+		0ED2DD47287680570082D4C4 /* APIAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2DD43287680570082D4C4 /* APIAlamofireManager.swift */; };
 		0EDF9A7528771041004AE2BE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0EDF9A7428771041004AE2BE /* Alamofire */; };
 		0EE7AA072880D8E200A3CBD5 /* PokemonSpecies.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7AA062880D8E200A3CBD5 /* PokemonSpecies.json */; };
 		0EE7AA082880D8E200A3CBD5 /* PokemonSpecies.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7AA062880D8E200A3CBD5 /* PokemonSpecies.json */; };
@@ -203,7 +203,7 @@
 		0EBB024C2877FDB50001B5E1 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		0EBF3D89287D5B07002A8CCF /* PokemonEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonEntryViewModel.swift; sourceTree = "<group>"; };
 		0ED2DD3A287679320082D4C4 /* PokemonApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonApiService.swift; sourceTree = "<group>"; };
-		0ED2DD43287680570082D4C4 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		0ED2DD43287680570082D4C4 /* APIAlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAlamofireManager.swift; sourceTree = "<group>"; };
 		0EE7AA062880D8E200A3CBD5 /* PokemonSpecies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PokemonSpecies.json; sourceTree = "<group>"; };
 		0EE7AA0B2880DAB700A3CBD5 /* PokemonSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSpecies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -450,7 +450,7 @@
 		0ED2DD42287680450082D4C4 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				0ED2DD43287680570082D4C4 /* APIManager.swift */,
+				0ED2DD43287680570082D4C4 /* APIAlamofireManager.swift */,
 				0ED2DD3A287679320082D4C4 /* PokemonApiService.swift */,
 				0E9E15482A123706003ACDE8 /* DataObjects */,
 				0E10803E2A2750F000E94515 /* IAPIManager.swift */,
@@ -669,7 +669,7 @@
 				0E10803F2A2750F000E94515 /* IAPIManager.swift in Sources */,
 				0E45E1FF287075DE00285D2A /* ContentView.swift in Sources */,
 				0E45E23828707A0100285D2A /* pokemon_with_ios_widget.intentdefinition in Sources */,
-				0ED2DD44287680570082D4C4 /* APIManager.swift in Sources */,
+				0ED2DD44287680570082D4C4 /* APIAlamofireManager.swift in Sources */,
 				0E02B53A2882FFD100CD9CBE /* LocalDataManager.swift in Sources */,
 				0EB9C4B929FFA34B00817997 /* RealmRepository.swift in Sources */,
 				0E5CF6992884FF9F00AC7BE1 /* CommonContentView.swift in Sources */,
@@ -699,7 +699,7 @@
 				0EB9C4BA29FFA34B00817997 /* RealmRepository.swift in Sources */,
 				0E7A11F9288A5EFE001D8006 /* PokemonType.swift in Sources */,
 				0E02B540288304E500CD9CBE /* MediumContentView.swift in Sources */,
-				0ED2DD45287680570082D4C4 /* APIManager.swift in Sources */,
+				0ED2DD45287680570082D4C4 /* APIAlamofireManager.swift in Sources */,
 				0EBB024E2877FDB50001B5E1 /* Pokemon.swift in Sources */,
 				0E02B5352882FD8400CD9CBE /* LargeContentView.swift in Sources */,
 				0ED2DD3C287679320082D4C4 /* PokemonApiService.swift in Sources */,
@@ -722,7 +722,7 @@
 				0EE7AA0E2880DAB700A3CBD5 /* PokemonSpecies.swift in Sources */,
 				0E02B53C2882FFD100CD9CBE /* LocalDataManager.swift in Sources */,
 				0E1080412A2750F000E94515 /* IAPIManager.swift in Sources */,
-				0ED2DD46287680570082D4C4 /* APIManager.swift in Sources */,
+				0ED2DD46287680570082D4C4 /* APIAlamofireManager.swift in Sources */,
 				0E02B541288304E500CD9CBE /* MediumContentView.swift in Sources */,
 				0E5CF69B2884FF9F00AC7BE1 /* CommonContentView.swift in Sources */,
 				0EB9C4BB29FFA34B00817997 /* RealmRepository.swift in Sources */,
@@ -748,7 +748,7 @@
 				0EE7AA0F2880DAB700A3CBD5 /* PokemonSpecies.swift in Sources */,
 				0E02B53D2882FFD100CD9CBE /* LocalDataManager.swift in Sources */,
 				0E1080422A2750F000E94515 /* IAPIManager.swift in Sources */,
-				0ED2DD47287680570082D4C4 /* APIManager.swift in Sources */,
+				0ED2DD47287680570082D4C4 /* APIAlamofireManager.swift in Sources */,
 				0E02B542288304E500CD9CBE /* MediumContentView.swift in Sources */,
 				0E5CF69C2884FF9F00AC7BE1 /* CommonContentView.swift in Sources */,
 				0EB9C4BC29FFA34B00817997 /* RealmRepository.swift in Sources */,

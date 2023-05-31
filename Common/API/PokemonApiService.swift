@@ -12,7 +12,7 @@ final class PokemonApiService {
     public static let POKEMON_URL = "https://pokeapi.co/api/v2/pokemon/"
     public static let POKEMON_SPECIES_URL = "https://pokeapi.co/api/v2/pokemon-species/"
     private let _number: Int
-    private let api: IAPIManager = APIManager()
+    private let api: IAPIManager = APIAlamofireManager()
 
     public var pokemonURL: String {
         PokemonApiService.POKEMON_URL + _number.description

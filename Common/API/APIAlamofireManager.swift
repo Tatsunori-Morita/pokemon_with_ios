@@ -1,5 +1,5 @@
 //
-//  APIManager.swift
+//  APIAlamofireManager.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2022/07/07.
@@ -12,7 +12,7 @@ enum APIError: Error {
     case responseDataNil
 }
 
-final class APIManager: IAPIManager {
+final class APIAlamofireManager: IAPIManager {
 
     public func get(
         url: String,

@@ -17,6 +17,7 @@ class PokemonRealmModel: Object {
     @Persisted var flavorTextEntries: List<FlavorTextEntryRealmModel>
     @Persisted var frontDefault: String = ""
     @Persisted var officialArtwork: OfficialArtworkRealmModel?
+    @Persisted var pokemonTypes: List<PokemonTypeRealmModel>
 
     convenience init(entity: PokemonEntity) {
         self.init()
@@ -45,6 +46,11 @@ class PokemonRealmModel: Object {
         
         self.frontDefault = entity.frontDefault
         self.officialArtwork = OfficialArtworkRealmModel(entity: entity)
+        entity.pokemonTypeValues.forEach { pokemonType in
+            if pokemonType.language == "ja" || pokemonType.language == "en" {
+                self.pokemonTypes.append(PokemonTypeRealmModel(idValue: entity.idValue, pokemonTypeValue: pokemonType))
+            }
+        }
     }
 
     public func createPokemonEntity() -> PokemonEntity {
@@ -112,5 +118,19 @@ class OfficialArtworkRealmModel: Object {
         self.init()
         self.no = entity.id
         self.frontDefault = entity.frontDefault
+    }
+}
+
+class PokemonTypeRealmModel: Object {
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var no: Int = 0
+    @Persisted var name: String
+    @Persisted var language: String = ""
+    
+    convenience init(idValue: PokemonEntity.IdValue, pokemonTypeValue: PokemonEntity.PokemonTypeValue) {
+        self.init()
+        self.no = idValue.id
+        self.name = pokemonTypeValue.name
+        self.language = pokemonTypeValue.language
     }
 }

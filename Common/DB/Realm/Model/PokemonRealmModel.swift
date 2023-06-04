@@ -35,12 +35,12 @@ class PokemonRealmModel: Object {
         }
         
         // 各言語でバージョンによって複数存在するため、最初の１件だけ取得
-        if let jaTextEntryValue = entity.flavorTextEntries.filter({ $0.language == "ja" }).first {
-            self.flavorTextEntries.append(FlavorTextEntryRealmModel(idValue: entity.idValue, flavorTextEntryValue: jaTextEntryValue))
+        if let jaText = entity.flavorTextEntries.filter({ $0.language == "ja" }).first {
+            self.flavorTextEntries.append(FlavorTextEntryRealmModel(idValue: entity.idValue, flavorTextEntryValue: jaText))
         }
         
-        if let jaTextEntryValue = entity.flavorTextEntries.filter({ $0.language == "en" }).first {
-            self.flavorTextEntries.append(FlavorTextEntryRealmModel(idValue: entity.idValue, flavorTextEntryValue: jaTextEntryValue))
+        if let enText = entity.flavorTextEntries.filter({ $0.language == "en" }).first {
+            self.flavorTextEntries.append(FlavorTextEntryRealmModel(idValue: entity.idValue, flavorTextEntryValue: enText))
         }
         
         self.frontDefault = entity.frontDefault

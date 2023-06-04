@@ -22,16 +22,27 @@ class PokemonRealmModel: Object {
         self.init()
         self.no = entity.id
         entity.names.forEach { name in
-            self.names.append(NameRealmModel(idValue: entity.idValue, nameValue: name))
+            if name.language == "ja" || name.language == "en" {
+                self.names.append(NameRealmModel(idValue: entity.idValue, nameValue: name))
+            }
         }
         self.weight = entity.weight
         self.height = entity.height
         entity.genera.forEach { genus in
-            self.genera.append(GenusRealmModel(idValue: entity.idValue, genusValue: genus))
+            if genus.language == "ja" || genus.language == "en" {
+                self.genera.append(GenusRealmModel(idValue: entity.idValue, genusValue: genus))
+            }
         }
-        entity.flavorTextEntries.forEach { flavorTextEntry in
-            self.flavorTextEntries.append(FlavorTextEntryRealmModel(idValue: entity.idValue, flavorTextEntryValue: flavorTextEntry))
+        
+        // 各言語でバージョンによって複数存在するため、最初の１件だけ取得
+        if let jaTextEntryValue = entity.flavorTextEntries.filter({ $0.language == "ja" }).first {
+            self.flavorTextEntries.append(FlavorTextEntryRealmModel(idValue: entity.idValue, flavorTextEntryValue: jaTextEntryValue))
         }
+        
+        if let jaTextEntryValue = entity.flavorTextEntries.filter({ $0.language == "en" }).first {
+            self.flavorTextEntries.append(FlavorTextEntryRealmModel(idValue: entity.idValue, flavorTextEntryValue: jaTextEntryValue))
+        }
+        
         self.frontDefault = entity.frontDefault
         self.officialArtwork = OfficialArtworkRealmModel(entity: entity)
     }

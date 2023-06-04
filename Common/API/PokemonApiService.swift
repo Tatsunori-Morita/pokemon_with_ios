@@ -1,5 +1,5 @@
 //
-//  PokemonViewModel.swift
+//  PokemonApiService.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2022/07/07.

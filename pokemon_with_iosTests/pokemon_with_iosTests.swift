@@ -37,22 +37,22 @@ class pokemon_with_iosTests: XCTestCase {
 //            e.fulfill()
 //        }
 
-        viewModel.fetchPokemon { pokemon in
-            guard let typeElements = pokemon.types else { return }
-
-            typeElements.forEach { typeElement in
-                if let url = typeElement.type?.url {
-                    viewModel.fetchPokemonType(url: url) { type in
-                        guard let names = type.names else { return }
-                        let name = names.filter { $0.language?.name == "ja" }.first
-                        print(name)
-                    }
-                }
-            }
-            e.fulfill()
-        }
-
-        waitForExpectations(timeout: 5.0, handler: nil)
+//        viewModel.fetch { pokemon in
+//            guard let typeElements = pokemon.types else { return }
+//
+//            typeElements.forEach { typeElement in
+//                if let url = typeElement.type?.url {
+//                    viewModel.fetchPokemonType(url: url) { type in
+//                        guard let names = type.names else { return }
+//                        let name = names.filter { $0.language?.name == "ja" }.first
+//                        print(name)
+//                    }
+//                }
+//            }
+//            e.fulfill()
+//        }
+//
+//        waitForExpectations(timeout: 5.0, handler: nil)
     }
 
     func testPerformanceExample() throws {

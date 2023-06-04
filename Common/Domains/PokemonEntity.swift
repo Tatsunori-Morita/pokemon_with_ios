@@ -15,6 +15,7 @@ class PokemonEntity {
     private let _generaValues: [GenusValue]
     private let _flavorTextEntryValues: [FlavorTextEntryValue]
     private let _frontDefaultValue: FrontDefaultValue
+    private let _pokemonTypeValues: [PokemonTypeValue]
 
     public var id: Int {
         _idValue.id
@@ -51,8 +52,12 @@ class PokemonEntity {
     public var frontDefault: String {
         _frontDefaultValue.frontDefault
     }
+    
+    public var pokemonTypeValues: [PokemonTypeValue] {
+        _pokemonTypeValues
+    }
 
-    init(id: IdValue, names: [NameValue], weight: WeightValue, height: HeightValue, genera: [GenusValue], flavorTextEntries: [FlavorTextEntryValue], frontDefault: FrontDefaultValue) {
+    init(id: IdValue, names: [NameValue], weight: WeightValue, height: HeightValue, genera: [GenusValue], flavorTextEntries: [FlavorTextEntryValue], frontDefault: FrontDefaultValue, pokemonTypeValues: [PokemonTypeValue]) {
         _idValue = id
         _nameValues = names
         _weightValue = weight
@@ -60,6 +65,7 @@ class PokemonEntity {
         _generaValues = genera
         _flavorTextEntryValues = flavorTextEntries
         _frontDefaultValue = frontDefault
+        _pokemonTypeValues = pokemonTypeValues
     }
 
     class IdValue {
@@ -74,7 +80,7 @@ class PokemonEntity {
         }
 
         init(id: Int) {
-            if id < 0 {
+            if id < 1 {
                 fatalError("IDが0以下の値が設定されています")
             }
             _id = id
@@ -199,6 +205,31 @@ class PokemonEntity {
 
         init(frontDefault: String) {
             _frontDefault = frontDefault
+        }
+    }
+    
+    class PokemonTypeValue {
+        private let _name: String
+        private let _language: LanguageValue
+        
+        public var name: String {
+            _name
+        }
+        
+        public var color: String {
+            ""
+        }
+        
+        public var language: String {
+            _language.language
+        }
+        
+        init(name: String, language: LanguageValue) {
+            if name.isEmpty {
+                fatalError("タイプが設定されていません")
+            }
+            _name = name
+            _language = language
         }
     }
 }

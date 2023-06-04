@@ -8,15 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @State private var isDarkMode = true
-//    @State private var selectedUpdatePeriod = UpdatePeriod.hour
-
-//    private enum UpdatePeriod {
-//        case hour
-//        case twelve
-//        case twentyFour
-//    }
-
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
 
     var body: some View {

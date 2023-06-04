@@ -43,11 +43,11 @@ struct Pokemon: Codable {
         case species, sprites, stats, types, weight
     }
 
-    public var getId: String {
+    public var getId: Int {
         guard let value = id else {
-            return ""
+            return 0
         }
-        return value.description
+        return value
     }
 
     public var getName: String {
@@ -80,6 +80,13 @@ struct Ability: Codable {
 struct Species: Codable {
     let name: String?
     let url: String?
+    
+    public var getName: String {
+        guard let value = name else {
+            return ""
+        }
+        return value
+    }
 }
 
 // MARK: - GameIndex

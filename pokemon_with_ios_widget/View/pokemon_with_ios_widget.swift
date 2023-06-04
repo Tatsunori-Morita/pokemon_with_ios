@@ -10,24 +10,22 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
+    let entity = PokemonEntryDTO(
+        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)).createEntity()
 
     func placeholder(in context: Context) -> PokemonEntry {
         PokemonEntry(
             date: Date(),
-            pokemonEntryViewModel: PokemonEntryViewModel(
-                pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-                pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-                pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)),
+            viewHelper: ViewHelper(pokemonEntity: entity),
             configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (PokemonEntry) -> ()) {
         let entry = PokemonEntry(
             date: Date(),
-            pokemonEntryViewModel: PokemonEntryViewModel(
-                pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-                pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-                pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)),
+            viewHelper: ViewHelper(pokemonEntity: entity),
             configuration: configuration)
         completion(entry)
     }
@@ -60,30 +58,18 @@ struct Provider: IntentTimelineProvider {
 
                 pokemonTypesGroup.notify(queue: .main) {
                     let currentDate = Date()
-                    let viewModel = PokemonEntryViewModel(
+                    let dto = PokemonEntryDTO(
                         pokemon: pokemon,
                         pokemonSpecies: pokemonSpecies,
                         pokemonTypes: pokemonTypes)
+
+                    let entity = dto.createEntity()
+                    repository.add(entity: entity)
+                    
                     let entry = PokemonEntry(
                         date: currentDate,
-                        pokemonEntryViewModel: viewModel,
+                        viewHelper: ViewHelper(pokemonEntity: entity),
                         configuration: configuration)
-
-                    let ja = PokemonEntity.LanguageValue(language: "ja")
-                    let en = PokemonEntity.LanguageValue(language: "en")
-                    let id = PokemonEntity.IdValue(id: viewModel.id)
-                    let jaName = PokemonEntity.NameValue(name: viewModel.getJaName, language: ja)
-                    let enName = PokemonEntity.NameValue(name: viewModel.getEnName, language: en)
-                    let weight = PokemonEntity.WeightValue(weight: viewModel.weight)
-                    let height = PokemonEntity.HeightValue(height: viewModel.height)
-                    let jaGenera = PokemonEntity.GenusValue(genus: viewModel.getJaGenera, language: ja)
-                    let enGenera = PokemonEntity.GenusValue(genus: viewModel.getEnGenera, language: en)
-                    let jaFlavorTextEntry = PokemonEntity.FlavorTextEntryValue(flavorTextEntry: viewModel.getJaFlavorTextEntry, language: ja)
-                    let enFlavorTextEntry = PokemonEntity.FlavorTextEntryValue(flavorTextEntry: viewModel.getEnFlavorTextEntry, language: en)
-                    let frontDefault = PokemonEntity.FrontDefaultValue(frontDefault: viewModel.getFrontDefault)
-                    let entity = PokemonEntity(id: id, names: [jaName, enName], weight: weight, height: height, genera: [jaGenera, enGenera], flavorTextEntries: [jaFlavorTextEntry, enFlavorTextEntry], frontDefault: frontDefault)
-
-                    repository.add(entity: entity)
 
                     let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
                     let timeline = Timeline(entries: [entry], policy: .after(futureDate))
@@ -96,7 +82,7 @@ struct Provider: IntentTimelineProvider {
 
 struct PokemonEntry: TimelineEntry {
     var date: Date
-    var pokemonEntryViewModel: PokemonEntryViewModel
+    var viewHelper: ViewHelper
     let configuration: ConfigurationIntent
 }
 
@@ -106,14 +92,7 @@ struct pokemon_with_ios_widgetEntryView : View {
     @Environment(\.widgetFamily) var family
 
     var body: some View {
-        switch family {
-        case .systemMedium:
-            MediumContentView(pokemonEntryViewModel: entry.pokemonEntryViewModel)
-        case .systemLarge:
-            LargeContentView(pokemonEntryViewModel: entry.pokemonEntryViewModel)
-        default:
-            fatalError()
-        }
+        WidgetContentView(viewHelper: entry.viewHelper)
     }
 }
 
@@ -128,30 +107,21 @@ struct pokemon_with_ios_widget: Widget {
         }
         .configurationDisplayName("configurationDisplayName")
         .description("description")
-        .supportedFamilies([.systemMedium, .systemLarge])
+        .supportedFamilies([.systemLarge])
     }
 }
 
 struct pokemon_with_ios_widget_Previews: PreviewProvider {
+    static let dto = PokemonEntryDTO(
+        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
+        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
+        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
     static var previews: some View {
         Group {
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
                     date: Date(),
-                    pokemonEntryViewModel: PokemonEntryViewModel(
-                        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-                        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-                        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)),
-                    configuration: ConfigurationIntent()))
-            .background(Color.layout)
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-            pokemon_with_ios_widgetEntryView(
-                entry: PokemonEntry(
-                    date: Date(),
-                    pokemonEntryViewModel: PokemonEntryViewModel(
-                        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-                        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-                        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)),
+                    viewHelper: ViewHelper(pokemonEntity: dto.createEntity()),
                     configuration: ConfigurationIntent()))
             .background(.white)
             .previewContext(WidgetPreviewContext(family: .systemLarge))

@@ -10,7 +10,7 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    let entity = PokemonEntryDTO(
+    let entity = PokemonEntityDTO(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)).createEntity()
@@ -58,7 +58,7 @@ struct Provider: IntentTimelineProvider {
 
                 pokemonTypesGroup.notify(queue: .main) {
                     let currentDate = Date()
-                    let dto = PokemonEntryDTO(
+                    let dto = PokemonEntityDTO(
                         pokemon: pokemon,
                         pokemonSpecies: pokemonSpecies,
                         pokemonTypes: pokemonTypes)
@@ -112,7 +112,7 @@ struct pokemon_with_ios_widget: Widget {
 }
 
 struct pokemon_with_ios_widget_Previews: PreviewProvider {
-    static let dto = PokemonEntryDTO(
+    static let dto = PokemonEntityDTO(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))

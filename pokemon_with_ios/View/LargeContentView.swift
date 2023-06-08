@@ -94,7 +94,7 @@ struct LargeContentView: View {
 }
 
 struct WidgetLarge_Previews: PreviewProvider {
-    static let dto = PokemonEntryDTO(
+    static let dto = PokemonEntityDTO(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))

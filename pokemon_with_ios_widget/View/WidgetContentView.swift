@@ -36,15 +36,15 @@ struct WidgetContentView: View {
                                 .bold()
                                 .padding(.trailing, 16)
                             HStack (spacing: 5) {
-                                ForEach(0..<viewHelper.types.count, id: \.self) { num in
-                                    Text(viewHelper.types[num].name)
+                                ForEach(0..<viewHelper.types.count, id: \.self) { index in
+                                    Text(viewHelper.typeName(index: index))
                                         .font(.custom("Hiragino Kaku Gothic ProN", size: 10))
                                         .foregroundColor(.white)
                                         .padding(.top, 4)
                                         .padding(.leading, 10)
                                         .padding(.trailing, 10)
                                         .padding(.bottom, 4)
-                                        .background(.yellow)
+                                        .background(viewHelper.typeColor(index: index))
                                         .cornerRadius(10)
                                 }
                             }

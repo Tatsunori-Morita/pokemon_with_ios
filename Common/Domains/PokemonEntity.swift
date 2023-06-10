@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class PokemonEntity {
     private let _idValue: IdValue
@@ -212,12 +213,157 @@ class PokemonEntity {
         private let _name: String
         private let _language: LanguageValue
         
+        enum Types {
+            case Normal
+            case Fire
+            case Water
+            case Grass
+            case Electric
+            case Ice
+            case Fighting
+            case Poison
+            case Ground
+            case Flying
+            case Psychic
+            case Bug
+            case Rock
+            case Ghost
+            case Dragon
+            case Dark
+            case Steel
+            case Fairy
+        }
+        
         public var name: String {
             _name
         }
+
+        public var typeJapanese: Types  {
+            switch _name {
+            case "ノーマル":
+                return .Normal
+            case "ほのお":
+                return .Fire
+            case "みず":
+                return .Water
+            case "くさ":
+                return .Grass
+            case "でんき":
+                return .Electric
+            case "こおり":
+                return .Ice
+            case "かくとう":
+                return .Fighting
+            case "どく":
+                return .Poison
+            case "じめん":
+                return .Ground
+            case "ひこう":
+                return .Flying
+            case "エスパー":
+                return .Psychic
+            case "むし":
+                return .Bug
+            case "いわ":
+                return .Rock
+            case "ゴースト":
+                return .Ghost
+            case "ドラゴン":
+                return .Dragon
+            case "あく":
+                return .Dark
+            case "はがね":
+                return .Steel
+            case "フェアリー":
+                return .Fairy
+            default:
+                fatalError("対象の日本語属性が存在しません")
+            }
+        }
         
-        public var color: String {
-            ""
+        public var typeEnglish: Types  {
+            switch _name {
+            case "Normal":
+                return .Normal
+            case "Fire":
+                return .Fire
+            case "Water":
+                return .Water
+            case "Grass":
+                return .Grass
+            case "Electric":
+                return .Electric
+            case "Ice":
+                return .Ice
+            case "Fighting":
+                return .Fighting
+            case "Poison":
+                return .Poison
+            case "Ground":
+                return .Ground
+            case "Flying":
+                return .Flying
+            case "Psychic":
+                return .Psychic
+            case "Bug":
+                return .Bug
+            case "Rock":
+                return .Rock
+            case "Ghost":
+                return .Ghost
+            case "Dragon":
+                return .Dragon
+            case "Dark":
+                return .Dark
+            case "Steel":
+                return .Steel
+            case "Fairy":
+                return .Fairy
+            default:
+                fatalError("対象の英語語属性が存在しません")
+            }
+        }
+        
+        public var color: Color {
+            let type = _language.language == "ja" ? typeJapanese : typeEnglish
+            switch type {
+            case .Normal:
+                return .normal
+            case .Fire:
+                return .fire
+            case .Water:
+                return .water
+            case .Grass:
+                return .grass
+            case .Electric:
+                return .electric
+            case .Ice:
+                return .ice
+            case .Fighting:
+                return .flying
+            case .Poison:
+                return .poison
+            case .Ground:
+                return .ground
+            case .Flying:
+                return .flying
+            case .Psychic:
+                return .psychic
+            case .Bug:
+                return .bug
+            case .Rock:
+                return .rock
+            case .Ghost:
+                return .ghost
+            case .Dragon:
+                return .dragon
+            case .Dark:
+                return .dark
+            case .Steel:
+                return .steel
+            case .Fairy:
+                return .fairy
+            }
         }
         
         public var language: String {

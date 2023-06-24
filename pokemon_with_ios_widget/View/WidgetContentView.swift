@@ -57,7 +57,7 @@ struct WidgetContentView: View {
                             Text(viewHelper.genera)
                                 .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                         }
-                        .padding(.top, 16)
+                        .padding(.top, 8)
                     }
                     .padding(.top, 0)
                 }

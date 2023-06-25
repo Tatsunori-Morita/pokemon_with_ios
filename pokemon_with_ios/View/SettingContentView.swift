@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SettingContentView.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2022/07/02.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct SettingContentView: View {
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
 
     var body: some View {
@@ -30,9 +30,9 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView()
+            SettingContentView()
                 .environment(\.locale, .init(identifier: "en"))
-            ContentView()
+            SettingContentView()
                 .environment(\.locale, .init(identifier: "ja"))
         }
     }

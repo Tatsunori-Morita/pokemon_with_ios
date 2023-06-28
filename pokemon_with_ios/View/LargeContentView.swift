@@ -103,7 +103,7 @@ struct WidgetLarge_Previews: PreviewProvider {
         Group {
             LargeContentView(
                 viewHelper: ViewHelper(
-                    pokemonEntity: dto.createEntity()))
+                    pokemonEntity: dto.createEntity(), isApp: true))
             .environment(\.locale, .init(identifier: "ja"))
         }
     }

@@ -10,9 +10,15 @@ import SwiftUI
 
 struct ViewHelper {
     private let _pokemonEntity: PokemonEntity
+    private let _isApp: Bool
 
-    init(pokemonEntity: PokemonEntity) {
+    init(pokemonEntity: PokemonEntity, isApp: Bool) {
         _pokemonEntity = pokemonEntity
+        _isApp = isApp
+    }
+    
+    public var isApp: Bool {
+        _isApp
     }
 
     public var id: String {

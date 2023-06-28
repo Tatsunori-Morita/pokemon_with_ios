@@ -9,8 +9,13 @@ import Foundation
 import SwiftUI
 
 extension Color {
+    // Setting
     public static let layout = Color("Layout")
+    public static let layout2 = Color("Layout2")
     public static let text = Color("Text")
+    public static let image = Color("Image")
+    
+    // Pokemon type
     public static let normal = Color("Normal")
     public static let fire = Color("Fire")
     public static let water = Color("Water")

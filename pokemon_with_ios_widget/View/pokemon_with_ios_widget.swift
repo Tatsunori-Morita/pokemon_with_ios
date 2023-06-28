@@ -18,14 +18,14 @@ struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> PokemonEntry {
         PokemonEntry(
             date: Date(),
-            viewHelper: ViewHelper(pokemonEntity: entity),
+            viewHelper: ViewHelper(pokemonEntity: entity, isApp: false),
             configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (PokemonEntry) -> ()) {
         let entry = PokemonEntry(
             date: Date(),
-            viewHelper: ViewHelper(pokemonEntity: entity),
+            viewHelper: ViewHelper(pokemonEntity: entity, isApp: false),
             configuration: configuration)
         completion(entry)
     }
@@ -68,7 +68,7 @@ struct Provider: IntentTimelineProvider {
                     
                     let entry = PokemonEntry(
                         date: currentDate,
-                        viewHelper: ViewHelper(pokemonEntity: entity),
+                        viewHelper: ViewHelper(pokemonEntity: entity, isApp: false),
                         configuration: configuration)
 
                     let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
@@ -121,7 +121,7 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
                     date: Date(),
-                    viewHelper: ViewHelper(pokemonEntity: dto.createEntity()),
+                    viewHelper: ViewHelper(pokemonEntity: dto.createEntity(), isApp: false),
                     configuration: ConfigurationIntent()))
             .background(.white)
             .previewContext(WidgetPreviewContext(family: .systemLarge))

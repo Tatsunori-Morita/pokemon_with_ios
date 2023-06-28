@@ -61,8 +61,8 @@ class PokemonRealmModel: Object {
         let genera = genera.map { PokemonEntity.GenusValue(genus: $0.genus, language: PokemonEntity.LanguageValue(language: $0.language))}
         let flavorTextEntries = flavorTextEntries.map { PokemonEntity.FlavorTextEntryValue(flavorTextEntry: $0.flavorText, language: PokemonEntity.LanguageValue(language: $0.language)) }
         let frontDefault = PokemonEntity.FrontDefaultValue(frontDefault: frontDefault)
-
-        let entity = PokemonEntity(id: id, names: Array(names), weight: weight, height: height, genera: Array(genera), flavorTextEntries: Array(flavorTextEntries), frontDefault: frontDefault, pokemonTypeValues: [])
+        let types = pokemonTypes.map { PokemonEntity.PokemonTypeValue(name: $0.name, language: PokemonEntity.LanguageValue(language: $0.language))}
+        let entity = PokemonEntity(id: id, names: Array(names), weight: weight, height: height, genera: Array(genera), flavorTextEntries: Array(flavorTextEntries), frontDefault: frontDefault, pokemonTypeValues: Array(types))
         return entity
     }
 }

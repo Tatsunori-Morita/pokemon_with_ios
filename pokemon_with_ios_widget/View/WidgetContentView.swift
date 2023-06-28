@@ -21,7 +21,7 @@ struct WidgetContentView: View {
                             Text(viewHelper.name)
                                 .font(.custom("Hiragino Kaku Gothic ProN", size: 20))
                                 .bold()
-                                .padding(.top, 5)
+                                .padding(.top, 4)
                         }
                         Spacer()
                         viewHelper.image
@@ -35,7 +35,7 @@ struct WidgetContentView: View {
                                 .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
-                            HStack (spacing: 5) {
+                            HStack (spacing: 8) {
                                 ForEach(0..<viewHelper.types.count, id: \.self) { index in
                                     Text(viewHelper.typeName(index: index))
                                         .font(.custom("Hiragino Kaku Gothic ProN", size: 10))
@@ -49,6 +49,7 @@ struct WidgetContentView: View {
                                 }
                             }
                         }
+                        .padding(.top, 8)
                         HStack (spacing: 0) {
                             Text("分類：")
                                 .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
@@ -57,7 +58,27 @@ struct WidgetContentView: View {
                             Text(viewHelper.genera)
                                 .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                         }
-                        .padding(.top, 8)
+                        .padding(.top, 12)
+                        if viewHelper.isApp {
+                            HStack (spacing: 0) {
+                                Text("高さ：")
+                                    .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                                    .bold()
+                                    .padding(.trailing, 16)
+                                Text(viewHelper.height)
+                                    .font(.custom("SF Pro Text", size: 16))
+                            }
+                            .padding(.top, 8)
+                            HStack (spacing: 0) {
+                                Text("重さ：")
+                                    .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                                    .bold()
+                                    .padding(.trailing, 16)
+                                Text(viewHelper.weight)
+                                    .font(.custom("SF Pro Text", size: 16))
+                            }
+                            .padding(.top, 8)
+                        }
                     }
                     .padding(.top, 0)
                 }
@@ -72,7 +93,7 @@ struct WidgetContentView: View {
     }
 }
 
-struct LargeContentView2_Previews: PreviewProvider {
+struct WidgetContentView_Previews: PreviewProvider {
     static let dto = PokemonEntityDTO(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
@@ -82,7 +103,7 @@ struct LargeContentView2_Previews: PreviewProvider {
         Group {
             WidgetContentView(
                 viewHelper: ViewHelper(
-                    pokemonEntity: dto.createEntity()))
+                    pokemonEntity: dto.createEntity(), isApp: false))
             .environment(\.locale, .init(identifier: "ja"))
         }
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WidgetContentView: View {
-    let viewHelper: ViewHelper
+    let viewModel: WidgetContentViewModel
     
     var body: some View {
         GeometryReader { geometry in
@@ -16,15 +16,15 @@ struct WidgetContentView: View {
                 VStack (alignment: .leading, spacing: 0) {
                     HStack (alignment: .top) {
                         VStack (alignment: .leading, spacing: 0) {
-                            Text(viewHelper.id)
+                            Text(viewModel.id)
                                 .font(.custom("SF Pro Text", size: 16))
-                            Text(viewHelper.name)
+                            Text(viewModel.name)
                                 .font(.custom("Hiragino Kaku Gothic ProN", size: 20))
                                 .bold()
                                 .padding(.top, 4)
                         }
                         Spacer()
-                        viewHelper.image
+                        viewModel.image
                             .resizable()
                             .scaledToFit()
                             .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
@@ -36,15 +36,15 @@ struct WidgetContentView: View {
                                 .bold()
                                 .padding(.trailing, 16)
                             HStack (spacing: 8) {
-                                ForEach(0..<viewHelper.types.count, id: \.self) { index in
-                                    Text(viewHelper.typeName(index: index))
+                                ForEach(0..<viewModel.types.count, id: \.self) { index in
+                                    Text(viewModel.typeName(index: index))
                                         .font(.custom("Hiragino Kaku Gothic ProN", size: 10))
                                         .foregroundColor(.white)
                                         .padding(.top, 4)
                                         .padding(.leading, 10)
                                         .padding(.trailing, 10)
                                         .padding(.bottom, 4)
-                                        .background(viewHelper.typeColor(index: index))
+                                        .background(viewModel.typeColor(index: index))
                                         .cornerRadius(10)
                                 }
                             }
@@ -55,17 +55,17 @@ struct WidgetContentView: View {
                                 .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
-                            Text(viewHelper.genera)
+                            Text(viewModel.genera)
                                 .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                         }
                         .padding(.top, 12)
-                        if viewHelper.isApp {
+                        if viewModel.isApp {
                             HStack (spacing: 0) {
                                 Text("高さ：")
                                     .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                                     .bold()
                                     .padding(.trailing, 16)
-                                Text(viewHelper.height)
+                                Text(viewModel.height)
                                     .font(.custom("SF Pro Text", size: 16))
                             }
                             .padding(.top, 8)
@@ -74,7 +74,7 @@ struct WidgetContentView: View {
                                     .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                                     .bold()
                                     .padding(.trailing, 16)
-                                Text(viewHelper.weight)
+                                Text(viewModel.weight)
                                     .font(.custom("SF Pro Text", size: 16))
                             }
                             .padding(.top, 8)
@@ -82,7 +82,7 @@ struct WidgetContentView: View {
                     }
                     .padding(.top, 0)
                 }
-                Text(viewHelper.flavorTextEntry)
+                Text(viewModel.flavorTextEntry)
                     .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                     .lineSpacing(7)
                     .padding(.top, 32)
@@ -102,7 +102,7 @@ struct WidgetContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             WidgetContentView(
-                viewHelper: ViewHelper(
+                viewModel: WidgetContentViewModel(
                     pokemonEntity: dto.createEntity(), isApp: false))
             .environment(\.locale, .init(identifier: "ja"))
         }

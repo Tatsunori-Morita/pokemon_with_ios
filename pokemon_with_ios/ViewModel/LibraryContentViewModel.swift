@@ -23,11 +23,11 @@ class LibraryContentViewModel: ObservableObject {
         }
     }
     
-    public func pokemonViewHelper(num: Int) -> ViewHelper {
+    public func pokemonViewModel(num: Int) -> WidgetContentViewModel {
         guard let pokemon = _pokemons.first(where: { $0.id == num }) else {
             fatalError("Pokemon not found")
         }
-        return ViewHelper(pokemonEntity: pokemon, isApp: true)
+        return WidgetContentViewModel(pokemonEntity: pokemon, isApp: true)
     }
     
     public func pokemonEntity(num: Int) -> PokemonEntity? {

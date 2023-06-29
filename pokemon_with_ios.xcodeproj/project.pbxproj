@@ -379,8 +379,6 @@
 		0E45E230287079FF00285D2A /* pokemon_with_ios_widget */ = {
 			isa = PBXGroup;
 			children = (
-				0E02B5382882FFBA00CD9CBE /* Manager */,
-				0E78E977287F01F60070EED0 /* Json */,
 				0E02B5322882FD1E00CD9CBE /* View */,
 				0E45E233287079FF00285D2A /* pokemon_with_ios_widget.intentdefinition */,
 				0E45E23428707A0100285D2A /* Assets.xcassets */,
@@ -475,6 +473,7 @@
 				0EAE1AA32A138410009D0529 /* DB */,
 				0E9E15412A122CC6003ACDE8 /* Domains */,
 				0E95E6CD2889810D00F05B05 /* Extension */,
+				0EE367962A4E43DC007559A3 /* Test */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -496,6 +495,15 @@
 				0ED2DD3A287679320082D4C4 /* PokemonApiService.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		0EE367962A4E43DC007559A3 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				0E78E977287F01F60070EED0 /* Json */,
+				0E02B5382882FFBA00CD9CBE /* Manager */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

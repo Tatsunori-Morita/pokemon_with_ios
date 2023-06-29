@@ -268,6 +268,14 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		0E0D0CDD2A4D6DAE001697FF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0EE72C122A49093B0053F47B /* LibraryContentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0E1080432A27528D00E94515 /* Alamofire */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +316,7 @@
 			children = (
 				0E9E15402A12249B003ACDE8 /* pokemon_with_ios.entitlements */,
 				0E49C5E0289AB6A6005DB9B1 /* View */,
+				0E0D0CDD2A4D6DAE001697FF /* ViewModel */,
 				0E45E200287075E200285D2A /* Assets.xcassets */,
 				0E45E202287075E300285D2A /* Preview Content */,
 			);
@@ -369,7 +378,6 @@
 				0E45E1FE287075DE00285D2A /* SettingContentView.swift */,
 				0EE72C0B2A4716340053F47B /* MainContentView.swift */,
 				0EE72C0D2A4716910053F47B /* LibraryContentView.swift */,
-				0EE72C122A49093B0053F47B /* LibraryContentViewModel.swift */,
 				0E94D6942A4BA7DE0093D7AD /* ModalPopUpView.swift */,
 			);
 			path = View;

@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  LibraryContentViewModel.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2023/06/26.
@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-class ViewModel: ObservableObject {
-    @Published var data: [LibraryCellViewModel] = []
+class LibraryContentViewModel: ObservableObject {
+    @Published var data: [LibraryContentCellViewModel] = []
     
     public let _pokemons: [PokemonEntity]
     
@@ -19,7 +19,7 @@ class ViewModel: ObservableObject {
         _pokemons = RealmRepository().select().map({$0})
         
         for i in 1..<21 {
-            data.append(LibraryCellViewModel(id: i, entity: pokemonEntity(num: i)))
+            data.append(LibraryContentCellViewModel(id: i, entity: pokemonEntity(num: i)))
         }
     }
     
@@ -43,7 +43,7 @@ class ViewModel: ObservableObject {
     
     public func loadMore() {
         for i in data.count+1..<data.count+10 {
-            data.append(LibraryCellViewModel(id: i, entity: pokemonEntity(num: i)))
+            data.append(LibraryContentCellViewModel(id: i, entity: pokemonEntity(num: i)))
         }
     }
     
@@ -55,7 +55,7 @@ class ViewModel: ObservableObject {
     }
 }
 
-struct LibraryCellViewModel: Identifiable {    
+struct LibraryContentCellViewModel: Identifiable {    
     var id = UUID()
     private let _id: Int
     let _entity: PokemonEntity?

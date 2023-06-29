@@ -9,7 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct LibraryContentView: View {
-    @ObservedObject var viewModel: ViewModel = .init()
+    @ObservedObject var viewModel: LibraryContentViewModel = .init()
     
     @Environment(\.viewController) private var viewControllerHolder: UIViewController?
     

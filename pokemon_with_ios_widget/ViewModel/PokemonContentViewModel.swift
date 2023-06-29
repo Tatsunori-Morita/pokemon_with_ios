@@ -1,5 +1,5 @@
 //
-//  WidgetContentViewModel.swift
+//  PokemonContentViewModel.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2023/06/02.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct WidgetContentViewModel {
+struct PokemonContentViewModel {
     private let _pokemonEntity: PokemonEntity
     private let _isApp: Bool
 

@@ -1,5 +1,5 @@
 //
-//  WidgetContentView.swift
+//  PokemonContentView.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2022/07/16.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct WidgetContentView: View {
-    let viewModel: WidgetContentViewModel
+struct PokemonContentView: View {
+    let viewModel: PokemonContentViewModel
     
     var body: some View {
         GeometryReader { geometry in
@@ -101,8 +101,8 @@ struct WidgetContentView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            WidgetContentView(
-                viewModel: WidgetContentViewModel(
+            PokemonContentView(
+                viewModel: PokemonContentViewModel(
                     pokemonEntity: dto.createEntity(), isApp: false))
             .environment(\.locale, .init(identifier: "ja"))
         }

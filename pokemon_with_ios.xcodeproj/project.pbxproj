@@ -296,9 +296,9 @@
 				0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */,
 				0EB8E6AA2A16E9F900E643C1 /* Common */,
 				0E45E1FB287075DE00285D2A /* pokemon_with_ios */,
+				0E45E230287079FF00285D2A /* pokemon_with_ios_widget */,
 				0E45E20C287075E300285D2A /* pokemon_with_iosTests */,
 				0E45E216287075E300285D2A /* pokemon_with_iosUITests */,
-				0E45E230287079FF00285D2A /* pokemon_with_ios_widget */,
 				0E45E22B287079FF00285D2A /* Frameworks */,
 				0E45E1FA287075DE00285D2A /* Products */,
 			);

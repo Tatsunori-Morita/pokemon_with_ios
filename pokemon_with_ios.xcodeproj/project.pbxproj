@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E02B5342882FD8400CD9CBE /* LargeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E02B5332882FD8400CD9CBE /* LargeContentView.swift */; };
 		0E02B53A2882FFD100CD9CBE /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E02B5392882FFD100CD9CBE /* LocalDataManager.swift */; };
 		0E02B53B2882FFD100CD9CBE /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E02B5392882FFD100CD9CBE /* LocalDataManager.swift */; };
 		0E02B53C2882FFD100CD9CBE /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E02B5392882FFD100CD9CBE /* LocalDataManager.swift */; };
@@ -160,7 +159,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0E02B5332882FD8400CD9CBE /* LargeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeContentView.swift; sourceTree = "<group>"; };
 		0E02B5392882FFD100CD9CBE /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		0E10803E2A2750F000E94515 /* IAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPIManager.swift; sourceTree = "<group>"; };
 		0E45E1F9287075DE00285D2A /* pokemon_with_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokemon_with_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -369,7 +367,6 @@
 			children = (
 				0E45E1FC287075DE00285D2A /* pokemon_with_iosApp.swift */,
 				0E45E1FE287075DE00285D2A /* SettingContentView.swift */,
-				0E02B5332882FD8400CD9CBE /* LargeContentView.swift */,
 				0EE72C0B2A4716340053F47B /* MainContentView.swift */,
 				0EE72C0D2A4716910053F47B /* LibraryContentView.swift */,
 				0EE72C122A49093B0053F47B /* ViewModel.swift */,
@@ -704,7 +701,6 @@
 				0EBF3D8A287D5B07002A8CCF /* PokemonEntityDTO.swift in Sources */,
 				0EE72C132A49093B0053F47B /* ViewModel.swift in Sources */,
 				0EB8E6AC2A16F59A00E643C1 /* IRepository.swift in Sources */,
-				0E02B5342882FD8400CD9CBE /* LargeContentView.swift in Sources */,
 				0E9E15432A122E00003ACDE8 /* PokemonEntity.swift in Sources */,
 				0EBB024D2877FDB50001B5E1 /* Pokemon.swift in Sources */,
 				0E7A11F8288A5EFE001D8006 /* PokemonType.swift in Sources */,

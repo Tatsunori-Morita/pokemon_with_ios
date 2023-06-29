@@ -8,7 +8,7 @@
 import Foundation
 
 final class PokemonApiService {
-    public static let POKEMON_AMOUNT = 898
+    public static let POKEMON_AMOUNT = 1010
     public static let POKEMON_URL = "https://pokeapi.co/api/v2/pokemon/"
     public static let POKEMON_SPECIES_URL = "https://pokeapi.co/api/v2/pokemon-species/"
     private let _number: Int

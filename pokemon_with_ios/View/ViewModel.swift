@@ -13,7 +13,7 @@ class ViewModel: ObservableObject {
     
     public let _pokemons: [PokemonEntity]
     
-    private let max = 900
+    private let max = 1010
     
     init() {
         _pokemons = RealmRepository().select().map({$0})

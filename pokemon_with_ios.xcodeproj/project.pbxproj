@@ -253,7 +253,7 @@
 		0E02B5322882FD1E00CD9CBE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0EFF55A02A2C905700588EB6 /* ViewHelper */,
+				0EFF55A02A2C905700588EB6 /* ViewModel */,
 				0E45E231287079FF00285D2A /* pokemon_with_ios_widget.swift */,
 				0EFF559B2A2C854100588EB6 /* WidgetContentView.swift */,
 			);
@@ -476,12 +476,12 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		0EFF55A02A2C905700588EB6 /* ViewHelper */ = {
+		0EFF55A02A2C905700588EB6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				0ECE1FAE2A29E2B5002D8992 /* WidgetContentViewModel.swift */,
 			);
-			path = ViewHelper;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

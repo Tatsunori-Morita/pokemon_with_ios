@@ -67,7 +67,7 @@ struct LibraryContentView: View {
                     }
                 }
             }
-            .navigationTitle("ポケモン図鑑")
+            .navigationTitle("Library")
             .background(Color.layout)
         }
     }

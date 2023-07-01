@@ -22,7 +22,7 @@ struct ModalPopUpView: View {
             Button(action: {
                 self.viewControllerHolder?.dismiss(animated: true, completion: nil)
             }) {
-                Text("閉じる")
+                Text("Close")
                     .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                     .foregroundColor(Color.text)
             }

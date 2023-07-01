@@ -20,6 +20,7 @@ struct MainContentView: View {
                     Label("設定", systemImage: "gear")
                 }
         }
+        .accentColor(.accent)
     }
 }
 

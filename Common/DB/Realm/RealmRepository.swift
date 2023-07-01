@@ -27,22 +27,30 @@ class RealmRepository: IRepository {
     }
 
     func getEntityBy(no: PokemonEntity.IdValue) -> PokemonEntity? {
+        guard let model = _getRealmModelBy(no: no) else {
+            return nil
+        }
+        return model.createPokemonEntity()
+    }
+
+    private func _getRealmModelBy(no: PokemonEntity.IdValue) -> PokemonRealmModel? {
         let result = _realm.objects(PokemonRealmModel.self).filter("%K == %d", "no", no.id)
         if result.isEmpty {
             return nil
         }
-        return result.first!.createPokemonEntity()
+        return result.first!
     }
-
+    
     func select() -> [PokemonEntity] {
         let result = _realm.objects(PokemonRealmModel.self).sorted(byKeyPath: "no", ascending: true)
         return Array(result.map { $0.createPokemonEntity() })
     }
 
     func delete(entity: PokemonEntity) {
-        let model = PokemonRealmModel(entity: entity)
-        try! _realm.write {
-            _realm.delete(model)
+        if let model = _getRealmModelBy(no: entity.idValue) {
+            try! _realm.write {
+                _realm.delete(model)
+            }
         }
     }
 

@@ -8,19 +8,51 @@
 import SwiftUI
 
 struct SettingContentView: View {
+    private let models = RealmRepository().select()
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    
+    init() {
+        UINavigationBar.appearance().titleTextAttributes = [
+            .font : UIFont(name: "Hiragino Kaku Gothic ProN", size: 16)!
+        ]
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .font : UIFont(name: "Hiragino Kaku Gothic ProN", size: 32)!
+        ]
+    }
 
     var body: some View {
-        let _ = RealmRepository()
         NavigationView {
             List {
                 HStack {
                     Text("Version")
+                        .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
                     Text(version)
+                        .font(.custom("SF Pro Text", size: 16))
                         .foregroundColor(Color.text)
                 }
+                .listRowBackground(Color.layout)
+                HStack {
+                    Text("Library")
+                        .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                        .foregroundColor(Color.text)
+                    Spacer()
+                    Text("\(models.count) / \(1010)")
+                        .font(.custom("SF Pro Text", size: 16))
+                        .foregroundColor(Color.text)
+                }
+                .listRowBackground(Color.layout)
+                HStack {
+                    Text("Created by")
+                        .font(.custom("SF Pro Text", size: 16))
+                        .foregroundColor(Color.text)
+                    Spacer()
+                    Text("Tatsunori")
+                        .font(.custom("SF Pro Text", size: 16))
+                        .foregroundColor(Color.text)
+                }
+                .listRowBackground(Color.layout)
             }
             .navigationTitle("Setting")
         }

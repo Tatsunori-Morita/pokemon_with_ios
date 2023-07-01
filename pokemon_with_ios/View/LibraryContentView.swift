@@ -30,11 +30,20 @@ struct LibraryContentView: View {
                 LazyVGrid(columns: columns, spacing: 0) {
                     ForEach(viewModel.data) { pokemon in
                         VStack(alignment: .leading, spacing: 0) {
-                            WebImage(url: URL(string: pokemon.url))
-                                .renderingMode(pokemon.isExist ? .original : .template)
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(Color.image)
+                            ZStack {
+                                WebImage(url: URL(string: pokemon.url))
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(Color.image)
+                                Rectangle()
+                                    .fill(.black.opacity(pokemon.isExist ? 0 : 0.8))
+                                    .mask {
+                                        WebImage(url: URL(string: pokemon.url))
+                                            .resizable()
+                                            .scaledToFit()
+                                            .foregroundColor(Color.image)
+                                    }
+                            }
                             Text(pokemon.no)
                                 .font(.custom("SF Pro Text", size: 16))
                                 .foregroundColor(Color.text)

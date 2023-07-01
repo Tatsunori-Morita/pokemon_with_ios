@@ -1,5 +1,5 @@
 //
-//  extension_color.swift
+//  Extension_Color.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2022/07/21.
@@ -11,7 +11,6 @@ import SwiftUI
 extension Color {
     // Setting
     public static let layout = Color("Layout")
-    public static let layout2 = Color("Layout2")
     public static let text = Color("Text")
     public static let image = Color("Image")
     

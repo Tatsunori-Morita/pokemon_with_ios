@@ -60,7 +60,6 @@ struct LibraryContentView: View {
                             .font(.custom("SF Pro Text", size: 16))
                             .foregroundColor(Color.text)
                             .bold()
-                            .foregroundColor(Color.text)
                             .onAppear {
                                 viewModel.loadMore()
                             }

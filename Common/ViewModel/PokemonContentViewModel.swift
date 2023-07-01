@@ -38,7 +38,7 @@ struct PokemonContentViewModel {
         guard
             let genus = _pokemonEntity.genera.filter({ $0.language == "ja" }).first
         else {
-            return ""
+            return "未確認"
         }
         return genus.genus
     }
@@ -67,7 +67,7 @@ struct PokemonContentViewModel {
         guard
             let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == "ja" }).last
         else {
-            return ""
+            return "未確認"
         }
         return flavorTextEntry.flavorTextEntry.replacingOccurrences(of: "\n", with: "")
     }

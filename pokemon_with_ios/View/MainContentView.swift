@@ -19,6 +19,7 @@ struct MainContentView: View {
             SettingContentView()
                 .tabItem {
                     Label("Setting", systemImage: "gear")
+                        .environment(\.symbolVariants, .none)
                 }
         }
         .accentColor(.accent)

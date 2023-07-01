@@ -13,6 +13,7 @@ struct MainContentView: View {
             LibraryContentView()
                 .tabItem {
                     Label("Library", systemImage: "book")
+                        .environment(\.symbolVariants, .none)
                 }
             
             SettingContentView()

@@ -12,12 +12,12 @@ struct MainContentView: View {
         TabView {
             LibraryContentView()
                 .tabItem {
-                    Label("図鑑", systemImage: "book")
+                    Label("Library", systemImage: "book")
                 }
             
             SettingContentView()
                 .tabItem {
-                    Label("設定", systemImage: "gear")
+                    Label("Setting", systemImage: "gear")
                 }
         }
         .accentColor(.accent)
@@ -27,5 +27,8 @@ struct MainContentView: View {
 struct MainContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainContentView()
+            .environment(\.locale, .init(identifier: "en"))
+        MainContentView()
+            .environment(\.locale, .init(identifier: "ja"))
     }
 }

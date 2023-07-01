@@ -24,21 +24,21 @@ struct SettingContentView: View {
         NavigationView {
             List {
                 HStack {
-                    Text("Version")
-                        .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
-                        .foregroundColor(Color.text)
-                    Spacer()
-                    Text(version)
-                        .font(.custom("SF Pro Text", size: 16))
-                        .foregroundColor(Color.text)
-                }
-                .listRowBackground(Color.layout)
-                HStack {
                     Text("Library")
                         .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
                     Text("\(models.count) / \(1010)")
+                        .font(.custom("SF Pro Text", size: 16))
+                        .foregroundColor(Color.text)
+                }
+                .listRowBackground(Color.layout)
+                HStack {
+                    Text("Version")
+                        .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                        .foregroundColor(Color.text)
+                    Spacer()
+                    Text(version)
                         .font(.custom("SF Pro Text", size: 16))
                         .foregroundColor(Color.text)
                 }

@@ -76,5 +76,8 @@ struct LibraryContentView: View {
 struct LibraryContentView_Previews: PreviewProvider {
     static var previews: some View {
         LibraryContentView()
+            .environment(\.locale, .init(identifier: "en"))
+        LibraryContentView()
+            .environment(\.locale, .init(identifier: "ja"))
     }
 }

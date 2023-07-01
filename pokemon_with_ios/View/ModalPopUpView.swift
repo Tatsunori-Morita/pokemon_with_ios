@@ -43,5 +43,8 @@ struct ModalPopUpView_Previews: PreviewProvider {
 
     static var previews: some View {
         ModalPopUpView(entity: dto.createEntity())
+            .environment(\.locale, .init(identifier: "en"))
+        ModalPopUpView(entity: dto.createEntity())
+            .environment(\.locale, .init(identifier: "ja"))
     }
 }

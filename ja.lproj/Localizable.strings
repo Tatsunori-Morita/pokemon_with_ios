@@ -7,8 +7,10 @@
 */
 
 "Setting" = "設定";
+"Library" = "ポケモン図鑑";
 "Version" = "バージョン";
 "Height" = "たかさ:";
 "Weight" = "おもさ:";
 "configurationDisplayName" = "ポケモン WITH";
 "description" = "かわいいポケモンをランダム表示します。";
+"Close" = "閉じる";

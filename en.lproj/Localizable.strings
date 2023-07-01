@@ -6,9 +6,11 @@
   
 */
 
-"Setting" = "Setting";
+"Setting" = "SETTING";
+"Library" = "POKEMON LIBRARY";
 "Version" = "Version";
 "Height" = "Height:";
 "Weight" = "Weight:";
 "configurationDisplayName" = "Pokémon WITH";
 "description" = "Randomly display cute Pokémon.";
+"Close" = "Close";

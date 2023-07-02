@@ -9,8 +9,10 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct LibraryContentView: View {
-    @Environment(\.viewController) private var viewControllerHolder: UIViewController?
-    @ObservedObject private var _viewModel: LibraryContentViewModel
+    @Environment(\.viewController)
+    private var viewControllerHolder: UIViewController?
+    @ObservedObject
+    private var _viewModel: LibraryContentViewModel
     private let columns = [GridItem(.flexible()),
                            GridItem(.flexible()),
                            GridItem(.flexible())]

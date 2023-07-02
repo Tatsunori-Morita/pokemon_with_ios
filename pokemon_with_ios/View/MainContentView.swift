@@ -8,15 +8,23 @@
 import SwiftUI
 
 struct MainContentView: View {
+    @Environment(\.locale) private var locale: Locale
+    
+    private let _pokemonEntities = RealmRepository().select()
+    
     var body: some View {
         TabView {
-            LibraryContentView()
+            LibraryContentView(viewModel: LibraryContentViewModel(
+                configuration: Configuration(locale: locale),
+                pokemonEntities: _pokemonEntities))
                 .tabItem {
                     Label("Library", systemImage: "book")
                         .environment(\.symbolVariants, .none)
                 }
             
-            SettingContentView()
+            SettingContentView(viewModel: SettingContentViewModel(
+                configuration: Configuration(locale: locale),
+                pokemonEntities: _pokemonEntities))
                 .tabItem {
                     Label("Setting", systemImage: "gear")
                         .environment(\.symbolVariants, .none)

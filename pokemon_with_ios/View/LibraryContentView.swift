@@ -9,18 +9,20 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct LibraryContentView: View {
-    @ObservedObject var viewModel: LibraryContentViewModel = .init()
-    
     @Environment(\.viewController) private var viewControllerHolder: UIViewController?
+    @ObservedObject private var _viewModel: LibraryContentViewModel
+    private let columns = [GridItem(.flexible()),
+                           GridItem(.flexible()),
+                           GridItem(.flexible())]
     
-    private let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    
-    init() {
+    init(viewModel: LibraryContentViewModel) {
+        _viewModel = viewModel
+        
         UINavigationBar.appearance().titleTextAttributes = [
-            .font : UIFont(name: "Hiragino Kaku Gothic ProN", size: 16)!
+            .font : UIFont(name: "HiraginoSans-W6", size: 16)!
         ]
         UINavigationBar.appearance().largeTitleTextAttributes = [
-            .font : UIFont(name: "Hiragino Kaku Gothic ProN", size: 32)!
+            .font : UIFont(name: "HiraginoSans-W6", size: 32)!
         ]
     }
     
@@ -28,7 +30,7 @@ struct LibraryContentView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(viewModel.data) { pokemon in
+                    ForEach(_viewModel.data) { pokemon in
                         VStack(alignment: .leading, spacing: 0) {
                             ZStack {
                                 WebImage(url: URL(string: pokemon.url))
@@ -45,10 +47,10 @@ struct LibraryContentView: View {
                                     }
                             }
                             Text(pokemon.no)
-                                .font(.custom("SF Pro Text", size: 16))
+                                .font(.system(size: 16))
                                 .foregroundColor(Color.text)
                             Text(pokemon.name)
-                                .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                                .font(.custom("HiraginoSans-W6", size: 16))
                                 .foregroundColor(Color.text)
                                 .bold()
                                 .padding(.top, 4)
@@ -64,13 +66,13 @@ struct LibraryContentView: View {
                             }
                         }
                     }
-                    if viewModel.canLoadMore {
+                    if _viewModel.canLoadMore {
                         Text("Loading...")
-                            .font(.custom("SF Pro Text", size: 16))
+                            .font(.custom("HiraginoSans-W6", size: 16))
                             .foregroundColor(Color.text)
                             .bold()
                             .onAppear {
-                                viewModel.loadMore()
+                                _viewModel.loadMore()
                             }
                     }
                 }
@@ -82,10 +84,20 @@ struct LibraryContentView: View {
 }
 
 struct LibraryContentView_Previews: PreviewProvider {
+    private static let entities = RealmRepository().select()
+    
     static var previews: some View {
-        LibraryContentView()
+        LibraryContentView(
+            viewModel: LibraryContentViewModel(
+                configuration: Configuration(
+                    locale: Locale(identifier: "en_jp")),
+                pokemonEntities: entities))
             .environment(\.locale, .init(identifier: "en"))
-        LibraryContentView()
+        LibraryContentView(
+            viewModel: LibraryContentViewModel(
+                configuration: Configuration(
+                    locale: Locale(identifier: "ja_jp")),
+                pokemonEntities: entities))
             .environment(\.locale, .init(identifier: "ja"))
     }
 }

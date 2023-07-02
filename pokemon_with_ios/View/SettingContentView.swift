@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct SettingContentView: View {
-    private let models = RealmRepository().select()
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     
-    init() {
+    @Environment(\.locale) private var locale: Locale
+    private let _viewModel: SettingContentViewModel
+    
+    
+    init(viewModel: SettingContentViewModel) {
+        _viewModel = viewModel
+        
         UINavigationBar.appearance().titleTextAttributes = [
-            .font : UIFont(name: "Hiragino Kaku Gothic ProN", size: 16)!
+            .font : UIFont(name: "HiraginoSans-W6", size: 16)!
         ]
         UINavigationBar.appearance().largeTitleTextAttributes = [
-            .font : UIFont(name: "Hiragino Kaku Gothic ProN", size: 32)!
+            .font : UIFont(name: "HiraginoSans-W6", size: 32)!
         ]
     }
 
@@ -25,31 +30,31 @@ struct SettingContentView: View {
             List {
                 HStack {
                     Text("Library")
-                        .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                        .font(.custom("HiraginoSans-W3", size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
-                    Text("\(models.count) / \(1010)")
-                        .font(.custom("SF Pro Text", size: 16))
+                    Text(_viewModel.amount)
+                        .font(.system(size: 16))
                         .foregroundColor(Color.text)
                 }
                 .listRowBackground(Color.layout)
                 HStack {
                     Text("Version")
-                        .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                        .font(.custom("HiraginoSans-W3", size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
                     Text(version)
-                        .font(.custom("SF Pro Text", size: 16))
+                        .font(.system(size: 16))
                         .foregroundColor(Color.text)
                 }
                 .listRowBackground(Color.layout)
                 HStack {
                     Text("Created by")
-                        .font(.custom("SF Pro Text", size: 16))
+                        .font(.system(size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
                     Text("Tatsunori")
-                        .font(.custom("SF Pro Text", size: 16))
+                        .font(.system(size: 16))
                         .foregroundColor(Color.text)
                 }
                 .listRowBackground(Color.layout)
@@ -60,12 +65,20 @@ struct SettingContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    private static let entities = RealmRepository().select()
+    
     static var previews: some View {
         Group {
-            SettingContentView()
-                .environment(\.locale, .init(identifier: "en"))
-            SettingContentView()
-                .environment(\.locale, .init(identifier: "ja"))
+            SettingContentView(viewModel: SettingContentViewModel(
+                configuration: Configuration(
+                    locale: Locale(identifier: "en_jp")),
+                pokemonEntities: entities))
+            .environment(\.locale, .init(identifier: "en"))
+            SettingContentView(viewModel: SettingContentViewModel(
+                configuration: Configuration(
+                    locale: Locale(identifier: "ja_jp")),
+                pokemonEntities: entities))
+            .environment(\.locale, .init(identifier: "ja"))
         }
     }
 }

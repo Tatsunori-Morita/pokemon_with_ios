@@ -11,6 +11,8 @@
 		0E02B53B2882FFD100CD9CBE /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E02B5392882FFD100CD9CBE /* LocalDataManager.swift */; };
 		0E02B53C2882FFD100CD9CBE /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E02B5392882FFD100CD9CBE /* LocalDataManager.swift */; };
 		0E02B53D2882FFD100CD9CBE /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E02B5392882FFD100CD9CBE /* LocalDataManager.swift */; };
+		0E032F592A50E03600E94035 /* SettingContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E032F582A50E03600E94035 /* SettingContentViewModel.swift */; };
+		0E032F5B2A50E15D00E94035 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E032F5A2A50E15D00E94035 /* Configuration.swift */; };
 		0E0D0CDF2A4D716F001697FF /* Extension_UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D0CDE2A4D716F001697FF /* Extension_UIViewController.swift */; };
 		0E0D0CE12A4D7A23001697FF /* LibraryContentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D0CE02A4D7A23001697FF /* LibraryContentCellViewModel.swift */; };
 		0E10803F2A2750F000E94515 /* IAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E10803E2A2750F000E94515 /* IAPIManager.swift */; };
@@ -162,6 +164,8 @@
 
 /* Begin PBXFileReference section */
 		0E02B5392882FFD100CD9CBE /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		0E032F582A50E03600E94035 /* SettingContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingContentViewModel.swift; sourceTree = "<group>"; };
+		0E032F5A2A50E15D00E94035 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		0E0D0CDE2A4D716F001697FF /* Extension_UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIViewController.swift; sourceTree = "<group>"; };
 		0E0D0CE02A4D7A23001697FF /* LibraryContentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryContentCellViewModel.swift; sourceTree = "<group>"; };
 		0E10803E2A2750F000E94515 /* IAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPIManager.swift; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 			children = (
 				0EE72C122A49093B0053F47B /* LibraryContentViewModel.swift */,
 				0E0D0CE02A4D7A23001697FF /* LibraryContentCellViewModel.swift */,
+				0E032F582A50E03600E94035 /* SettingContentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 			children = (
 				0ED2DD36287678A70082D4C4 /* DTO */,
 				0E9E15422A122E00003ACDE8 /* PokemonEntity.swift */,
+				0E032F5A2A50E15D00E94035 /* Configuration.swift */,
 			);
 			path = Domains;
 			sourceTree = "<group>";
@@ -733,10 +739,12 @@
 				0E0D0CE12A4D7A23001697FF /* LibraryContentCellViewModel.swift in Sources */,
 				0EB8E6AC2A16F59A00E643C1 /* IRepository.swift in Sources */,
 				0E9E15432A122E00003ACDE8 /* PokemonEntity.swift in Sources */,
+				0E032F5B2A50E15D00E94035 /* Configuration.swift in Sources */,
 				0EBB024D2877FDB50001B5E1 /* Pokemon.swift in Sources */,
 				0E7A11F8288A5EFE001D8006 /* PokemonType.swift in Sources */,
 				0ECE1FAF2A29E2B5002D8992 /* PokemonContentViewModel.swift in Sources */,
 				0EE72C0C2A4716340053F47B /* MainContentView.swift in Sources */,
+				0E032F592A50E03600E94035 /* SettingContentViewModel.swift in Sources */,
 				0E0D0CDF2A4D716F001697FF /* Extension_UIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

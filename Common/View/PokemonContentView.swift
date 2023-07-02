@@ -17,9 +17,9 @@ struct PokemonContentView: View {
                     HStack (alignment: .top) {
                         VStack (alignment: .leading, spacing: 0) {
                             Text(viewModel.id)
-                                .font(.custom("SF Pro Text", size: 16))
+                                .font(.system(size: 16))
                             Text(viewModel.name)
-                                .font(.custom("Hiragino Kaku Gothic ProN", size: 20))
+                                .font(.custom("HiraginoSans-W6", size: 20))
                                 .bold()
                                 .padding(.top, 4)
                         }
@@ -32,13 +32,13 @@ struct PokemonContentView: View {
                     VStack (alignment: .leading, spacing: 0) {
                         HStack {
                             Text("タイプ：")
-                                .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                                .font(.custom("HiraginoSans-W6", size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
                             HStack (spacing: 8) {
                                 ForEach(0..<viewModel.types.count, id: \.self) { index in
                                     Text(viewModel.typeName(index: index))
-                                        .font(.custom("Hiragino Kaku Gothic ProN", size: 10))
+                                        .font(.custom("HiraginoSans-W6", size: 10))
                                         .foregroundColor(.white)
                                         .padding(.top, 4)
                                         .padding(.leading, 10)
@@ -52,30 +52,30 @@ struct PokemonContentView: View {
                         .padding(.top, 8)
                         HStack (spacing: 0) {
                             Text("分類：")
-                                .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                                .font(.custom("HiraginoSans-W6", size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
                             Text(viewModel.genera)
-                                .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                                .font(.custom("HiraginoSans-W3", size: 16))
                         }
                         .padding(.top, 12)
                         if viewModel.isApp {
                             HStack (spacing: 0) {
                                 Text("高さ：")
-                                    .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                                    .font(.custom("HiraginoSans-W6", size: 16))
                                     .bold()
                                     .padding(.trailing, 16)
                                 Text(viewModel.height)
-                                    .font(.custom("SF Pro Text", size: 16))
+                                    .font(.system(size: 16))
                             }
                             .padding(.top, 8)
                             HStack (spacing: 0) {
                                 Text("重さ：")
-                                    .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                                    .font(.custom("HiraginoSans-W6", size: 16))
                                     .bold()
                                     .padding(.trailing, 16)
                                 Text(viewModel.weight)
-                                    .font(.custom("SF Pro Text", size: 16))
+                                    .font(.system(size: 16))
                             }
                             .padding(.top, 8)
                         }
@@ -83,7 +83,7 @@ struct PokemonContentView: View {
                     .padding(.top, 0)
                 }
                 Text(viewModel.flavorTextEntry)
-                    .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                    .font(.custom("HiraginoSans-W3", size: 16))
                     .lineSpacing(7)
                     .padding(.top, 32)
                     .frame(maxWidth: .infinity, alignment: .leading)

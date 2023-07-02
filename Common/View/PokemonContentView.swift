@@ -98,6 +98,9 @@ struct PokemonContentView: View {
 }
 
 struct WidgetContentView_Previews: PreviewProvider {
+    @Environment(\.colorScheme)
+    private static var colorScheme
+    
     static let dto = PokemonEntityDTO(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
@@ -105,11 +108,11 @@ struct WidgetContentView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "en_jp")), pokemonEntity: dto.createEntity(), isApp: false))
-                .environment(\.locale, .init(identifier: "en"))
-            
-            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "ja_jp")), pokemonEntity: dto.createEntity(), isApp: false))
+            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "ja_jp"), isDarkMode: colorScheme == .dark), pokemonEntity: dto.createEntity(), isApp: false))
                 .environment(\.locale, .init(identifier: "ja"))
+            
+            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "en_jp"), isDarkMode: colorScheme == .dark), pokemonEntity: dto.createEntity(), isApp: false))
+                .environment(\.locale, .init(identifier: "en"))
         }
     }
 }

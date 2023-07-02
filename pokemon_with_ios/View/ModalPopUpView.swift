@@ -39,15 +39,16 @@ struct ModalPopUpView: View {
 }
 
 struct ModalPopUpView_Previews: PreviewProvider {
+    @Environment(\.colorScheme)
+    private static var colorScheme
+    
     static let dto = PokemonEntityDTO(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
 
     static var previews: some View {
-        ModalPopUpView(configuration: Configuration(locale: Locale(identifier: "en_jp")), entity: dto.createEntity())
-            .environment(\.locale, .init(identifier: "en"))
-        ModalPopUpView(configuration: Configuration(locale: Locale(identifier: "ja_jp")), entity: dto.createEntity())
+        ModalPopUpView(configuration: Configuration(locale: Locale(identifier: "ja_jp"), isDarkMode: colorScheme == .dark), entity: dto.createEntity())
             .environment(\.locale, .init(identifier: "ja"))
     }
 }

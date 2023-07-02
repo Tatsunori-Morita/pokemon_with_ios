@@ -38,7 +38,7 @@ struct LibraryContentView: View {
                                     .scaledToFit()
                                     .foregroundColor(Color.image)
                                 Rectangle()
-                                    .fill(.black.opacity(pokemon.isExist ? 0 : 0.8))
+                                    .fill(.black.opacity(pokemon.opacity))
                                     .mask {
                                         WebImage(url: URL(string: pokemon.url))
                                             .resizable()
@@ -85,19 +85,22 @@ struct LibraryContentView: View {
 
 struct LibraryContentView_Previews: PreviewProvider {
     private static let entities = RealmRepository().select()
+    @Environment(\.colorScheme)
+    private static var colorScheme
     
     static var previews: some View {
         LibraryContentView(
             viewModel: LibraryContentViewModel(
                 configuration: Configuration(
-                    locale: Locale(identifier: "en_jp")),
+                    locale: Locale(identifier: "ja_jp"), isDarkMode: false),
                 pokemonEntities: entities))
-            .environment(\.locale, .init(identifier: "en"))
+            .environment(\.locale, .init(identifier: "ja"))
+        
         LibraryContentView(
             viewModel: LibraryContentViewModel(
                 configuration: Configuration(
-                    locale: Locale(identifier: "ja_jp")),
+                    locale: Locale(identifier: "en_jp"), isDarkMode: colorScheme == .dark),
                 pokemonEntities: entities))
-            .environment(\.locale, .init(identifier: "ja"))
+            .environment(\.locale, .init(identifier: "en"))
     }
 }

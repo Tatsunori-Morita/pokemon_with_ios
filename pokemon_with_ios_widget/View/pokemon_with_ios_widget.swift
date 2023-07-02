@@ -87,12 +87,15 @@ struct PokemonEntry: TimelineEntry {
 }
 
 struct pokemon_with_ios_widgetEntryView : View {
-    @Environment(\.locale) private var locale: Locale
+    @Environment(\.locale)
+    private var locale: Locale
+    @Environment(\.colorScheme)
+    private var colorScheme
     var entry: Provider.Entry
 
     var body: some View {
         PokemonContentView(viewModel: PokemonContentViewModel(
-            configuration: Configuration(locale: locale),
+            configuration: Configuration(locale: locale, isDarkMode: colorScheme == .dark),
             pokemonEntity: entry.entity,
             isApp: false))
     }

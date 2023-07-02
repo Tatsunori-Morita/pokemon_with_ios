@@ -38,6 +38,12 @@ struct LibraryContentCellViewModel: Identifiable {
         _entity == nil ? false : true
     }
     
+    public var opacity: Double {
+        if isExist { return 0 }
+        if _configuration.isDarkMode { return 0.9 }
+        return 0.8
+    }
+    
     init(id: Int, entity: PokemonEntity?, configuration: Configuration) {
         _id = id
         _entity = entity

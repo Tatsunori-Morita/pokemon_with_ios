@@ -73,9 +73,9 @@ struct ContentView_Previews: PreviewProvider {
         Group {
             SettingContentView(viewModel: SettingContentViewModel(
                 configuration: Configuration(
-                    locale: Locale(identifier: "js_jp"), isDarkMode: colorScheme == .dark),
+                    locale: Locale(identifier: "ja_jp"), isDarkMode: colorScheme == .dark),
                 pokemonEntities: entities))
-            .environment(\.locale, .init(identifier: "js"))
+            .environment(\.locale, .init(identifier: "ja"))
             
             SettingContentView(viewModel: SettingContentViewModel(
                 configuration: Configuration(

@@ -59,6 +59,8 @@ struct SettingContentView: View {
                 }
                 .listRowBackground(Color.layout)
             }
+            .listStyle(.plain)
+            .background(Color.layout)
             .navigationTitle("Setting")
         }
     }

@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct PokemonContentView: View {
-    let viewModel: PokemonContentViewModel
+    private let _viewModel: PokemonContentViewModel
+    
+    init(viewModel: PokemonContentViewModel) {
+        _viewModel = viewModel
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -16,15 +20,15 @@ struct PokemonContentView: View {
                 VStack (alignment: .leading, spacing: 0) {
                     HStack (alignment: .top) {
                         VStack (alignment: .leading, spacing: 0) {
-                            Text(viewModel.id)
+                            Text(_viewModel.id)
                                 .font(.system(size: 16))
-                            Text(viewModel.name)
+                            Text(_viewModel.name)
                                 .font(.custom("HiraginoSans-W6", size: 20))
                                 .bold()
                                 .padding(.top, 4)
                         }
                         Spacer()
-                        viewModel.image
+                        _viewModel.image
                             .resizable()
                             .scaledToFit()
                             .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
@@ -36,15 +40,15 @@ struct PokemonContentView: View {
                                 .bold()
                                 .padding(.trailing, 16)
                             HStack (spacing: 8) {
-                                ForEach(0..<viewModel.types.count, id: \.self) { index in
-                                    Text(viewModel.typeName(index: index))
+                                ForEach(0..<_viewModel.types.count, id: \.self) { index in
+                                    Text(_viewModel.typeName(index: index))
                                         .font(.custom("HiraginoSans-W6", size: 10))
                                         .foregroundColor(.white)
                                         .padding(.top, 4)
                                         .padding(.leading, 10)
                                         .padding(.trailing, 10)
                                         .padding(.bottom, 4)
-                                        .background(viewModel.typeColor(index: index))
+                                        .background(_viewModel.typeColor(index: index))
                                         .cornerRadius(10)
                                 }
                             }
@@ -55,17 +59,17 @@ struct PokemonContentView: View {
                                 .font(.custom("HiraginoSans-W6", size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
-                            Text(viewModel.genera)
+                            Text(_viewModel.genera)
                                 .font(.custom("HiraginoSans-W3", size: 16))
                         }
                         .padding(.top, 12)
-                        if viewModel.isApp {
+                        if _viewModel.isApp {
                             HStack (spacing: 0) {
                                 Text("高さ：")
                                     .font(.custom("HiraginoSans-W6", size: 16))
                                     .bold()
                                     .padding(.trailing, 16)
-                                Text(viewModel.height)
+                                Text(_viewModel.height)
                                     .font(.system(size: 16))
                             }
                             .padding(.top, 8)
@@ -74,7 +78,7 @@ struct PokemonContentView: View {
                                     .font(.custom("HiraginoSans-W6", size: 16))
                                     .bold()
                                     .padding(.trailing, 16)
-                                Text(viewModel.weight)
+                                Text(_viewModel.weight)
                                     .font(.system(size: 16))
                             }
                             .padding(.top, 8)
@@ -82,7 +86,7 @@ struct PokemonContentView: View {
                     }
                     .padding(.top, 0)
                 }
-                Text(viewModel.flavorTextEntry)
+                Text(_viewModel.flavorTextEntry)
                     .font(.custom("HiraginoSans-W3", size: 16))
                     .lineSpacing(7)
                     .padding(.top, 32)
@@ -101,10 +105,11 @@ struct WidgetContentView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            PokemonContentView(
-                viewModel: PokemonContentViewModel(
-                    pokemonEntity: dto.createEntity(), isApp: false))
-            .environment(\.locale, .init(identifier: "ja"))
+            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "en_jp")), pokemonEntity: dto.createEntity(), isApp: false))
+                .environment(\.locale, .init(identifier: "en"))
+            
+            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "ja_jp")), pokemonEntity: dto.createEntity(), isApp: false))
+                .environment(\.locale, .init(identifier: "ja"))
         }
     }
 }

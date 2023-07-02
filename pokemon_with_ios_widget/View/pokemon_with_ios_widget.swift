@@ -10,7 +10,7 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    let entity = PokemonEntityDTO(
+    private let entity = PokemonEntityDTO(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)).createEntity()
@@ -18,14 +18,14 @@ struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> PokemonEntry {
         PokemonEntry(
             date: Date(),
-            viewModel: PokemonContentViewModel(pokemonEntity: entity, isApp: false),
+            entity: entity,
             configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (PokemonEntry) -> ()) {
         let entry = PokemonEntry(
             date: Date(),
-            viewModel: PokemonContentViewModel(pokemonEntity: entity, isApp: false),
+            entity: entity,
             configuration: configuration)
         completion(entry)
     }
@@ -68,7 +68,7 @@ struct Provider: IntentTimelineProvider {
                     
                     let entry = PokemonEntry(
                         date: currentDate,
-                        viewModel: PokemonContentViewModel(pokemonEntity: entity, isApp: false),
+                        entity: entity,
                         configuration: configuration)
 
                     let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
@@ -82,17 +82,19 @@ struct Provider: IntentTimelineProvider {
 
 struct PokemonEntry: TimelineEntry {
     var date: Date
-    var viewModel: PokemonContentViewModel
+    var entity: PokemonEntity
     let configuration: ConfigurationIntent
 }
 
 struct pokemon_with_ios_widgetEntryView : View {
+    @Environment(\.locale) private var locale: Locale
     var entry: Provider.Entry
 
-    @Environment(\.widgetFamily) var family
-
     var body: some View {
-        PokemonContentView(viewModel: entry.viewModel)
+        PokemonContentView(viewModel: PokemonContentViewModel(
+            configuration: Configuration(locale: locale),
+            pokemonEntity: entry.entity,
+            isApp: false))
     }
 }
 
@@ -112,18 +114,19 @@ struct pokemon_with_ios_widget: Widget {
 }
 
 struct pokemon_with_ios_widget_Previews: PreviewProvider {
-    static let dto = PokemonEntityDTO(
+    private static let dto = PokemonEntityDTO(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
+    
     static var previews: some View {
         Group {
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
                     date: Date(),
-                    viewModel: PokemonContentViewModel(pokemonEntity: dto.createEntity(), isApp: false),
+                    entity: dto.createEntity(),
                     configuration: ConfigurationIntent()))
-            .background(.white)
+            .background(Color.layout)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
     }

@@ -11,16 +11,20 @@ struct LibraryContentCellViewModel: Identifiable {
     var id = UUID()
     private let _id: Int
     let _entity: PokemonEntity?
+    private let _configuration: Configuration
     
     public var no: String {
         "No." + String(format: "%04d", _id)
     }
     
     public var name: String {
-        guard let entity = _entity else {
+        guard
+            let entity = _entity,
+            let name = entity.names.first(where: { $0.language == _configuration.language })
+        else {
             return "????"
         }
-        return entity.names.last!.name
+        return name.name
     }
     
     public var url: String {
@@ -34,8 +38,9 @@ struct LibraryContentCellViewModel: Identifiable {
         _entity == nil ? false : true
     }
     
-    init(id: Int, entity: PokemonEntity?) {
+    init(id: Int, entity: PokemonEntity?, configuration: Configuration) {
         _id = id
         _entity = entity
+        _configuration = configuration
     }
 }

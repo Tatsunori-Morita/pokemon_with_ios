@@ -19,15 +19,21 @@ class LibraryContentViewModel: ObservableObject {
         _pokemonEntities = pokemonEntities
         
         for i in 1..<21 {
-            data.append(LibraryContentCellViewModel(id: i, entity: pokemonEntity(num: i)))
+            data.append(LibraryContentCellViewModel(
+                id: i, entity: pokemonEntity(num: i), configuration: _configuration))
         }
+    }
+    
+    public var configuration: Configuration {
+        _configuration
     }
     
     public func pokemonViewModel(num: Int) -> PokemonContentViewModel {
         guard let pokemon = _pokemonEntities.first(where: { $0.id == num }) else {
             fatalError("Pokemon not found")
         }
-        return PokemonContentViewModel(pokemonEntity: pokemon, isApp: true)
+        return PokemonContentViewModel(
+            configuration: _configuration, pokemonEntity: pokemon, isApp: true)
     }
     
     public func pokemonEntity(num: Int) -> PokemonEntity? {
@@ -43,7 +49,8 @@ class LibraryContentViewModel: ObservableObject {
     
     public func loadMore() {
         for i in data.count+1..<data.count+10 {
-            data.append(LibraryContentCellViewModel(id: i, entity: pokemonEntity(num: i)))
+            data.append(LibraryContentCellViewModel(
+                id: i, entity: pokemonEntity(num: i), configuration: _configuration))
         }
     }
     

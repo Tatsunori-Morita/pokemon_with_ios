@@ -62,7 +62,7 @@ struct LibraryContentView: View {
                         .onTapGesture {
                             guard let entity = pokemon._entity else { return }
                             self.viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
-                                ModalPopUpView(entity: entity)
+                                ModalPopUpView(configuration: _viewModel.configuration, entity: entity)
                             }
                         }
                     }

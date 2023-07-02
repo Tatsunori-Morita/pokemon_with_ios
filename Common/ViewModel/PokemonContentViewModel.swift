@@ -9,10 +9,12 @@ import Foundation
 import SwiftUI
 
 struct PokemonContentViewModel {
+    private let _configuration: Configuration
     private let _pokemonEntity: PokemonEntity
     private let _isApp: Bool
 
-    init(pokemonEntity: PokemonEntity, isApp: Bool) {
+    init(configuration: Configuration, pokemonEntity: PokemonEntity, isApp: Bool) {
+        _configuration = configuration
         _pokemonEntity = pokemonEntity
         _isApp = isApp
     }
@@ -27,7 +29,7 @@ struct PokemonContentViewModel {
 
     public var name: String {
         guard
-            let name = _pokemonEntity.names.filter({ $0.language == "ja" }).first
+            let name = _pokemonEntity.names.filter({ $0.language == _configuration.language }).first
         else {
             return ""
         }
@@ -36,7 +38,7 @@ struct PokemonContentViewModel {
 
     public var genera: String {
         guard
-            let genus = _pokemonEntity.genera.filter({ $0.language == "ja" }).first
+            let genus = _pokemonEntity.genera.filter({ $0.language == _configuration.language }).first
         else {
             return "未確認"
         }
@@ -65,7 +67,7 @@ struct PokemonContentViewModel {
     
     public var flavorTextEntry: String {
         guard
-            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == "ja" }).last
+            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _configuration.language }).last
         else {
             return "未確認"
         }

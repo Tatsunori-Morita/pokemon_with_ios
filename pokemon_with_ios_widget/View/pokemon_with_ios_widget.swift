@@ -71,7 +71,7 @@ struct Provider: IntentTimelineProvider {
                         entity: entity,
                         configuration: configuration)
 
-                    let futureDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
+                    let futureDate = Calendar.current.date(byAdding: .hour, value: 24, to: currentDate)!
                     let timeline = Timeline(entries: [entry], policy: .after(futureDate))
                     completion(timeline)
                 }

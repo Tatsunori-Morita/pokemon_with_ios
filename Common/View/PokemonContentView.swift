@@ -35,7 +35,7 @@ struct PokemonContentView: View {
                     }
                     VStack (alignment: .leading, spacing: 0) {
                         HStack {
-                            Text("タイプ：")
+                            Text("Type")
                                 .font(.custom("HiraginoSans-W6", size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
@@ -55,7 +55,7 @@ struct PokemonContentView: View {
                         }
                         .padding(.top, 8)
                         HStack (spacing: 0) {
-                            Text("分類：")
+                            Text("Genre")
                                 .font(.custom("HiraginoSans-W6", size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
@@ -65,7 +65,7 @@ struct PokemonContentView: View {
                         .padding(.top, 12)
                         if _viewModel.isApp {
                             HStack (spacing: 0) {
-                                Text("高さ：")
+                                Text("Height")
                                     .font(.custom("HiraginoSans-W6", size: 16))
                                     .bold()
                                     .padding(.trailing, 16)
@@ -74,7 +74,7 @@ struct PokemonContentView: View {
                             }
                             .padding(.top, 8)
                             HStack (spacing: 0) {
-                                Text("重さ：")
+                                Text("Weight")
                                     .font(.custom("HiraginoSans-W6", size: 16))
                                     .bold()
                                     .padding(.trailing, 16)

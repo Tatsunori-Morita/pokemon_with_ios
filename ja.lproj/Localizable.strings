@@ -9,8 +9,10 @@
 "Setting" = "設定";
 "Library" = "ポケモン図鑑";
 "Version" = "バージョン";
-"Height" = "たかさ:";
-"Weight" = "おもさ:";
+"Type" = "タイプ:";
+"Genre" = "分類:";
+"Height" = "高さ:";
+"Weight" = "重さ:";
 "configurationDisplayName" = "ポケモン WITH";
 "description" = "かわいいポケモンをランダム表示します。";
 "Close" = "閉じる";

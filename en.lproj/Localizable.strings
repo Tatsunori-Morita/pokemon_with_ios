@@ -9,6 +9,8 @@
 "Setting" = "SETTING";
 "Library" = "POKEMON LIBRARY";
 "Version" = "Version";
+"Type" = "Type:";
+"Genre" = "Genre:";
 "Height" = "Height:";
 "Weight" = "Weight:";
 "configurationDisplayName" = "Pokémon WITH";

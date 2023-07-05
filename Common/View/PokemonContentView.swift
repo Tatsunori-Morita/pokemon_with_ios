@@ -16,92 +16,90 @@ struct PokemonContentView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack (spacing: 0) {
+        VStack (spacing: 0) {
+            VStack (alignment: .leading, spacing: 0) {
+                HStack (alignment: .top) {
+                    VStack (alignment: .leading, spacing: 0) {
+                        Text(_viewModel.id)
+                            .font(.system(size: 16))
+                        Text(_viewModel.name)
+                            .font(.custom("HiraginoSans-W6", size: 20))
+                            .bold()
+                            .padding(.top, 4)
+                    }
+                    Spacer()
+                    if _viewModel.isApp {
+                        WebImage(url: URL(string: _viewModel.frontDefault))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                    } else {
+                        _viewModel.image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                    }
+                }
                 VStack (alignment: .leading, spacing: 0) {
-                    HStack (alignment: .top) {
-                        VStack (alignment: .leading, spacing: 0) {
-                            Text(_viewModel.id)
-                                .font(.system(size: 16))
-                            Text(_viewModel.name)
-                                .font(.custom("HiraginoSans-W6", size: 20))
-                                .bold()
-                                .padding(.top, 4)
-                        }
-                        Spacer()
-                        if _viewModel.isApp {
-                            WebImage(url: URL(string: _viewModel.frontDefault))
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
-                        } else {
-                            _viewModel.image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                    HStack {
+                        Text("Type")
+                            .font(.custom("HiraginoSans-W6", size: 16))
+                            .bold()
+                            .padding(.trailing, 16)
+                        HStack (spacing: 8) {
+                            ForEach(_viewModel.types) { pokemonTypeValue in
+                                Text(pokemonTypeValue.name)
+                                    .font(.custom("HiraginoSans-W6", size: 10))
+                                    .foregroundColor(.white)
+                                    .padding(.top, 4)
+                                    .padding(.leading, 10)
+                                    .padding(.trailing, 10)
+                                    .padding(.bottom, 4)
+                                    .background(try! PokemonColor.shared.getColorType(name: pokemonTypeValue.name).color)
+                                    .cornerRadius(10)
+                            }
                         }
                     }
-                    VStack (alignment: .leading, spacing: 0) {
-                        HStack {
-                            Text("Type")
+                    .padding(.top, 8)
+                    HStack (spacing: 0) {
+                        Text("Genre")
+                            .font(.custom("HiraginoSans-W6", size: 16))
+                            .bold()
+                            .padding(.trailing, 16)
+                        Text(_viewModel.genera)
+                            .font(.custom("HiraginoSans-W3", size: 16))
+                    }
+                    .padding(.top, 12)
+                    if _viewModel.isApp {
+                        HStack (spacing: 0) {
+                            Text("Height")
                                 .font(.custom("HiraginoSans-W6", size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
-                            HStack (spacing: 8) {
-                                ForEach(_viewModel.types) { pokemonTypeValue in
-                                    Text(pokemonTypeValue.name)
-                                        .font(.custom("HiraginoSans-W6", size: 10))
-                                        .foregroundColor(.white)
-                                        .padding(.top, 4)
-                                        .padding(.leading, 10)
-                                        .padding(.trailing, 10)
-                                        .padding(.bottom, 4)
-                                        .background(try! PokemonColor.shared.getColorType(name: pokemonTypeValue.name).color)
-                                        .cornerRadius(10)
-                                }
-                            }
+                            Text(_viewModel.height)
+                                .font(.system(size: 16))
                         }
                         .padding(.top, 8)
                         HStack (spacing: 0) {
-                            Text("Genre")
+                            Text("Weight")
                                 .font(.custom("HiraginoSans-W6", size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
-                            Text(_viewModel.genera)
-                                .font(.custom("HiraginoSans-W3", size: 16))
+                            Text(_viewModel.weight)
+                                .font(.system(size: 16))
                         }
-                        .padding(.top, 12)
-                        if _viewModel.isApp {
-                            HStack (spacing: 0) {
-                                Text("Height")
-                                    .font(.custom("HiraginoSans-W6", size: 16))
-                                    .bold()
-                                    .padding(.trailing, 16)
-                                Text(_viewModel.height)
-                                    .font(.system(size: 16))
-                            }
-                            .padding(.top, 8)
-                            HStack (spacing: 0) {
-                                Text("Weight")
-                                    .font(.custom("HiraginoSans-W6", size: 16))
-                                    .bold()
-                                    .padding(.trailing, 16)
-                                Text(_viewModel.weight)
-                                    .font(.system(size: 16))
-                            }
-                            .padding(.top, 8)
-                        }
+                        .padding(.top, 8)
                     }
-                    .padding(.top, 0)
                 }
-                Text(_viewModel.flavorTextEntry)
-                    .font(.custom("HiraginoSans-W3", size: 16))
-                    .lineSpacing(7)
-                    .padding(.top, 32)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 0)
             }
-            .padding(24)
+            Text(_viewModel.flavorTextEntry)
+                .font(.custom("HiraginoSans-W3", size: 16))
+                .lineSpacing(7)
+                .padding(.top, 32)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .padding(24)
     }
 }
 

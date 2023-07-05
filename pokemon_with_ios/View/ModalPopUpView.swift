@@ -29,11 +29,14 @@ struct ModalPopUpView: View {
                     .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                     .foregroundColor(Color.text)
             }
-            .padding(.bottom, 32)
+            .padding(.top, 40)
+            .padding(.leading, 40)
+            .padding(.trailing, 40)
+            .padding(.bottom, 24)
         }
+        .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
         .background(Color.layout)
         .clipShape(RoundedRectangle(cornerRadius: 15))
-        .frame(width: UIScreen.main.bounds.size.width - 80, height: UIScreen.main.bounds.size.height * 0.55)
         .shadow(radius: 3)
     }
 }

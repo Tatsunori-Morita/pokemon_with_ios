@@ -70,12 +70,19 @@ struct Provider: IntentTimelineProvider {
                         entity: entity,
                         configuration: configuration)
 
-                    let futureDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate)!
-                    let timeline = Timeline(entries: [entry], policy: .after(futureDate))
+                    let timeline = Timeline(entries: [entry], policy: .after(getDate(to: currentDate)))
                     completion(timeline)
                 }
             }
         }
+    }
+    
+    private func getDate(to :Date) -> Date {
+#if DEBUG
+        return Calendar.current.date(byAdding: .minute, value: 15, to: to)!
+#else
+        return Calendar.current.date(byAdding: .hour, value: 24, to: to)!
+#endif
     }
 }
 
@@ -93,13 +100,15 @@ struct pokemon_with_ios_widgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        PokemonContentView(viewModel: PokemonContentViewModel(
-            viewConfig: ViewConfig(
-                locale: locale,
-                isDarkMode: colorScheme == .dark,
-                domainConfig: DomainConfig()),
-            pokemonEntity: entry.entity,
-            isApp: false))
+        GeometryReader { geometry in
+            PokemonContentView(viewModel: PokemonContentViewModel(
+                viewConfig: ViewConfig(
+                    locale: locale,
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: DomainConfig()),
+                pokemonEntity: entry.entity,
+                isApp: false))
+        }
     }
 }
 

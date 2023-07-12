@@ -24,9 +24,6 @@
 		0E45E1FF287075DE00285D2A /* SettingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E1FE287075DE00285D2A /* SettingContentView.swift */; };
 		0E45E201287075E200285D2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E45E200287075E200285D2A /* Assets.xcassets */; };
 		0E45E204287075E300285D2A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E45E203287075E300285D2A /* Preview Assets.xcassets */; };
-		0E45E20E287075E300285D2A /* pokemon_with_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E20D287075E300285D2A /* pokemon_with_iosTests.swift */; };
-		0E45E218287075E300285D2A /* pokemon_with_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E217287075E300285D2A /* pokemon_with_iosUITests.swift */; };
-		0E45E21A287075E300285D2A /* pokemon_with_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E219287075E300285D2A /* pokemon_with_iosUITestsLaunchTests.swift */; };
 		0E45E22D287079FF00285D2A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E45E22C287079FF00285D2A /* WidgetKit.framework */; };
 		0E45E22F287079FF00285D2A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E45E22E287079FF00285D2A /* SwiftUI.framework */; };
 		0E45E232287079FF00285D2A /* pokemon_with_ios_widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E231287079FF00285D2A /* pokemon_with_ios_widget.swift */; };
@@ -175,11 +172,6 @@
 		0E45E1FE287075DE00285D2A /* SettingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingContentView.swift; sourceTree = "<group>"; };
 		0E45E200287075E200285D2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E45E203287075E300285D2A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0E45E209287075E300285D2A /* pokemon_with_iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokemon_with_iosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E45E20D287075E300285D2A /* pokemon_with_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemon_with_iosTests.swift; sourceTree = "<group>"; };
-		0E45E213287075E300285D2A /* pokemon_with_iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokemon_with_iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E45E217287075E300285D2A /* pokemon_with_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemon_with_iosUITests.swift; sourceTree = "<group>"; };
-		0E45E219287075E300285D2A /* pokemon_with_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemon_with_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0E45E22A287079FF00285D2A /* pokemon_with_ios_widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = pokemon_with_ios_widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E45E22C287079FF00285D2A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0E45E22E287079FF00285D2A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -1039,84 +1031,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		0E45E221287075E300285D2A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MSDQFFFB37;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "ポケモンWITH";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tatsunori.morita.pokemon-with-iosTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pokemon_with_ios.app/pokemon_with_ios";
-			};
-			name = Debug;
-		};
-		0E45E222287075E300285D2A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MSDQFFFB37;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "ポケモンWITH";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tatsunori.morita.pokemon-with-iosTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pokemon_with_ios.app/pokemon_with_ios";
-			};
-			name = Release;
-		};
-		0E45E224287075E300285D2A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MSDQFFFB37;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tatsunori.morita.pokemon-with-iosUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = pokemon_with_ios;
-			};
-			name = Debug;
-		};
-		0E45E225287075E300285D2A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MSDQFFFB37;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tatsunori.morita.pokemon-with-iosUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = pokemon_with_ios;
 			};
 			name = Release;
 		};

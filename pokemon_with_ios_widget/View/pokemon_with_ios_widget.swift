@@ -34,7 +34,7 @@ struct Provider: IntentTimelineProvider {
         let number = Int.random(in: 1 ... PokemonApiService.POKEMON_AMOUNT)
 
         let repository: IRepository = RealmRepository()
-        let entity = repository.getEntityBy(no: PokemonEntity.IdValue(id: number))
+        let entity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: number))
         if let entity = entity {
             repository.delete(entity: entity)
         }

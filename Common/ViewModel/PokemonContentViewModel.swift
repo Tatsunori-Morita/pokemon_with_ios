@@ -58,7 +58,7 @@ struct PokemonContentViewModel {
     public var types: [PokemonEntity.PokemonTypeValue] {
         var array: [PokemonEntity.PokemonTypeValue] = []
         _pokemonEntity.pokemonTypeValues.forEach { pokemonType in
-            if pokemonType.language == "ja" {
+            if pokemonType.language == _configuration.language {
                 array.append(pokemonType)
             }
         }

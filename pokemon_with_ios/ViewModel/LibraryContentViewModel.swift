@@ -44,7 +44,7 @@ class LibraryContentViewModel: ObservableObject {
     }
     
     public var canLoadMore: Bool {
-        data.count < _configuration.POKEMON_MAX_AMOUNT
+        data.count < _configuration.amount
     }
     
     public func loadMore() {

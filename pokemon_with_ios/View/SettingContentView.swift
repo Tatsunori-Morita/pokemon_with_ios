@@ -70,18 +70,23 @@ struct ContentView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
     private static var colorScheme
     private static let entities = RealmRepository().select()
+    private static let _domainConfig = DomainConfig()
     
     static var previews: some View {
         Group {
             SettingContentView(viewModel: SettingContentViewModel(
                 configuration: Configuration(
-                    locale: Locale(identifier: "ja_jp"), isDarkMode: colorScheme == .dark),
+                    locale: Locale(identifier: "ja_jp"),
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: _domainConfig),
                 pokemonEntities: entities))
             .environment(\.locale, .init(identifier: "ja"))
             
             SettingContentView(viewModel: SettingContentViewModel(
                 configuration: Configuration(
-                    locale: Locale(identifier: "en_jp"), isDarkMode: colorScheme == .dark),
+                    locale: Locale(identifier: "en_jp"),
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: _domainConfig),
                 pokemonEntities: entities))
             .environment(\.locale, .init(identifier: "en"))
         }

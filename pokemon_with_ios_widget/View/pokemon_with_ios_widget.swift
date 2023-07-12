@@ -31,15 +31,14 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let number = Int.random(in: 1 ... PokemonApiService.POKEMON_AMOUNT)
-
+        let config = DomainConfig()
         let repository: IRepository = RealmRepository()
-        let entity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: number))
+        let entity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: config.number))
         if let entity = entity {
             repository.delete(entity: entity)
         }
 
-        let apiService = PokemonApiService(number: number)
+        let apiService = PokemonApiService(domainConfig: config)
 
         apiService.fetch(url: apiService.pokemonURL) { (pokemon: Pokemon) in
             var pokemonTypes: [PokemonType] = []
@@ -95,7 +94,10 @@ struct pokemon_with_ios_widgetEntryView : View {
 
     var body: some View {
         PokemonContentView(viewModel: PokemonContentViewModel(
-            configuration: Configuration(locale: locale, isDarkMode: colorScheme == .dark),
+            configuration: Configuration(
+                locale: locale,
+                isDarkMode: colorScheme == .dark,
+                domainConfig: DomainConfig()),
             pokemonEntity: entry.entity,
             isApp: false))
     }

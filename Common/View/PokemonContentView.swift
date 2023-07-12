@@ -108,10 +108,22 @@ struct WidgetContentView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "ja_jp"), isDarkMode: colorScheme == .dark), pokemonEntity: dto.createEntity(), isApp: false))
+            PokemonContentView(viewModel: PokemonContentViewModel(
+                configuration: Configuration(
+                    locale: Locale(identifier: "ja_jp"),
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: DomainConfig()),
+                pokemonEntity: dto.createEntity(),
+                isApp: false))
                 .environment(\.locale, .init(identifier: "ja"))
             
-            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "en_jp"), isDarkMode: colorScheme == .dark), pokemonEntity: dto.createEntity(), isApp: false))
+            PokemonContentView(viewModel: PokemonContentViewModel(
+                configuration: Configuration(
+                    locale: Locale(identifier: "en_jp"),
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: DomainConfig()),
+                pokemonEntity: dto.createEntity(),
+                isApp: false))
                 .environment(\.locale, .init(identifier: "en"))
         }
     }

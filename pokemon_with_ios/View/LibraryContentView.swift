@@ -94,14 +94,18 @@ struct LibraryContentView_Previews: PreviewProvider {
         LibraryContentView(
             viewModel: LibraryContentViewModel(
                 configuration: Configuration(
-                    locale: Locale(identifier: "ja_jp"), isDarkMode: false),
+                    locale: Locale(identifier: "ja_jp"),
+                    isDarkMode: false,
+                    domainConfig: DomainConfig()),
                 pokemonEntities: entities))
             .environment(\.locale, .init(identifier: "ja"))
         
         LibraryContentView(
             viewModel: LibraryContentViewModel(
                 configuration: Configuration(
-                    locale: Locale(identifier: "en_jp"), isDarkMode: colorScheme == .dark),
+                    locale: Locale(identifier: "en_jp"),
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: DomainConfig()),
                 pokemonEntities: entities))
             .environment(\.locale, .init(identifier: "en"))
     }

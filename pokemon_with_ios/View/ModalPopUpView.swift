@@ -41,6 +41,7 @@ struct ModalPopUpView: View {
 struct ModalPopUpView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
     private static var colorScheme
+    private static let _domainConfig = DomainConfig()
     
     static let dto = PokemonEntityDTO(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
@@ -48,10 +49,20 @@ struct ModalPopUpView_Previews: PreviewProvider {
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
 
     static var previews: some View {
-        ModalPopUpView(configuration: Configuration(locale: Locale(identifier: "ja_jp"), isDarkMode: colorScheme == .dark), entity: dto.createEntity())
-            .environment(\.locale, .init(identifier: "ja"))
+        ModalPopUpView(
+            configuration: Configuration(
+                locale: Locale(identifier: "ja_jp"),
+                isDarkMode: colorScheme == .dark,
+                domainConfig: _domainConfig),
+            entity: dto.createEntity())
+        .environment(\.locale, .init(identifier: "ja"))
         
-        ModalPopUpView(configuration: Configuration(locale: Locale(identifier: "en_jp"), isDarkMode: colorScheme == .dark), entity: dto.createEntity())
-            .environment(\.locale, .init(identifier: "en"))
+        ModalPopUpView(
+            configuration: Configuration(
+                locale: Locale(identifier: "en_jp"),
+                isDarkMode: colorScheme == .dark,
+                domainConfig: _domainConfig),
+            entity: dto.createEntity())
+        .environment(\.locale, .init(identifier: "en"))
     }
 }

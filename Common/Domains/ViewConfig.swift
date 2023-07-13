@@ -1,5 +1,5 @@
 //
-//  Configuration.swift
+//  ViewConfig.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2023/07/02.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Configuration {
+struct ViewConfig {
     private let _locale: Locale
     private let _isDartModel: Bool
     private let _domainConfig: DomainConfig

@@ -64,7 +64,7 @@ struct LibraryContentView: View {
                         .onTapGesture {
                             guard let entity = pokemon._entity else { return }
                             self.viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
-                                ModalPopUpView(configuration: _viewModel.configuration, entity: entity)
+                                ModalPopUpView(viewConfig: _viewModel.viewConfig, entity: entity)
                             }
                         }
                     }
@@ -93,7 +93,7 @@ struct LibraryContentView_Previews: PreviewProvider {
     static var previews: some View {
         LibraryContentView(
             viewModel: LibraryContentViewModel(
-                configuration: Configuration(
+                viewConfig: ViewConfig(
                     locale: Locale(identifier: "ja_jp"),
                     isDarkMode: false,
                     domainConfig: DomainConfig()),
@@ -102,7 +102,7 @@ struct LibraryContentView_Previews: PreviewProvider {
         
         LibraryContentView(
             viewModel: LibraryContentViewModel(
-                configuration: Configuration(
+                viewConfig: ViewConfig(
                     locale: Locale(identifier: "en_jp"),
                     isDarkMode: colorScheme == .dark,
                     domainConfig: DomainConfig()),

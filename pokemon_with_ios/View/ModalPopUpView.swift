@@ -10,18 +10,18 @@ import SwiftUI
 struct ModalPopUpView: View {
     @Environment(\.viewController) private var viewControllerHolder: UIViewController?
 
-    private let _configuration: Configuration
+    private let _viewConfig: ViewConfig
     private let _entity: PokemonEntity
 
-    init(configuration: Configuration, entity: PokemonEntity) {
-        _configuration = configuration
+    init(viewConfig: ViewConfig, entity: PokemonEntity) {
+        _viewConfig = viewConfig
         _entity = entity
     }
 
     var body: some View {
         VStack(alignment: .center) {
             PokemonContentView(viewModel: PokemonContentViewModel(
-                configuration: _configuration, pokemonEntity: _entity, isApp: true))
+                viewConfig: _viewConfig, pokemonEntity: _entity, isApp: true))
             Button(action: {
                 self.viewControllerHolder?.dismiss(animated: true, completion: nil)
             }) {
@@ -50,7 +50,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
 
     static var previews: some View {
         ModalPopUpView(
-            configuration: Configuration(
+            viewConfig: ViewConfig(
                 locale: Locale(identifier: "ja_jp"),
                 isDarkMode: colorScheme == .dark,
                 domainConfig: _domainConfig),
@@ -58,7 +58,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
         .environment(\.locale, .init(identifier: "ja"))
         
         ModalPopUpView(
-            configuration: Configuration(
+            viewConfig: ViewConfig(
                 locale: Locale(identifier: "en_jp"),
                 isDarkMode: colorScheme == .dark,
                 domainConfig: _domainConfig),

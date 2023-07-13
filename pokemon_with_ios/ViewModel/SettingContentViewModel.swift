@@ -8,16 +8,16 @@
 import Foundation
 
 struct SettingContentViewModel {
-    private let _configuration: Configuration
+    private let _viewConfig: ViewConfig
     private let _pokemonEntities: [PokemonEntity]
     
     
-    init(configuration: Configuration, pokemonEntities: [PokemonEntity]) {
-        _configuration = configuration
+    init(viewConfig: ViewConfig, pokemonEntities: [PokemonEntity]) {
+        _viewConfig = viewConfig
         _pokemonEntities = pokemonEntities
     }
     
     public var amount: String {
-        "\(_pokemonEntities.count) / \(1010)"
+        "\(_pokemonEntities.count) / \(_viewConfig.amount)"
     }
 }

@@ -109,7 +109,7 @@ struct WidgetContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             PokemonContentView(viewModel: PokemonContentViewModel(
-                configuration: Configuration(
+                viewConfig: ViewConfig(
                     locale: Locale(identifier: "ja_jp"),
                     isDarkMode: colorScheme == .dark,
                     domainConfig: DomainConfig()),
@@ -118,7 +118,7 @@ struct WidgetContentView_Previews: PreviewProvider {
                 .environment(\.locale, .init(identifier: "ja"))
             
             PokemonContentView(viewModel: PokemonContentViewModel(
-                configuration: Configuration(
+                viewConfig: ViewConfig(
                     locale: Locale(identifier: "en_jp"),
                     isDarkMode: colorScheme == .dark,
                     domainConfig: DomainConfig()),

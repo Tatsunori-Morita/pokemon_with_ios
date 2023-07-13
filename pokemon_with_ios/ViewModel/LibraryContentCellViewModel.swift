@@ -11,7 +11,7 @@ struct LibraryContentCellViewModel: Identifiable {
     var id = UUID()
     private let _id: Int
     let _entity: PokemonEntity?
-    private let _configuration: Configuration
+    private let _viewConfig: ViewConfig
     
     public var no: String {
         "No." + String(format: "%04d", _id)
@@ -20,7 +20,7 @@ struct LibraryContentCellViewModel: Identifiable {
     public var name: String {
         guard
             let entity = _entity,
-            let name = entity.names.first(where: { $0.language == _configuration.language })
+            let name = entity.names.first(where: { $0.language == _viewConfig.language })
         else {
             return "????"
         }
@@ -40,13 +40,13 @@ struct LibraryContentCellViewModel: Identifiable {
     
     public var opacity: Double {
         if isExist { return 0 }
-        if _configuration.isDarkMode { return 0.9 }
+        if _viewConfig.isDarkMode { return 0.9 }
         return 0.8
     }
     
-    init(id: Int, entity: PokemonEntity?, configuration: Configuration) {
+    init(id: Int, entity: PokemonEntity?, viewConfig: ViewConfig) {
         _id = id
         _entity = entity
-        _configuration = configuration
+        _viewConfig = viewConfig
     }
 }

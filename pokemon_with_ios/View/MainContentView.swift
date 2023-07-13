@@ -18,7 +18,7 @@ struct MainContentView: View {
     var body: some View {
         TabView {
             LibraryContentView(viewModel: LibraryContentViewModel(
-                configuration: Configuration(
+                viewConfig: ViewConfig(
                     locale: locale,
                     isDarkMode: colorScheme == .dark,
                     domainConfig: _domainConfig),
@@ -29,7 +29,7 @@ struct MainContentView: View {
                 }
             
             SettingContentView(viewModel: SettingContentViewModel(
-                configuration: Configuration(
+                viewConfig: ViewConfig(
                     locale: locale,
                     isDarkMode: colorScheme == .dark,
                     domainConfig: _domainConfig),

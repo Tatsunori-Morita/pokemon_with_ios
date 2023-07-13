@@ -75,7 +75,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             SettingContentView(viewModel: SettingContentViewModel(
-                configuration: Configuration(
+                viewConfig: ViewConfig(
                     locale: Locale(identifier: "ja_jp"),
                     isDarkMode: colorScheme == .dark,
                     domainConfig: _domainConfig),
@@ -83,7 +83,7 @@ struct ContentView_Previews: PreviewProvider {
             .environment(\.locale, .init(identifier: "ja"))
             
             SettingContentView(viewModel: SettingContentViewModel(
-                configuration: Configuration(
+                viewConfig: ViewConfig(
                     locale: Locale(identifier: "en_jp"),
                     isDarkMode: colorScheme == .dark,
                     domainConfig: _domainConfig),

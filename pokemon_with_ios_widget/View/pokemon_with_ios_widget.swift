@@ -94,7 +94,7 @@ struct pokemon_with_ios_widgetEntryView : View {
 
     var body: some View {
         PokemonContentView(viewModel: PokemonContentViewModel(
-            configuration: Configuration(
+            viewConfig: ViewConfig(
                 locale: locale,
                 isDarkMode: colorScheme == .dark,
                 domainConfig: DomainConfig()),

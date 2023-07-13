@@ -368,7 +368,6 @@
 			children = (
 				0ED9F2592A5F75A600159E66 /* Config */,
 				0E9E15422A122E00003ACDE8 /* PokemonEntity.swift */,
-				0E032F5A2A50E15D00E94035 /* ViewConfig.swift */,
 			);
 			path = Domains;
 			sourceTree = "<group>";
@@ -446,6 +445,7 @@
 		0ED9F2582A5F759100159E66 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				0E032F5A2A50E15D00E94035 /* ViewConfig.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";

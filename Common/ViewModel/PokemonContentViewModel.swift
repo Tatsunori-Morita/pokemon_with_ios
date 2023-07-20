@@ -56,13 +56,7 @@ struct PokemonContentViewModel {
     }
 
     public var types: [PokemonEntity.PokemonTypeValue] {
-        var array: [PokemonEntity.PokemonTypeValue] = []
-        _pokemonEntity.pokemonTypeValues.forEach { pokemonType in
-            if pokemonType.language == _viewConfig.language {
-                array.append(pokemonType)
-            }
-        }
-        return array
+        _pokemonEntity.pokemonTypeValues.filter { $0.language == _viewConfig.language}
     }
     
     public var flavorTextEntry: String {

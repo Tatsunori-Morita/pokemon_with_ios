@@ -1,5 +1,5 @@
 //
-//  PokemonDomain.swift
+//  PokemonEntity.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2023/05/15.
@@ -58,7 +58,10 @@ class PokemonEntity {
         _pokemonTypeValues
     }
 
-    init(id: IdValue, names: [NameValue], weight: WeightValue, height: HeightValue, genera: [GenusValue], flavorTextEntries: [FlavorTextEntryValue], frontDefault: FrontDefaultValue, pokemonTypeValues: [PokemonTypeValue]) {
+    init(id: IdValue, names: [NameValue], weight: WeightValue, height: HeightValue,
+         genera: [GenusValue], flavorTextEntries: [FlavorTextEntryValue],
+         frontDefault: FrontDefaultValue, pokemonTypeValues: [PokemonTypeValue])
+    {
         _idValue = id
         _nameValues = names
         _weightValue = weight

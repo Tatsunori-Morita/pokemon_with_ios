@@ -217,24 +217,24 @@ class PokemonEntity {
         private let _name: String
         private let _language: LanguageValue
         private let _typeValues: [TypeValue] = [
-            TypeValue(jaName: "ノーマル", enName: "Normal", color: Color.normal),
-            TypeValue(jaName: "ほのお", enName: "Fire", color: Color.fire),
-            TypeValue(jaName: "みず", enName: "Water", color: Color.water),
-            TypeValue(jaName: "くさ", enName: "Grass", color: Color.grass),
-            TypeValue(jaName: "でんき", enName: "Electric", color: Color.electric),
-            TypeValue(jaName: "こおり", enName: "Ice", color: Color.ice),
-            TypeValue(jaName: "かくとう", enName: "Fighting", color: Color.fighting),
-            TypeValue(jaName: "どく", enName: "Poison", color: Color.poison),
-            TypeValue(jaName: "じめん", enName: "Ground", color: Color.ground),
-            TypeValue(jaName: "ひこう", enName: "Flying", color: Color.flying),
-            TypeValue(jaName: "エスパー", enName: "Psychic", color: Color.psychic),
-            TypeValue(jaName: "むし", enName: "Bug", color: Color.bug),
-            TypeValue(jaName: "いわ", enName: "Rock", color: Color.rock),
-            TypeValue(jaName: "ゴースト", enName: "Ghost", color: Color.ghost),
-            TypeValue(jaName: "ドラゴン", enName: "Dragon", color: Color.dragon),
-            TypeValue(jaName: "あく", enName: "Dark", color: Color.dark),
-            TypeValue(jaName: "はがね", enName: "Steel", color: Color.steel),
-            TypeValue(jaName: "フェアリー", enName: "Fairy", color: Color.fairy),
+            try! TypeValue(jaName: "ノーマル", enName: "Normal", color: Color.normal),
+            try! TypeValue(jaName: "ほのお", enName: "Fire", color: Color.fire),
+            try! TypeValue(jaName: "みず", enName: "Water", color: Color.water),
+            try! TypeValue(jaName: "くさ", enName: "Grass", color: Color.grass),
+            try! TypeValue(jaName: "でんき", enName: "Electric", color: Color.electric),
+            try! TypeValue(jaName: "こおり", enName: "Ice", color: Color.ice),
+            try! TypeValue(jaName: "かくとう", enName: "Fighting", color: Color.fighting),
+            try! TypeValue(jaName: "どく", enName: "Poison", color: Color.poison),
+            try! TypeValue(jaName: "じめん", enName: "Ground", color: Color.ground),
+            try! TypeValue(jaName: "ひこう", enName: "Flying", color: Color.flying),
+            try! TypeValue(jaName: "エスパー", enName: "Psychic", color: Color.psychic),
+            try! TypeValue(jaName: "むし", enName: "Bug", color: Color.bug),
+            try! TypeValue(jaName: "いわ", enName: "Rock", color: Color.rock),
+            try! TypeValue(jaName: "ゴースト", enName: "Ghost", color: Color.ghost),
+            try! TypeValue(jaName: "ドラゴン", enName: "Dragon", color: Color.dragon),
+            try! TypeValue(jaName: "あく", enName: "Dark", color: Color.dark),
+            try! TypeValue(jaName: "はがね", enName: "Steel", color: Color.steel),
+            try! TypeValue(jaName: "フェアリー", enName: "Fairy", color: Color.fairy),
         ]
         
         public var name: String {
@@ -277,7 +277,15 @@ class PokemonEntity {
                 _color
             }
             
-            init(jaName: String, enName: String, color: Color) {
+            init(jaName: String, enName: String, color: Color) throws {
+                if jaName.isEmpty {
+                    throw NSError(domain: "日本語のタイプ名が設定されていません", code: -1)
+                }
+                
+                if enName.isEmpty {
+                    throw NSError(domain: "英語のタイプ名が設定されていません", code: -1)
+                }
+                
                 _jaName = jaName
                 _enName = enName
                 _color = color

@@ -84,14 +84,4 @@ struct PokemonContentViewModel {
 
         return Image(uiImage: image)
     }
-    
-    public func typeName(index: Int) -> String {
-        let types = self.types
-        return types[index].name
-    }
-    
-    public func typeColor(index: Int) -> Color {
-        let types = self.types
-        return types[index].color
-    }
 }

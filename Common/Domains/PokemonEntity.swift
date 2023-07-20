@@ -212,165 +212,44 @@ class PokemonEntity {
         }
     }
     
-    class PokemonTypeValue {
+    class PokemonTypeValue: Identifiable {
+        let id = UUID()
         private let _name: String
         private let _language: LanguageValue
-        
-        enum Types {
-            case Normal
-            case Fire
-            case Water
-            case Grass
-            case Electric
-            case Ice
-            case Fighting
-            case Poison
-            case Ground
-            case Flying
-            case Psychic
-            case Bug
-            case Rock
-            case Ghost
-            case Dragon
-            case Dark
-            case Steel
-            case Fairy
-        }
+        private let _typeValues: [TypeValue] = [
+            TypeValue(jaName: "ノーマル", enName: "Normal", color: Color.normal),
+            TypeValue(jaName: "ほのお", enName: "Fire", color: Color.fire),
+            TypeValue(jaName: "みず", enName: "Water", color: Color.water),
+            TypeValue(jaName: "くさ", enName: "Grass", color: Color.grass),
+            TypeValue(jaName: "でんき", enName: "Electric", color: Color.electric),
+            TypeValue(jaName: "こおり", enName: "Ice", color: Color.ice),
+            TypeValue(jaName: "かくとう", enName: "Fighting", color: Color.fighting),
+            TypeValue(jaName: "どく", enName: "Poison", color: Color.poison),
+            TypeValue(jaName: "じめん", enName: "Ground", color: Color.ground),
+            TypeValue(jaName: "ひこう", enName: "Flying", color: Color.flying),
+            TypeValue(jaName: "エスパー", enName: "Psychic", color: Color.psychic),
+            TypeValue(jaName: "むし", enName: "Bug", color: Color.bug),
+            TypeValue(jaName: "いわ", enName: "Rock", color: Color.rock),
+            TypeValue(jaName: "ゴースト", enName: "Ghost", color: Color.ghost),
+            TypeValue(jaName: "ドラゴン", enName: "Dragon", color: Color.dragon),
+            TypeValue(jaName: "あく", enName: "Dark", color: Color.dark),
+            TypeValue(jaName: "はがね", enName: "Steel", color: Color.steel),
+            TypeValue(jaName: "フェアリー", enName: "Fairy", color: Color.fairy),
+        ]
         
         public var name: String {
             _name
         }
 
-        private var typeJapanese: Types  {
-            switch _name {
-            case "ノーマル":
-                return .Normal
-            case "ほのお":
-                return .Fire
-            case "みず":
-                return .Water
-            case "くさ":
-                return .Grass
-            case "でんき":
-                return .Electric
-            case "こおり":
-                return .Ice
-            case "かくとう":
-                return .Fighting
-            case "どく":
-                return .Poison
-            case "じめん":
-                return .Ground
-            case "ひこう":
-                return .Flying
-            case "エスパー":
-                return .Psychic
-            case "むし":
-                return .Bug
-            case "いわ":
-                return .Rock
-            case "ゴースト":
-                return .Ghost
-            case "ドラゴン":
-                return .Dragon
-            case "あく":
-                return .Dark
-            case "はがね":
-                return .Steel
-            case "フェアリー":
-                return .Fairy
-            default:
-                fatalError("対象の日本語属性が存在しません")
-            }
-        }
-        
-        private var typeEnglish: Types  {
-            switch _name {
-            case "Normal":
-                return .Normal
-            case "Fire":
-                return .Fire
-            case "Water":
-                return .Water
-            case "Grass":
-                return .Grass
-            case "Electric":
-                return .Electric
-            case "Ice":
-                return .Ice
-            case "Fighting":
-                return .Fighting
-            case "Poison":
-                return .Poison
-            case "Ground":
-                return .Ground
-            case "Flying":
-                return .Flying
-            case "Psychic":
-                return .Psychic
-            case "Bug":
-                return .Bug
-            case "Rock":
-                return .Rock
-            case "Ghost":
-                return .Ghost
-            case "Dragon":
-                return .Dragon
-            case "Dark":
-                return .Dark
-            case "Steel":
-                return .Steel
-            case "Fairy":
-                return .Fairy
-            default:
-                fatalError("対象の英語属性が存在しません")
-            }
-        }
-        
-        public var color: Color {
-            let type = _language.language == "ja" ? typeJapanese : typeEnglish
-            switch type {
-            case .Normal:
-                return .normal
-            case .Fire:
-                return .fire
-            case .Water:
-                return .water
-            case .Grass:
-                return .grass
-            case .Electric:
-                return .electric
-            case .Ice:
-                return .ice
-            case .Fighting:
-                return .flying
-            case .Poison:
-                return .poison
-            case .Ground:
-                return .ground
-            case .Flying:
-                return .flying
-            case .Psychic:
-                return .psychic
-            case .Bug:
-                return .bug
-            case .Rock:
-                return .rock
-            case .Ghost:
-                return .ghost
-            case .Dragon:
-                return .dragon
-            case .Dark:
-                return .dark
-            case .Steel:
-                return .steel
-            case .Fairy:
-                return .fairy
-            }
-        }
-        
         public var language: String {
             _language.language
+        }
+        
+        public var typeValue: TypeValue {
+            if let value = _typeValues.first(where: { $0.jaName == _name || $0.enName == _name}) {
+                return value
+            }
+            fatalError("対象のタイプが存在しません")
         }
         
         init(name: String, language: LanguageValue) throws {
@@ -379,6 +258,30 @@ class PokemonEntity {
             }
             _name = name
             _language = language
+        }
+        
+        struct TypeValue {
+            private let _jaName: String
+            private let _enName: String
+            private let _color: Color
+            
+            public var jaName: String {
+                _jaName
+            }
+            
+            public var enName: String {
+                _enName
+            }
+            
+            public var color: Color {
+                _color
+            }
+            
+            init(jaName: String, enName: String, color: Color) {
+                _jaName = jaName
+                _enName = enName
+                _color = color
+            }
         }
     }
 }

@@ -40,15 +40,15 @@ struct PokemonContentView: View {
                                 .bold()
                                 .padding(.trailing, 16)
                             HStack (spacing: 8) {
-                                ForEach(0..<_viewModel.types.count, id: \.self) { index in
-                                    Text(_viewModel.typeName(index: index))
+                                ForEach(_viewModel.types) { pokemonTypeValue in
+                                    Text(pokemonTypeValue.name)
                                         .font(.custom("HiraginoSans-W6", size: 10))
                                         .foregroundColor(.white)
                                         .padding(.top, 4)
                                         .padding(.leading, 10)
                                         .padding(.trailing, 10)
                                         .padding(.bottom, 4)
-                                        .background(_viewModel.typeColor(index: index))
+                                        .background(pokemonTypeValue.typeValue.color)
                                         .cornerRadius(10)
                                 }
                             }

@@ -68,6 +68,7 @@ struct PokemonContentViewModel {
         return flavorTextEntry.flavorTextEntry.replacingOccurrences(of: "\n", with: "")
     }
 
+    // Widget can not use AsyncImage.
     public var image: Image {
         guard let url = URL(string: _pokemonEntity.frontDefault),
               let imageData = try? Data(contentsOf: url),
@@ -75,7 +76,6 @@ struct PokemonContentViewModel {
         else {
             return Image(uiImage: UIImage())
         }
-
         return Image(uiImage: image)
     }
 }

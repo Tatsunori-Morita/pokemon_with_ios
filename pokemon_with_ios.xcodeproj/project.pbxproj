@@ -415,7 +415,7 @@
 				0E0D0CE32A4D7EDC001697FF /* ViewModel */,
 				0ED2DD42287680450082D4C4 /* API */,
 				0EAE1AA32A138410009D0529 /* DB */,
-				0ED2DD36287678A70082D4C4 /* DTO */,
+				0ED2DD36287678A70082D4C4 /* Factory */,
 				0E9E15412A122CC6003ACDE8 /* Domains */,
 				0E95E6CD2889810D00F05B05 /* Extension */,
 				0EE367962A4E43DC007559A3 /* Test */,
@@ -423,12 +423,12 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		0ED2DD36287678A70082D4C4 /* DTO */ = {
+		0ED2DD36287678A70082D4C4 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
 				0EBF3D89287D5B07002A8CCF /* PokemonEntityFactory.swift */,
 			);
-			path = DTO;
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		0ED2DD42287680450082D4C4 /* API */ = {

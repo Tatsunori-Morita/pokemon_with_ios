@@ -101,7 +101,7 @@ struct WidgetContentView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
     private static var colorScheme
     
-    static let dto = PokemonEntityDTO(
+    static let factory = PokemonEntityFactory(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
@@ -113,7 +113,7 @@ struct WidgetContentView_Previews: PreviewProvider {
                     locale: Locale(identifier: "ja_jp"),
                     isDarkMode: colorScheme == .dark,
                     domainConfig: DomainConfig()),
-                pokemonEntity: dto.createEntity(),
+                pokemonEntity: factory.createEntity(),
                 isApp: false))
                 .environment(\.locale, .init(identifier: "ja"))
             
@@ -122,7 +122,7 @@ struct WidgetContentView_Previews: PreviewProvider {
                     locale: Locale(identifier: "en_jp"),
                     isDarkMode: colorScheme == .dark,
                     domainConfig: DomainConfig()),
-                pokemonEntity: dto.createEntity(),
+                pokemonEntity: factory.createEntity(),
                 isApp: false))
                 .environment(\.locale, .init(identifier: "en"))
         }

@@ -1,5 +1,5 @@
 //
-//  PokemonEntityDTO.swift
+//  PokemonEntityFactory.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2022/07/12.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PokemonEntityDTO {
+class PokemonEntityFactory {
     private let _pokemon: Pokemon
     private let _pokemonSpecies: PokemonSpecies
     private let _pokemonTypes: [PokemonType]

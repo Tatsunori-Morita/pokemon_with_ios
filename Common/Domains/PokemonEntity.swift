@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 class PokemonEntity {
     private let _idValue: IdValue
@@ -219,26 +218,6 @@ class PokemonEntity {
         let id = UUID()
         private let _name: String
         private let _language: LanguageValue
-        private let _typeValues: [TypeValue] = [
-            try! TypeValue(jaName: "ノーマル", enName: "Normal", color: Color.normal),
-            try! TypeValue(jaName: "ほのお", enName: "Fire", color: Color.fire),
-            try! TypeValue(jaName: "みず", enName: "Water", color: Color.water),
-            try! TypeValue(jaName: "くさ", enName: "Grass", color: Color.grass),
-            try! TypeValue(jaName: "でんき", enName: "Electric", color: Color.electric),
-            try! TypeValue(jaName: "こおり", enName: "Ice", color: Color.ice),
-            try! TypeValue(jaName: "かくとう", enName: "Fighting", color: Color.fighting),
-            try! TypeValue(jaName: "どく", enName: "Poison", color: Color.poison),
-            try! TypeValue(jaName: "じめん", enName: "Ground", color: Color.ground),
-            try! TypeValue(jaName: "ひこう", enName: "Flying", color: Color.flying),
-            try! TypeValue(jaName: "エスパー", enName: "Psychic", color: Color.psychic),
-            try! TypeValue(jaName: "むし", enName: "Bug", color: Color.bug),
-            try! TypeValue(jaName: "いわ", enName: "Rock", color: Color.rock),
-            try! TypeValue(jaName: "ゴースト", enName: "Ghost", color: Color.ghost),
-            try! TypeValue(jaName: "ドラゴン", enName: "Dragon", color: Color.dragon),
-            try! TypeValue(jaName: "あく", enName: "Dark", color: Color.dark),
-            try! TypeValue(jaName: "はがね", enName: "Steel", color: Color.steel),
-            try! TypeValue(jaName: "フェアリー", enName: "Fairy", color: Color.fairy),
-        ]
         
         public var name: String {
             _name
@@ -248,51 +227,12 @@ class PokemonEntity {
             _language.language
         }
         
-        public var typeValue: TypeValue {
-            if let value = _typeValues.first(where: { $0.jaName == _name || $0.enName == _name}) {
-                return value
-            }
-            fatalError("対象のタイプが存在しません")
-        }
-        
         init(name: String, language: LanguageValue) throws {
             if name.isEmpty {
                 throw NSError(domain: "タイプが設定されていません", code: -1)
             }
             _name = name
             _language = language
-        }
-        
-        struct TypeValue {
-            private let _jaName: String
-            private let _enName: String
-            private let _color: Color
-            
-            public var jaName: String {
-                _jaName
-            }
-            
-            public var enName: String {
-                _enName
-            }
-            
-            public var color: Color {
-                _color
-            }
-            
-            init(jaName: String, enName: String, color: Color) throws {
-                if jaName.isEmpty {
-                    throw NSError(domain: "日本語のタイプ名が設定されていません", code: -1)
-                }
-                
-                if enName.isEmpty {
-                    throw NSError(domain: "英語のタイプ名が設定されていません", code: -1)
-                }
-                
-                _jaName = jaName
-                _enName = enName
-                _color = color
-            }
         }
     }
 }

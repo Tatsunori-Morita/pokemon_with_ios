@@ -48,7 +48,7 @@ struct PokemonContentView: View {
                                         .padding(.leading, 10)
                                         .padding(.trailing, 10)
                                         .padding(.bottom, 4)
-                                        .background(PokemonColor.getColorType(name: pokemonTypeValue.name).color)
+                                        .background(try! PokemonColor.shared.getColorType(name: pokemonTypeValue.name).color)
                                         .cornerRadius(10)
                                 }
                             }

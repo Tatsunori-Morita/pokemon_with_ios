@@ -27,6 +27,8 @@
 		0E45E23728707A0100285D2A /* pokemon_with_ios_widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E233287079FF00285D2A /* pokemon_with_ios_widget.intentdefinition */; };
 		0E45E23828707A0100285D2A /* pokemon_with_ios_widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E233287079FF00285D2A /* pokemon_with_ios_widget.intentdefinition */; };
 		0E45E23B28707A0100285D2A /* pokemon_with_ios_widgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E45E22A287079FF00285D2A /* pokemon_with_ios_widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0E4A01E92A73435200CEF82F /* PokemonColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A01E82A73435200CEF82F /* PokemonColorTests.swift */; };
+		0E4A01EA2A73474900CEF82F /* PokemonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E91619E2A7091750074A4D3 /* PokemonColor.swift */; };
 		0E64080B2A5BCA1F00AAF180 /* PokemonEntityValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E64080A2A5BCA1F00AAF180 /* PokemonEntityValueTests.swift */; };
 		0E64081E2A5BCC6800AAF180 /* PokemonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9E15422A122E00003ACDE8 /* PokemonEntity.swift */; };
 		0E64081F2A5BCC9200AAF180 /* Extension_Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E95E6D3288992DE00F05B05 /* Extension_Color.swift */; };
@@ -138,6 +140,7 @@
 		0E45E233287079FF00285D2A /* pokemon_with_ios_widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = pokemon_with_ios_widget.intentdefinition; sourceTree = "<group>"; };
 		0E45E23428707A0100285D2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E45E23628707A0100285D2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E4A01E82A73435200CEF82F /* PokemonColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonColorTests.swift; sourceTree = "<group>"; };
 		0E6408082A5BCA1F00AAF180 /* pokemon_with_iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokemon_with_iosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E64080A2A5BCA1F00AAF180 /* PokemonEntityValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonEntityValueTests.swift; sourceTree = "<group>"; };
 		0E6408122A5BCA7200AAF180 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -343,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				0E64080A2A5BCA1F00AAF180 /* PokemonEntityValueTests.swift */,
+				0E4A01E82A73435200CEF82F /* PokemonColorTests.swift */,
 			);
 			path = pokemon_with_iosTests;
 			sourceTree = "<group>";
@@ -708,6 +712,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E64081F2A5BCC9200AAF180 /* Extension_Color.swift in Sources */,
+				0E4A01E92A73435200CEF82F /* PokemonColorTests.swift in Sources */,
+				0E4A01EA2A73474900CEF82F /* PokemonColor.swift in Sources */,
 				0E64081E2A5BCC6800AAF180 /* PokemonEntity.swift in Sources */,
 				0E64080B2A5BCA1F00AAF180 /* PokemonEntityValueTests.swift in Sources */,
 			);

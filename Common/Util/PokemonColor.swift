@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct PokemonColor {
-    private static let _typeValues: [ColorType] = [
+    static let shared = PokemonColor()
+    
+    private let _typeValues: [ColorType] = [
         try! ColorType(jaName: "ノーマル", enName: "Normal", color: Color.normal),
         try! ColorType(jaName: "ほのお", enName: "Fire", color: Color.fire),
         try! ColorType(jaName: "みず", enName: "Water", color: Color.water),
@@ -29,11 +31,11 @@ struct PokemonColor {
         try! ColorType(jaName: "フェアリー", enName: "Fairy", color: Color.fairy),
     ]
     
-    public static func getColorType(name: String) -> ColorType {
+    public func getColorType(name: String) throws -> ColorType {
         if let value = _typeValues.first(where: { $0.jaName == name || $0.enName == name}) {
             return value
         }
-        fatalError("対象のタイプが存在しません")
+        throw NSError(domain: "対象のタイプが存在しません", code: -1)
     }
     
     struct ColorType {

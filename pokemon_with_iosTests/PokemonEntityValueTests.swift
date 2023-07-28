@@ -90,6 +90,17 @@ class PokemonEntityValueTests: QuickSpec {
                     expect { try PokemonEntity.FrontDefaultValue(frontDefault: "")}.to(throwError())
                 }
             }
+            
+            context("PokemonTypeValueのインスタンス生成") {
+                it("正常値でのインスタンス生成") {
+                    let value = try! PokemonEntity.PokemonTypeValue(name: testStr, language: language)
+                    expect(value.name).to(equal(testStr))
+                }
+                
+                it("異常値でのインスタンス生成") {
+                    expect { try PokemonEntity.PokemonTypeValue(name: "", language: language)}.to(throwError())
+                }
+            }
         }
     }
 }

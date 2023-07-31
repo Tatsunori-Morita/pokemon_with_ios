@@ -40,6 +40,7 @@
 		0E87BCAA288EC7C900F9D490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCAC288EC7C900F9D490 /* Localizable.strings */; };
 		0E87BCB4288EDA3200F9D490 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */; };
 		0E87BCB7288EDA3200F9D490 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BCB9288EDA3200F9D490 /* InfoPlist.strings */; };
+		0E8EB62A2A772F4D00C89907 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0E8EB6292A772F4D00C89907 /* SDWebImageSwiftUI */; };
 		0E91619F2A7091750074A4D3 /* PokemonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E91619E2A7091750074A4D3 /* PokemonColor.swift */; };
 		0E9161A02A7091750074A4D3 /* PokemonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E91619E2A7091750074A4D3 /* PokemonColor.swift */; };
 		0E94D6952A4BA7DE0093D7AD /* ModalPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E94D6942A4BA7DE0093D7AD /* ModalPopUpView.swift */; };
@@ -191,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E8EB62A2A772F4D00C89907 /* SDWebImageSwiftUI in Frameworks */,
 				0EDF9A7528771041004AE2BE /* Alamofire in Frameworks */,
 				0E45E22F287079FF00285D2A /* SwiftUI.framework in Frameworks */,
 				0EB9C4B029FFA09C00817997 /* Realm in Frameworks */,
@@ -528,6 +530,7 @@
 				0EDF9A7428771041004AE2BE /* Alamofire */,
 				0EB9C4AF29FFA09C00817997 /* Realm */,
 				0EB9C4B129FFA09C00817997 /* RealmSwift */,
+				0E8EB6292A772F4D00C89907 /* SDWebImageSwiftUI */,
 			);
 			productName = pokemon_with_ios_widgetExtension;
 			productReference = 0E45E22A287079FF00285D2A /* pokemon_with_ios_widgetExtension.appex */;
@@ -1115,6 +1118,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E8EB6292A772F4D00C89907 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0EE72C0F2A483B170053F47B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		0E95792D2A5D5D9F00A87A8C /* Nimble */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E95792C2A5D5D9F00A87A8C /* XCRemoteSwiftPackageReference "Nimble" */;

@@ -78,4 +78,8 @@ struct PokemonContentViewModel {
         }
         return Image(uiImage: image)
     }
+    
+    public var frontDefault: String {
+        _pokemonEntity.frontDefault
+    }
 }

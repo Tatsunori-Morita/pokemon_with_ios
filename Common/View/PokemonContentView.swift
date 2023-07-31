@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PokemonContentView: View {
     private let _viewModel: PokemonContentViewModel
@@ -28,10 +29,17 @@ struct PokemonContentView: View {
                                 .padding(.top, 4)
                         }
                         Spacer()
-                        _viewModel.image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                        if _viewModel.isApp {
+                            WebImage(url: URL(string: _viewModel.frontDefault))
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                        } else {
+                            _viewModel.image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                        }
                     }
                     VStack (alignment: .leading, spacing: 0) {
                         HStack {

@@ -11,21 +11,21 @@ import SwiftUI
 class LibraryContentViewModel: ObservableObject {
     @Published var data: [LibraryContentCellViewModel] = []
     
-    private let _configuration: Configuration
+    private let _viewConfig: ViewConfig
     public let _pokemonEntities: [PokemonEntity]
     
-    init(configuration: Configuration, pokemonEntities: [PokemonEntity]) {
-        _configuration = configuration
+    init(viewConfig: ViewConfig, pokemonEntities: [PokemonEntity]) {
+        _viewConfig = viewConfig
         _pokemonEntities = pokemonEntities
         
         for i in 1..<21 {
             data.append(LibraryContentCellViewModel(
-                id: i, entity: pokemonEntity(num: i), configuration: _configuration))
+                id: i, entity: pokemonEntity(num: i), viewConfig: _viewConfig))
         }
     }
     
-    public var configuration: Configuration {
-        _configuration
+    public var viewConfig: ViewConfig {
+        _viewConfig
     }
     
     public func pokemonViewModel(num: Int) -> PokemonContentViewModel {
@@ -33,7 +33,7 @@ class LibraryContentViewModel: ObservableObject {
             fatalError("Pokemon not found")
         }
         return PokemonContentViewModel(
-            configuration: _configuration, pokemonEntity: pokemon, isApp: true)
+            viewConfig: _viewConfig, pokemonEntity: pokemon, isApp: true)
     }
     
     public func pokemonEntity(num: Int) -> PokemonEntity? {
@@ -44,13 +44,13 @@ class LibraryContentViewModel: ObservableObject {
     }
     
     public var canLoadMore: Bool {
-        data.count < _configuration.POKEMON_MAX_AMOUNT
+        data.count < _viewConfig.amount
     }
     
     public func loadMore() {
         for i in data.count+1..<data.count+10 {
             data.append(LibraryContentCellViewModel(
-                id: i, entity: pokemonEntity(num: i), configuration: _configuration))
+                id: i, entity: pokemonEntity(num: i), viewConfig: _viewConfig))
         }
     }
     

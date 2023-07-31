@@ -10,18 +10,18 @@ import SwiftUI
 struct ModalPopUpView: View {
     @Environment(\.viewController) private var viewControllerHolder: UIViewController?
 
-    private let _configuration: Configuration
+    private let _viewConfig: ViewConfig
     private let _entity: PokemonEntity
 
-    init(configuration: Configuration, entity: PokemonEntity) {
-        _configuration = configuration
+    init(viewConfig: ViewConfig, entity: PokemonEntity) {
+        _viewConfig = viewConfig
         _entity = entity
     }
 
     var body: some View {
         VStack(alignment: .center) {
             PokemonContentView(viewModel: PokemonContentViewModel(
-                configuration: _configuration, pokemonEntity: _entity, isApp: true))
+                viewConfig: _viewConfig, pokemonEntity: _entity, isApp: true))
             Button(action: {
                 self.viewControllerHolder?.dismiss(animated: true, completion: nil)
             }) {
@@ -41,17 +41,28 @@ struct ModalPopUpView: View {
 struct ModalPopUpView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
     private static var colorScheme
+    private static let _domainConfig = DomainConfig()
     
-    static let dto = PokemonEntityDTO(
+    static let factory = PokemonEntityFactory(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
 
     static var previews: some View {
-        ModalPopUpView(configuration: Configuration(locale: Locale(identifier: "ja_jp"), isDarkMode: colorScheme == .dark), entity: dto.createEntity())
-            .environment(\.locale, .init(identifier: "ja"))
+        ModalPopUpView(
+            viewConfig: ViewConfig(
+                locale: Locale(identifier: "ja_jp"),
+                isDarkMode: colorScheme == .dark,
+                domainConfig: _domainConfig),
+            entity: factory.createEntity())
+        .environment(\.locale, .init(identifier: "ja"))
         
-        ModalPopUpView(configuration: Configuration(locale: Locale(identifier: "en_jp"), isDarkMode: colorScheme == .dark), entity: dto.createEntity())
-            .environment(\.locale, .init(identifier: "en"))
+        ModalPopUpView(
+            viewConfig: ViewConfig(
+                locale: Locale(identifier: "en_jp"),
+                isDarkMode: colorScheme == .dark,
+                domainConfig: _domainConfig),
+            entity: factory.createEntity())
+        .environment(\.locale, .init(identifier: "en"))
     }
 }

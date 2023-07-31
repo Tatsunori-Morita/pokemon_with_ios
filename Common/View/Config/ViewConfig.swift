@@ -1,5 +1,5 @@
 //
-//  Configuration.swift
+//  ViewConfig.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2023/07/02.
@@ -7,15 +7,19 @@
 
 import Foundation
 
-struct Configuration {
-    public let POKEMON_MAX_AMOUNT = 1010
-    
+struct ViewConfig {
     private let _locale: Locale
     private let _isDartModel: Bool
+    private let _domainConfig: DomainConfig
     
-    init(locale: Locale, isDarkMode: Bool) {
+    init(locale: Locale, isDarkMode: Bool, domainConfig: DomainConfig) {
         _locale = locale
         _isDartModel = isDarkMode
+        _domainConfig = domainConfig
+    }
+    
+    public var amount: Int {
+        _domainConfig.amount
     }
     
     public var isDarkMode: Bool {

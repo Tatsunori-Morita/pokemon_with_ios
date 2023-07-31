@@ -1,12 +1,11 @@
 //
-//  PokemonDomain.swift
+//  PokemonEntity.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2023/05/15.
 //
 
 import Foundation
-import SwiftUI
 
 class PokemonEntity {
     private let _idValue: IdValue
@@ -58,7 +57,10 @@ class PokemonEntity {
         _pokemonTypeValues
     }
 
-    init(id: IdValue, names: [NameValue], weight: WeightValue, height: HeightValue, genera: [GenusValue], flavorTextEntries: [FlavorTextEntryValue], frontDefault: FrontDefaultValue, pokemonTypeValues: [PokemonTypeValue]) {
+    init(id: IdValue, names: [NameValue], weight: WeightValue, height: HeightValue,
+         genera: [GenusValue], flavorTextEntries: [FlavorTextEntryValue],
+         frontDefault: FrontDefaultValue, pokemonTypeValues: [PokemonTypeValue])
+    {
         _idValue = id
         _nameValues = names
         _weightValue = weight
@@ -80,9 +82,9 @@ class PokemonEntity {
             return String(format: "%03d", self.id)
         }
 
-        init(id: Int) {
+        init(id: Int) throws {
             if id < 1 {
-                fatalError("IDが0以下の値が設定されています")
+                throw NSError(domain: "IDが0以下の値が設定されています", code: -1)
             }
             _id = id
         }
@@ -95,9 +97,9 @@ class PokemonEntity {
             _language
         }
 
-        init(language: String) {
+        init(language: String) throws {
             if (language.isEmpty) {
-                fatalError("言語が設定されていません")
+                throw NSError(domain: "言語が設定されていません", code: -1)
             }
             _language = language
         }
@@ -115,9 +117,9 @@ class PokemonEntity {
             _language.language
         }
 
-        init(name: String, language: LanguageValue) {
+        init(name: String, language: LanguageValue) throws {
             if (name.isEmpty) {
-                fatalError("名前が設定されていません")
+                throw NSError(domain: "名前が設定されていません", code: -1)
             }
             _name = name
             _language = language
@@ -131,9 +133,9 @@ class PokemonEntity {
             _height
         }
 
-        init(height: Int) {
-            if height < 0 {
-                fatalError("高さが0以下の値が設定されています")
+        init(height: Int) throws {
+            if height < 1 {
+                throw NSError(domain: "高さが0以下の値が設定されています", code: -1)
             }
             _height = height
         }
@@ -146,9 +148,9 @@ class PokemonEntity {
             _weight
         }
 
-        init(weight: Int) {
-            if weight < 0 {
-                fatalError("重さが0以下の値が設定されています")
+        init(weight: Int) throws {
+            if weight < 1 {
+                throw NSError(domain: "重さが0以下の値が設定されています", code: -1)
             }
             _weight = weight
         }
@@ -166,9 +168,9 @@ class PokemonEntity {
             _language.language
         }
 
-        init(genus: String, language: LanguageValue) {
+        init(genus: String, language: LanguageValue) throws {
             if genus.isEmpty {
-                fatalError("ジャンルが設定されていません")
+                throw NSError(domain: "ジャンルが設定されていません", code: -1)
             }
             _genus = genus
             _language = language
@@ -187,9 +189,9 @@ class PokemonEntity {
             _language.language
         }
 
-        init(flavorTextEntry: String, language: LanguageValue) {
+        init(flavorTextEntry: String, language: LanguageValue) throws {
             if flavorTextEntry.isEmpty {
-                fatalError("説明分が設定されていません")
+                throw NSError(domain: "説明文が設定されていません", code: -1)
             }
             _flavorTextEntry = flavorTextEntry
             _language = language
@@ -204,175 +206,30 @@ class PokemonEntity {
             _frontDefault
         }
 
-        init(frontDefault: String) {
+        init(frontDefault: String) throws {
+            if frontDefault.isEmpty {
+                throw NSError(domain: "アートワーク画像が設定されていません", code: -1)
+            }
             _frontDefault = frontDefault
         }
     }
     
-    class PokemonTypeValue {
+    class PokemonTypeValue: Identifiable {
+        let id = UUID()
         private let _name: String
         private let _language: LanguageValue
-        
-        enum Types {
-            case Normal
-            case Fire
-            case Water
-            case Grass
-            case Electric
-            case Ice
-            case Fighting
-            case Poison
-            case Ground
-            case Flying
-            case Psychic
-            case Bug
-            case Rock
-            case Ghost
-            case Dragon
-            case Dark
-            case Steel
-            case Fairy
-        }
         
         public var name: String {
             _name
         }
 
-        public var typeJapanese: Types  {
-            switch _name {
-            case "ノーマル":
-                return .Normal
-            case "ほのお":
-                return .Fire
-            case "みず":
-                return .Water
-            case "くさ":
-                return .Grass
-            case "でんき":
-                return .Electric
-            case "こおり":
-                return .Ice
-            case "かくとう":
-                return .Fighting
-            case "どく":
-                return .Poison
-            case "じめん":
-                return .Ground
-            case "ひこう":
-                return .Flying
-            case "エスパー":
-                return .Psychic
-            case "むし":
-                return .Bug
-            case "いわ":
-                return .Rock
-            case "ゴースト":
-                return .Ghost
-            case "ドラゴン":
-                return .Dragon
-            case "あく":
-                return .Dark
-            case "はがね":
-                return .Steel
-            case "フェアリー":
-                return .Fairy
-            default:
-                fatalError("対象の日本語属性が存在しません")
-            }
-        }
-        
-        public var typeEnglish: Types  {
-            switch _name {
-            case "Normal":
-                return .Normal
-            case "Fire":
-                return .Fire
-            case "Water":
-                return .Water
-            case "Grass":
-                return .Grass
-            case "Electric":
-                return .Electric
-            case "Ice":
-                return .Ice
-            case "Fighting":
-                return .Fighting
-            case "Poison":
-                return .Poison
-            case "Ground":
-                return .Ground
-            case "Flying":
-                return .Flying
-            case "Psychic":
-                return .Psychic
-            case "Bug":
-                return .Bug
-            case "Rock":
-                return .Rock
-            case "Ghost":
-                return .Ghost
-            case "Dragon":
-                return .Dragon
-            case "Dark":
-                return .Dark
-            case "Steel":
-                return .Steel
-            case "Fairy":
-                return .Fairy
-            default:
-                fatalError("対象の英語語属性が存在しません")
-            }
-        }
-        
-        public var color: Color {
-            let type = _language.language == "ja" ? typeJapanese : typeEnglish
-            switch type {
-            case .Normal:
-                return .normal
-            case .Fire:
-                return .fire
-            case .Water:
-                return .water
-            case .Grass:
-                return .grass
-            case .Electric:
-                return .electric
-            case .Ice:
-                return .ice
-            case .Fighting:
-                return .flying
-            case .Poison:
-                return .poison
-            case .Ground:
-                return .ground
-            case .Flying:
-                return .flying
-            case .Psychic:
-                return .psychic
-            case .Bug:
-                return .bug
-            case .Rock:
-                return .rock
-            case .Ghost:
-                return .ghost
-            case .Dragon:
-                return .dragon
-            case .Dark:
-                return .dark
-            case .Steel:
-                return .steel
-            case .Fairy:
-                return .fairy
-            }
-        }
-        
         public var language: String {
             _language.language
         }
         
-        init(name: String, language: LanguageValue) {
+        init(name: String, language: LanguageValue) throws {
             if name.isEmpty {
-                fatalError("タイプが設定されていません")
+                throw NSError(domain: "タイプが設定されていません", code: -1)
             }
             _name = name
             _language = language

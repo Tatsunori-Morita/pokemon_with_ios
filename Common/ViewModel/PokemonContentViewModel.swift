@@ -9,12 +9,12 @@ import Foundation
 import SwiftUI
 
 struct PokemonContentViewModel {
-    private let _configuration: Configuration
+    private let _viewConfig: ViewConfig
     private let _pokemonEntity: PokemonEntity
     private let _isApp: Bool
 
-    init(configuration: Configuration, pokemonEntity: PokemonEntity, isApp: Bool) {
-        _configuration = configuration
+    init(viewConfig: ViewConfig, pokemonEntity: PokemonEntity, isApp: Bool) {
+        _viewConfig = viewConfig
         _pokemonEntity = pokemonEntity
         _isApp = isApp
     }
@@ -29,7 +29,7 @@ struct PokemonContentViewModel {
 
     public var name: String {
         guard
-            let name = _pokemonEntity.names.filter({ $0.language == _configuration.language }).first
+            let name = _pokemonEntity.names.filter({ $0.language == _viewConfig.language }).first
         else {
             return ""
         }
@@ -38,7 +38,7 @@ struct PokemonContentViewModel {
 
     public var genera: String {
         guard
-            let genus = _pokemonEntity.genera.filter({ $0.language == _configuration.language }).first
+            let genus = _pokemonEntity.genera.filter({ $0.language == _viewConfig.language }).first
         else {
             return "未確認"
         }
@@ -56,24 +56,19 @@ struct PokemonContentViewModel {
     }
 
     public var types: [PokemonEntity.PokemonTypeValue] {
-        var array: [PokemonEntity.PokemonTypeValue] = []
-        _pokemonEntity.pokemonTypeValues.forEach { pokemonType in
-            if pokemonType.language == "ja" {
-                array.append(pokemonType)
-            }
-        }
-        return array
+        _pokemonEntity.pokemonTypeValues.filter { $0.language == _viewConfig.language}
     }
     
     public var flavorTextEntry: String {
         guard
-            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _configuration.language }).last
+            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _viewConfig.language }).last
         else {
             return "未確認"
         }
         return flavorTextEntry.flavorTextEntry.replacingOccurrences(of: "\n", with: "")
     }
 
+    // Widget can not use AsyncImage.
     public var image: Image {
         guard let url = URL(string: _pokemonEntity.frontDefault),
               let imageData = try? Data(contentsOf: url),
@@ -81,17 +76,10 @@ struct PokemonContentViewModel {
         else {
             return Image(uiImage: UIImage())
         }
-
         return Image(uiImage: image)
     }
     
-    public func typeName(index: Int) -> String {
-        let types = self.types
-        return types[index].name
-    }
-    
-    public func typeColor(index: Int) -> Color {
-        let types = self.types
-        return types[index].color
+    public var frontDefault: String {
+        _pokemonEntity.frontDefault
     }
 }

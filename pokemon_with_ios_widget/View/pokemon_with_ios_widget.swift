@@ -10,7 +10,7 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    private let entity = PokemonEntityDTO(
+    private let entity = PokemonEntityFactory(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)).createEntity()
@@ -31,15 +31,14 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let number = Int.random(in: 1 ... PokemonApiService.POKEMON_AMOUNT)
-
+        let config = DomainConfig()
         let repository: IRepository = RealmRepository()
-        let entity = repository.getEntityBy(no: PokemonEntity.IdValue(id: number))
+        let entity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: config.number))
         if let entity = entity {
             repository.delete(entity: entity)
         }
 
-        let apiService = PokemonApiService(number: number)
+        let apiService = PokemonApiService(domainConfig: config)
 
         apiService.fetch(url: apiService.pokemonURL) { (pokemon: Pokemon) in
             var pokemonTypes: [PokemonType] = []
@@ -58,12 +57,12 @@ struct Provider: IntentTimelineProvider {
 
                 pokemonTypesGroup.notify(queue: .main) {
                     let currentDate = Date()
-                    let dto = PokemonEntityDTO(
+                    let factory = PokemonEntityFactory(
                         pokemon: pokemon,
                         pokemonSpecies: pokemonSpecies,
                         pokemonTypes: pokemonTypes)
 
-                    let entity = dto.createEntity()
+                    let entity = factory.createEntity()
                     repository.add(entity: entity)
                     
                     let entry = PokemonEntry(
@@ -95,7 +94,10 @@ struct pokemon_with_ios_widgetEntryView : View {
 
     var body: some View {
         PokemonContentView(viewModel: PokemonContentViewModel(
-            configuration: Configuration(locale: locale, isDarkMode: colorScheme == .dark),
+            viewConfig: ViewConfig(
+                locale: locale,
+                isDarkMode: colorScheme == .dark,
+                domainConfig: DomainConfig()),
             pokemonEntity: entry.entity,
             isApp: false))
     }
@@ -117,7 +119,7 @@ struct pokemon_with_ios_widget: Widget {
 }
 
 struct pokemon_with_ios_widget_Previews: PreviewProvider {
-    private static let dto = PokemonEntityDTO(
+    private static let factory = PokemonEntityFactory(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
@@ -127,7 +129,7 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
                     date: Date(),
-                    entity: dto.createEntity(),
+                    entity: factory.createEntity(),
                     configuration: ConfigurationIntent()))
             .background(Color.layout)
             .previewContext(WidgetPreviewContext(family: .systemLarge))

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PokemonContentView: View {
     private let _viewModel: PokemonContentViewModel
@@ -28,10 +29,17 @@ struct PokemonContentView: View {
                                 .padding(.top, 4)
                         }
                         Spacer()
-                        _viewModel.image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                        if _viewModel.isApp {
+                            WebImage(url: URL(string: _viewModel.frontDefault))
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                        } else {
+                            _viewModel.image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                        }
                     }
                     VStack (alignment: .leading, spacing: 0) {
                         HStack {
@@ -40,15 +48,15 @@ struct PokemonContentView: View {
                                 .bold()
                                 .padding(.trailing, 16)
                             HStack (spacing: 8) {
-                                ForEach(0..<_viewModel.types.count, id: \.self) { index in
-                                    Text(_viewModel.typeName(index: index))
+                                ForEach(_viewModel.types) { pokemonTypeValue in
+                                    Text(pokemonTypeValue.name)
                                         .font(.custom("HiraginoSans-W6", size: 10))
                                         .foregroundColor(.white)
                                         .padding(.top, 4)
                                         .padding(.leading, 10)
                                         .padding(.trailing, 10)
                                         .padding(.bottom, 4)
-                                        .background(_viewModel.typeColor(index: index))
+                                        .background(try! PokemonColor.shared.getColorType(name: pokemonTypeValue.name).color)
                                         .cornerRadius(10)
                                 }
                             }
@@ -101,17 +109,29 @@ struct WidgetContentView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
     private static var colorScheme
     
-    static let dto = PokemonEntityDTO(
+    static let factory = PokemonEntityFactory(
         pokemon: LocalDataManager.shared.load(Pokemon.identifier),
         pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
         pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
     
     static var previews: some View {
         Group {
-            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "ja_jp"), isDarkMode: colorScheme == .dark), pokemonEntity: dto.createEntity(), isApp: false))
+            PokemonContentView(viewModel: PokemonContentViewModel(
+                viewConfig: ViewConfig(
+                    locale: Locale(identifier: "ja_jp"),
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: DomainConfig()),
+                pokemonEntity: factory.createEntity(),
+                isApp: false))
                 .environment(\.locale, .init(identifier: "ja"))
             
-            PokemonContentView(viewModel: PokemonContentViewModel(configuration: Configuration(locale: Locale(identifier: "en_jp"), isDarkMode: colorScheme == .dark), pokemonEntity: dto.createEntity(), isApp: false))
+            PokemonContentView(viewModel: PokemonContentViewModel(
+                viewConfig: ViewConfig(
+                    locale: Locale(identifier: "en_jp"),
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: DomainConfig()),
+                pokemonEntity: factory.createEntity(),
+                isApp: false))
                 .environment(\.locale, .init(identifier: "en"))
         }
     }

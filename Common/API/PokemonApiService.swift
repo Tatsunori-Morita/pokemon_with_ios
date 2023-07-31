@@ -8,22 +8,19 @@
 import Foundation
 
 final class PokemonApiService {
-    public static let POKEMON_AMOUNT = 1010
-    public static let POKEMON_URL = "https://pokeapi.co/api/v2/pokemon/"
-    public static let POKEMON_SPECIES_URL = "https://pokeapi.co/api/v2/pokemon-species/"
-    private let _number: Int
     private let api: IAPIManager = APIAlamofireManager()
+    private let _domainConfig: DomainConfig
 
     public var pokemonURL: String {
-        PokemonApiService.POKEMON_URL + _number.description
+        _domainConfig.pokemonUrl
     }
 
     public var pokemonSpeciesURL: String {
-        PokemonApiService.POKEMON_SPECIES_URL + _number.description
+        _domainConfig.speciesUrl
     }
 
-    init(number: Int) {
-        _number = number
+    init(domainConfig: DomainConfig) {
+        _domainConfig = domainConfig
     }
 
     public func fetch<T: Decodable>(url: String, completion: @escaping (T) -> ()) {

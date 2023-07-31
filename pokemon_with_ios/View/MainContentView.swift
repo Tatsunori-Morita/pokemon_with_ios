@@ -12,13 +12,16 @@ struct MainContentView: View {
     private var locale: Locale
     @Environment(\.colorScheme)
     private var colorScheme
-    
     private let _pokemonEntities = RealmRepository().select()
+    private let _domainConfig = DomainConfig()
     
     var body: some View {
         TabView {
             LibraryContentView(viewModel: LibraryContentViewModel(
-                configuration: Configuration(locale: locale, isDarkMode: colorScheme == .dark),
+                viewConfig: ViewConfig(
+                    locale: locale,
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: _domainConfig),
                 pokemonEntities: _pokemonEntities))
                 .tabItem {
                     Label("Library", systemImage: "book")
@@ -26,7 +29,10 @@ struct MainContentView: View {
                 }
             
             SettingContentView(viewModel: SettingContentViewModel(
-                configuration: Configuration(locale: locale, isDarkMode: colorScheme == .dark),
+                viewConfig: ViewConfig(
+                    locale: locale,
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: _domainConfig),
                 pokemonEntities: _pokemonEntities))
                 .tabItem {
                     Label("Setting", systemImage: "gear")

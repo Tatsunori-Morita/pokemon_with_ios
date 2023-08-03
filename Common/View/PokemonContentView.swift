@@ -26,6 +26,19 @@ struct PokemonContentView: View {
                             .font(.custom("HiraginoSans-W6", size: 20))
                             .bold()
                             .padding(.top, 4)
+                        if _viewModel.isNew {
+                            Text("New")
+                                .font(.system(size: 12))
+                                .bold()
+                                .foregroundColor(.white)
+                                .padding(.top, 4)
+                                .padding(.leading, 10)
+                                .padding(.trailing, 10)
+                                .padding(.bottom, 4)
+                                .background(Color.new)
+                                .cornerRadius(10)
+                                .padding(.top, 16)
+                        }
                     }
                     Spacer()
                     if _viewModel.isApp {
@@ -120,7 +133,7 @@ struct WidgetContentView_Previews: PreviewProvider {
                     isDarkMode: colorScheme == .dark,
                     domainConfig: DomainConfig()),
                 pokemonEntity: factory.createEntity(),
-                isApp: false))
+                isApp: false, isNew: true))
                 .environment(\.locale, .init(identifier: "ja"))
             
             PokemonContentView(viewModel: PokemonContentViewModel(
@@ -129,7 +142,7 @@ struct WidgetContentView_Previews: PreviewProvider {
                     isDarkMode: colorScheme == .dark,
                     domainConfig: DomainConfig()),
                 pokemonEntity: factory.createEntity(),
-                isApp: false))
+                isApp: false, isNew: true))
                 .environment(\.locale, .init(identifier: "en"))
         }
     }

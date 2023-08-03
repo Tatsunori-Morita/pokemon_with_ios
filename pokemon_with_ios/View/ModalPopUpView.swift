@@ -21,7 +21,7 @@ struct ModalPopUpView: View {
     var body: some View {
         VStack(alignment: .center) {
             PokemonContentView(viewModel: PokemonContentViewModel(
-                viewConfig: _viewConfig, pokemonEntity: _entity, isApp: true))
+                viewConfig: _viewConfig, pokemonEntity: _entity, isApp: true, isNew: false))
             Button(action: {
                 self.viewControllerHolder?.dismiss(animated: true, completion: nil)
             }) {

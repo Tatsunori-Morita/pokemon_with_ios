@@ -19,6 +19,7 @@ struct Provider: IntentTimelineProvider {
         PokemonEntry(
             date: Date(),
             entity: entity,
+            isNew: true,
             configuration: ConfigurationIntent())
     }
 
@@ -26,6 +27,7 @@ struct Provider: IntentTimelineProvider {
         let entry = PokemonEntry(
             date: Date(),
             entity: entity,
+            isNew: true,
             configuration: configuration)
         completion(entry)
     }
@@ -33,9 +35,10 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         let config = DomainConfig()
         let repository: IRepository = RealmRepository()
-        let entity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: config.number))
-        if let entity = entity {
-            repository.delete(entity: entity)
+        let savedEntity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: config.number))
+        let isNew = (savedEntity == nil)
+        if !isNew {
+            repository.delete(entity: savedEntity!)
         }
 
         let apiService = PokemonApiService(domainConfig: config)
@@ -68,20 +71,29 @@ struct Provider: IntentTimelineProvider {
                     let entry = PokemonEntry(
                         date: currentDate,
                         entity: entity,
+                        isNew: isNew,
                         configuration: configuration)
 
-                    let futureDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate)!
-                    let timeline = Timeline(entries: [entry], policy: .after(futureDate))
+                    let timeline = Timeline(entries: [entry], policy: .after(getDate(to: currentDate)))
                     completion(timeline)
                 }
             }
         }
+    }
+    
+    private func getDate(to :Date) -> Date {
+#if DEBUG
+        return Calendar.current.date(byAdding: .minute, value: 15, to: to)!
+#else
+        return Calendar.current.date(byAdding: .hour, value: 24, to: to)!
+#endif
     }
 }
 
 struct PokemonEntry: TimelineEntry {
     var date: Date
     var entity: PokemonEntity
+    var isNew: Bool
     let configuration: ConfigurationIntent
 }
 
@@ -93,13 +105,15 @@ struct pokemon_with_ios_widgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        PokemonContentView(viewModel: PokemonContentViewModel(
-            viewConfig: ViewConfig(
-                locale: locale,
-                isDarkMode: colorScheme == .dark,
-                domainConfig: DomainConfig()),
-            pokemonEntity: entry.entity,
-            isApp: false))
+        GeometryReader { geometry in
+            PokemonContentView(viewModel: PokemonContentViewModel(
+                viewConfig: ViewConfig(
+                    locale: locale,
+                    isDarkMode: colorScheme == .dark,
+                    domainConfig: DomainConfig()),
+                pokemonEntity: entry.entity,
+                isApp: false, isNew: entry.isNew))
+        }
     }
 }
 
@@ -130,6 +144,7 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
                 entry: PokemonEntry(
                     date: Date(),
                     entity: factory.createEntity(),
+                    isNew: true,
                     configuration: ConfigurationIntent()))
             .background(Color.layout)
             .previewContext(WidgetPreviewContext(family: .systemLarge))

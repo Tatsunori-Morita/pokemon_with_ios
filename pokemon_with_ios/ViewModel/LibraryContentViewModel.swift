@@ -33,7 +33,7 @@ class LibraryContentViewModel: ObservableObject {
             fatalError("Pokemon not found")
         }
         return PokemonContentViewModel(
-            viewConfig: _viewConfig, pokemonEntity: pokemon, isApp: true)
+            viewConfig: _viewConfig, pokemonEntity: pokemon, isApp: true, isNew: false)
     }
     
     public func pokemonEntity(num: Int) -> PokemonEntity? {

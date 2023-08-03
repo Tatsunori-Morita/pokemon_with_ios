@@ -12,11 +12,17 @@ struct PokemonContentViewModel {
     private let _viewConfig: ViewConfig
     private let _pokemonEntity: PokemonEntity
     private let _isApp: Bool
+    private let _isNew: Bool
 
-    init(viewConfig: ViewConfig, pokemonEntity: PokemonEntity, isApp: Bool) {
+    init(viewConfig: ViewConfig, pokemonEntity: PokemonEntity, isApp: Bool, isNew: Bool) {
         _viewConfig = viewConfig
         _pokemonEntity = pokemonEntity
         _isApp = isApp
+        _isNew = isNew
+    }
+
+    public var isNew: Bool {
+        _isNew
     }
     
     public var isApp: Bool {

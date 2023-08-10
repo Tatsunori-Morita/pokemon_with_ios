@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ModalPopUpView: View {
     @Environment(\.viewController) private var viewControllerHolder: UIViewController?
+    @State private var degrees = 0.0
 
     private let _viewConfig: ViewConfig
     private let _entity: PokemonEntity
@@ -38,6 +39,15 @@ struct ModalPopUpView: View {
         .background(Color.layout)
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .shadow(radius: 3)
+        .rotation3DEffect(
+            .degrees(degrees),
+            axis: (x: 0, y: 1, z: 0)
+        )
+        .onAppear {
+            withAnimation {
+                degrees += 360
+            }
+        }
     }
 }
 

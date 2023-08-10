@@ -114,6 +114,7 @@ struct pokemon_with_ios_widgetEntryView : View {
                 pokemonEntity: entry.entity,
                 isApp: false, isNew: entry.isNew))
         }
+        .widgetURL(URL(string: "\(entry.entity.id)"))
     }
 }
 

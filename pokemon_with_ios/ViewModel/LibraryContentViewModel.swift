@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 class LibraryContentViewModel: ObservableObject {
     @Published var data: [LibraryContentCellViewModel] = []

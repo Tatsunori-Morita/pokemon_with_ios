@@ -107,6 +107,7 @@ struct PokemonContentView: View {
                 .padding(.top, 0)
             }
             Text(_viewModel.flavorTextEntry)
+                .fixedSize(horizontal: false, vertical: true)
                 .font(.custom("HiraginoSans-W3", size: 16))
                 .lineSpacing(7)
                 .padding(.top, 32)

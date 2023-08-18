@@ -30,7 +30,8 @@ struct ModalPopUpView: View {
                     .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
                     .foregroundColor(Color.text)
             }
-            .padding(.top, 40)
+            .padding(24)
+            .padding(.top, 24)
             .padding(.leading, 40)
             .padding(.trailing, 40)
             .padding(.bottom, 24)

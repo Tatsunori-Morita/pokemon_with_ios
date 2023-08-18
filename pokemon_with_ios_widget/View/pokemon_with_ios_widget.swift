@@ -149,6 +149,17 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
                     configuration: ConfigurationIntent()))
             .background(Color.layout)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
+            .environment(\.locale, .init(identifier: "ja"))
+            
+            pokemon_with_ios_widgetEntryView(
+                entry: PokemonEntry(
+                    date: Date(),
+                    entity: factory.createEntity(),
+                    isNew: true,
+                    configuration: ConfigurationIntent()))
+            .background(Color.layout)
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
+            .environment(\.locale, .init(identifier: "en"))
         }
     }
 }

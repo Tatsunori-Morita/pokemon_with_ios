@@ -20,7 +20,7 @@ class LibraryContentViewModel: ObservableObject {
         for i in 1..<21 {
             cellViewModels.append(LibraryContentCellViewModel(
                 id: i,
-                entity: pokemonEntity(num: i),
+                entity: getPokemonEntity(num: i),
                 viewConfig: _viewConfig)
             )
         }
@@ -41,7 +41,7 @@ class LibraryContentViewModel: ObservableObject {
             isNew: false)
     }
     
-    public func pokemonEntity(num: Int) -> PokemonEntity? {
+    public func getPokemonEntity(num: Int) -> PokemonEntity? {
         guard let pokemon = _pokemonEntities.first(where: { $0.id == num }) else {
             return nil
         }
@@ -56,7 +56,7 @@ class LibraryContentViewModel: ObservableObject {
         for i in cellViewModels.count + 1..<cellViewModels.count + 10 {
             cellViewModels.append(LibraryContentCellViewModel(
                 id: i,
-                entity: pokemonEntity(num: i),
+                entity: getPokemonEntity(num: i),
                 viewConfig: _viewConfig)
             )
         }

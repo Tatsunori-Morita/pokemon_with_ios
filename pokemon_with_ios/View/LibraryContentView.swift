@@ -32,7 +32,7 @@ struct LibraryContentView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(_viewModel.data) { pokemon in
+                    ForEach(_viewModel.cellViewModels) { pokemon in
                         VStack(alignment: .leading, spacing: 0) {
                             ZStack {
                                 WebImage(url: URL(string: pokemon.url))

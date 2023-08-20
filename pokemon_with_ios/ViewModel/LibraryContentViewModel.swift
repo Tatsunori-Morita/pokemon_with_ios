@@ -8,18 +8,21 @@
 import Foundation
 
 class LibraryContentViewModel: ObservableObject {
-    @Published var data: [LibraryContentCellViewModel] = []
+    @Published var cellViewModels: [LibraryContentCellViewModel] = []
     
     private let _viewConfig: ViewConfig
-    public let _pokemonEntities: [PokemonEntity]
+    private let _pokemonEntities: [PokemonEntity]
     
     init(viewConfig: ViewConfig, pokemonEntities: [PokemonEntity]) {
         _viewConfig = viewConfig
         _pokemonEntities = pokemonEntities
         
         for i in 1..<21 {
-            data.append(LibraryContentCellViewModel(
-                id: i, entity: pokemonEntity(num: i), viewConfig: _viewConfig))
+            cellViewModels.append(LibraryContentCellViewModel(
+                id: i,
+                entity: pokemonEntity(num: i),
+                viewConfig: _viewConfig)
+            )
         }
     }
     
@@ -32,7 +35,10 @@ class LibraryContentViewModel: ObservableObject {
             fatalError("Pokemon not found")
         }
         return PokemonContentViewModel(
-            viewConfig: _viewConfig, pokemonEntity: pokemon, isApp: true, isNew: false)
+            viewConfig: _viewConfig,
+            pokemonEntity: pokemon,
+            isApp: true,
+            isNew: false)
     }
     
     public func pokemonEntity(num: Int) -> PokemonEntity? {
@@ -43,13 +49,16 @@ class LibraryContentViewModel: ObservableObject {
     }
     
     public var canLoadMore: Bool {
-        data.count < _viewConfig.amount
+        cellViewModels.count < _viewConfig.amount
     }
     
     public func loadMore() {
-        for i in data.count+1..<data.count+10 {
-            data.append(LibraryContentCellViewModel(
-                id: i, entity: pokemonEntity(num: i), viewConfig: _viewConfig))
+        for i in cellViewModels.count + 1..<cellViewModels.count + 10 {
+            cellViewModels.append(LibraryContentCellViewModel(
+                id: i,
+                entity: pokemonEntity(num: i),
+                viewConfig: _viewConfig)
+            )
         }
     }
     

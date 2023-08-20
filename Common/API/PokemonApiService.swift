@@ -8,7 +8,7 @@
 import Foundation
 
 final class PokemonApiService {
-    private let api: IAPIManager = APIAlamofireManager()
+    private let _api: IAPIManager = APIAlamofireManager()
     private let _domainConfig: DomainConfig
 
     public var pokemonURL: String {
@@ -35,7 +35,7 @@ final class PokemonApiService {
     }
 
     private func _fetch<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> ()) {
-        api.get(url: url, param: nil, headers: [:], completion: { result in
+        _api.get(url: url, param: nil, headers: [:], completion: { result in
             switch result {
             case .success(let data):
                 do {

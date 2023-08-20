@@ -57,18 +57,14 @@ struct ModalPopUpView_Previews: PreviewProvider {
     private static var colorScheme
     private static let _domainConfig = DomainConfig()
     
-    static let factory = PokemonEntityFactory(
-        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
-
     static var previews: some View {
         ModalPopUpView(
             viewConfig: ViewConfig(
                 locale: Locale(identifier: "ja_jp"),
                 isDarkMode: colorScheme == .dark,
                 domainConfig: _domainConfig),
-            entity: factory.createEntity())
+            entity: PokemonEntityPreviewFactory.createPreviewEntity()
+        )
         .environment(\.locale, .init(identifier: "ja"))
         
         ModalPopUpView(
@@ -76,7 +72,8 @@ struct ModalPopUpView_Previews: PreviewProvider {
                 locale: Locale(identifier: "en_jp"),
                 isDarkMode: colorScheme == .dark,
                 domainConfig: _domainConfig),
-            entity: factory.createEntity())
+            entity: PokemonEntityPreviewFactory.createPreviewEntity()
+        )
         .environment(\.locale, .init(identifier: "en"))
     }
 }

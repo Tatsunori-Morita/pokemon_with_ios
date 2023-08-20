@@ -10,15 +10,10 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    private let entity = PokemonEntityFactory(
-        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier)).createEntity()
-
     func placeholder(in context: Context) -> PokemonEntry {
         PokemonEntry(
             date: Date(),
-            entity: entity,
+            entity: PokemonEntityPreviewFactory.createPreviewEntity(),
             isNew: true,
             configuration: ConfigurationIntent())
     }
@@ -26,7 +21,7 @@ struct Provider: IntentTimelineProvider {
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (PokemonEntry) -> ()) {
         let entry = PokemonEntry(
             date: Date(),
-            entity: entity,
+            entity: PokemonEntityPreviewFactory.createPreviewEntity(),
             isNew: true,
             configuration: configuration)
         completion(entry)
@@ -134,17 +129,12 @@ struct pokemon_with_ios_widget: Widget {
 }
 
 struct pokemon_with_ios_widget_Previews: PreviewProvider {
-    private static let factory = PokemonEntityFactory(
-        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
-    
     static var previews: some View {
         Group {
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
                     date: Date(),
-                    entity: factory.createEntity(),
+                    entity: PokemonEntityPreviewFactory.createPreviewEntity(),
                     isNew: true,
                     configuration: ConfigurationIntent()))
             .background(Color.layout)
@@ -154,7 +144,7 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
                     date: Date(),
-                    entity: factory.createEntity(),
+                    entity: PokemonEntityPreviewFactory.createPreviewEntity(),
                     isNew: true,
                     configuration: ConfigurationIntent()))
             .background(Color.layout)

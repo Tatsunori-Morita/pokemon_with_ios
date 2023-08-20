@@ -28,6 +28,10 @@
 		0E36EDC92A91BFBE00E37762 /* PokemonSpecies_caterpie.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E36EDC72A91BFBE00E37762 /* PokemonSpecies_caterpie.json */; };
 		0E36EDCB2A91BFFE00E37762 /* PokemonType_caterpie.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E36EDCA2A91BFFE00E37762 /* PokemonType_caterpie.json */; };
 		0E36EDCC2A91BFFE00E37762 /* PokemonType_caterpie.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E36EDCA2A91BFFE00E37762 /* PokemonType_caterpie.json */; };
+		0E36EDCF2A91D4A200E37762 /* PokemonEntityPreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36EDCE2A91D4A200E37762 /* PokemonEntityPreviewFactory.swift */; };
+		0E36EDD02A91D4A200E37762 /* PokemonEntityPreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36EDCE2A91D4A200E37762 /* PokemonEntityPreviewFactory.swift */; };
+		0E36EDD52A91DF0E00E37762 /* PokemonEntityPreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36EDCE2A91D4A200E37762 /* PokemonEntityPreviewFactory.swift */; };
+		0E36EDD82A91E3F400E37762 /* PokemonEntityFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF3D89287D5B07002A8CCF /* PokemonEntityFactory.swift */; };
 		0E45E1FD287075DE00285D2A /* pokemon_with_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E1FC287075DE00285D2A /* pokemon_with_iosApp.swift */; };
 		0E45E1FF287075DE00285D2A /* SettingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E1FE287075DE00285D2A /* SettingContentView.swift */; };
 		0E45E201287075E200285D2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E45E200287075E200285D2A /* Assets.xcassets */; };
@@ -147,6 +151,7 @@
 		0E36EDC42A91BF9100E37762 /* Pokemon_caterpie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Pokemon_caterpie.json; sourceTree = "<group>"; };
 		0E36EDC72A91BFBE00E37762 /* PokemonSpecies_caterpie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PokemonSpecies_caterpie.json; sourceTree = "<group>"; };
 		0E36EDCA2A91BFFE00E37762 /* PokemonType_caterpie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PokemonType_caterpie.json; sourceTree = "<group>"; };
+		0E36EDCE2A91D4A200E37762 /* PokemonEntityPreviewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonEntityPreviewFactory.swift; sourceTree = "<group>"; };
 		0E45E1F9287075DE00285D2A /* pokemon_with_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokemon_with_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E45E1FC287075DE00285D2A /* pokemon_with_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemon_with_iosApp.swift; sourceTree = "<group>"; };
 		0E45E1FE287075DE00285D2A /* SettingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingContentView.swift; sourceTree = "<group>"; };
@@ -311,6 +316,14 @@
 				0E36EDCA2A91BFFE00E37762 /* PokemonType_caterpie.json */,
 			);
 			path = Caterpie;
+			sourceTree = "<group>";
+		};
+		0E36EDCD2A91D48100E37762 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				0E36EDCE2A91D4A200E37762 /* PokemonEntityPreviewFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		0E45E1F0287075DE00285D2A = {
@@ -527,6 +540,7 @@
 		0EE367962A4E43DC007559A3 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				0E36EDCD2A91D48100E37762 /* Factory */,
 				0E78E977287F01F60070EED0 /* Json */,
 				0E02B5382882FFBA00CD9CBE /* Manager */,
 			);
@@ -733,6 +747,7 @@
 				0EB8E6AC2A16F59A00E643C1 /* IRepository.swift in Sources */,
 				0E9E15432A122E00003ACDE8 /* PokemonEntity.swift in Sources */,
 				0E032F5B2A50E15D00E94035 /* ViewConfig.swift in Sources */,
+				0E36EDCF2A91D4A200E37762 /* PokemonEntityPreviewFactory.swift in Sources */,
 				0EBB024D2877FDB50001B5E1 /* Pokemon.swift in Sources */,
 				0E7A11F8288A5EFE001D8006 /* PokemonType.swift in Sources */,
 				0ECE1FAF2A29E2B5002D8992 /* PokemonContentViewModel.swift in Sources */,
@@ -758,6 +773,7 @@
 				0ED2DD47287680570082D4C4 /* APIAlamofireManager.swift in Sources */,
 				0EB9C4BC29FFA34B00817997 /* RealmRepository.swift in Sources */,
 				0EB8E6AF2A16F5D400E643C1 /* IRepository.swift in Sources */,
+				0E36EDD02A91D4A200E37762 /* PokemonEntityPreviewFactory.swift in Sources */,
 				0E7A11FB288A5EFE001D8006 /* PokemonType.swift in Sources */,
 				0E45E23728707A0100285D2A /* pokemon_with_ios_widget.intentdefinition in Sources */,
 				0E032F5C2A51518B00E94035 /* ViewConfig.swift in Sources */,
@@ -779,6 +795,7 @@
 				0E4A01EA2A73474900CEF82F /* PokemonColor.swift in Sources */,
 				0E64081E2A5BCC6800AAF180 /* PokemonEntity.swift in Sources */,
 				0E64080B2A5BCA1F00AAF180 /* PokemonEntityValueTests.swift in Sources */,
+				0E36EDD52A91DF0E00E37762 /* PokemonEntityPreviewFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -95,7 +95,7 @@ struct LibraryContentView: View {
 }
 
 struct LibraryContentView_Previews: PreviewProvider {
-    private static let entities = RealmRepository().select()
+    private static let entities = PokemonEntityPreviewFactory.createPreviewEntities()
     @Environment(\.colorScheme)
     private static var colorScheme
     

@@ -53,7 +53,7 @@ class LibraryContentViewModel: ObservableObject {
     }
     
     public func loadMore() {
-        for i in cellViewModels.count + 1..<cellViewModels.count + 10 {
+        for i in cellViewModels.count + 1..<cellViewModels.count + 11 {
             cellViewModels.append(LibraryContentCellViewModel(
                 id: i,
                 entity: getPokemonEntity(num: i),

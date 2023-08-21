@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MainContentView: View {
     @Environment(\.locale)
-    private var locale: Locale
+    private var _locale: Locale
     @Environment(\.colorScheme)
-    private var colorScheme
+    private var _colorScheme
     private let _pokemonEntities = RealmRepository().select()
     private let _domainConfig = DomainConfig()
     
@@ -19,8 +19,8 @@ struct MainContentView: View {
         TabView {
             LibraryContentView(viewModel: LibraryContentViewModel(
                 viewConfig: ViewConfig(
-                    locale: locale,
-                    isDarkMode: colorScheme == .dark,
+                    locale: _locale,
+                    isDarkMode: _colorScheme == .dark,
                     domainConfig: _domainConfig),
                 pokemonEntities: _pokemonEntities))
                 .tabItem {
@@ -30,8 +30,8 @@ struct MainContentView: View {
             
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
-                    locale: locale,
-                    isDarkMode: colorScheme == .dark,
+                    locale: _locale,
+                    isDarkMode: _colorScheme == .dark,
                     domainConfig: _domainConfig),
                 pokemonEntities: _pokemonEntities))
                 .tabItem {

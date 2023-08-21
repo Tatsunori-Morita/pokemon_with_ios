@@ -10,10 +10,10 @@ import SDWebImageSwiftUI
 
 struct LibraryContentView: View {
     @Environment(\.viewController)
-    private var viewControllerHolder: UIViewController?
+    private var _viewControllerHolder: UIViewController?
     @ObservedObject
     private var _viewModel: LibraryContentViewModel
-    private let columns = [GridItem(.flexible()),
+    private let _columns = [GridItem(.flexible()),
                            GridItem(.flexible()),
                            GridItem(.flexible())]
     
@@ -31,27 +31,27 @@ struct LibraryContentView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(_viewModel.cellViewModels) { pokemon in
+                LazyVGrid(columns: _columns, spacing: 0) {
+                    ForEach(_viewModel.cellViewModels) { cellViewModel in
                         VStack(alignment: .leading, spacing: 0) {
                             ZStack {
-                                WebImage(url: URL(string: pokemon.url))
+                                WebImage(url: URL(string: cellViewModel.url))
                                     .resizable()
                                     .scaledToFit()
                                     .foregroundColor(Color.image)
                                 Rectangle()
-                                    .fill(.black.opacity(pokemon.opacity))
+                                    .fill(.black.opacity(cellViewModel.opacity))
                                     .mask {
-                                        WebImage(url: URL(string: pokemon.url))
+                                        WebImage(url: URL(string: cellViewModel.url))
                                             .resizable()
                                             .scaledToFit()
                                             .foregroundColor(Color.image)
                                     }
                             }
-                            Text(pokemon.no)
+                            Text(cellViewModel.no)
                                 .font(.system(size: 16))
                                 .foregroundColor(Color.text)
-                            Text(pokemon.name)
+                            Text(cellViewModel.name)
                                 .font(.custom("HiraginoSans-W6", size: 16))
                                 .foregroundColor(Color.text)
                                 .bold()
@@ -62,8 +62,8 @@ struct LibraryContentView: View {
                         .padding(.leading, 16)
                         .padding(.trailing, 16)
                         .onTapGesture {
-                            guard let entity = pokemon._entity else { return }
-                            self.viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
+                            guard let entity = cellViewModel.entity else { return }
+                            self._viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
                                 ModalPopUpView(viewConfig: _viewModel.viewConfig, entity: entity)
                             }
                         }
@@ -87,7 +87,7 @@ struct LibraryContentView: View {
                 let num = Int(url.description),
                 let entity = _viewModel.getPokemonEntity(num: num)
             else { return }
-            self.viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
+            self._viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
                 ModalPopUpView(viewConfig: _viewModel.viewConfig, entity: entity)
             }
         })
@@ -95,27 +95,27 @@ struct LibraryContentView: View {
 }
 
 struct LibraryContentView_Previews: PreviewProvider {
-    private static let entities = PokemonEntityPreviewFactory.createPreviewEntities()
+    private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
     @Environment(\.colorScheme)
-    private static var colorScheme
+    private static var _colorScheme
     
     static var previews: some View {
         LibraryContentView(
             viewModel: LibraryContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: "ja_jp"),
-                    isDarkMode: false,
+                    isDarkMode: _colorScheme == .dark,
                     domainConfig: DomainConfig()),
-                pokemonEntities: entities))
+                pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: "ja"))
         
         LibraryContentView(
             viewModel: LibraryContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: "en_jp"),
-                    isDarkMode: colorScheme == .dark,
+                    isDarkMode: _colorScheme == .dark,
                     domainConfig: DomainConfig()),
-                pokemonEntities: entities))
+                pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: "en"))
     }
 }

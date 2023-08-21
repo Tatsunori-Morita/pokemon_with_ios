@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct SettingContentView: View {
-    private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-    
-    @Environment(\.locale) private var locale: Locale
+    private let _version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     private let _viewModel: SettingContentViewModel
     
     
@@ -43,7 +41,7 @@ struct SettingContentView: View {
                         .font(.custom("HiraginoSans-W3", size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
-                    Text(version)
+                    Text(_version)
                         .font(.system(size: 16))
                         .foregroundColor(Color.text)
                 }
@@ -68,8 +66,8 @@ struct SettingContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
-    private static var colorScheme
-    private static let entities = RealmRepository().select()
+    private static var _colorScheme
+    private static let _entities = RealmRepository().select()
     private static let _domainConfig = DomainConfig()
     
     static var previews: some View {
@@ -77,17 +75,17 @@ struct ContentView_Previews: PreviewProvider {
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: "ja_jp"),
-                    isDarkMode: colorScheme == .dark,
+                    isDarkMode: _colorScheme == .dark,
                     domainConfig: _domainConfig),
-                pokemonEntities: entities))
+                pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: "ja"))
             
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: "en_jp"),
-                    isDarkMode: colorScheme == .dark,
+                    isDarkMode: _colorScheme == .dark,
                     domainConfig: _domainConfig),
-                pokemonEntities: entities))
+                pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: "en"))
         }
     }

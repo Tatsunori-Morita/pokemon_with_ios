@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ModalPopUpView: View {
-    @Environment(\.viewController) private var viewControllerHolder: UIViewController?
-    @State private var degrees = 0.0
+    @Environment(\.viewController) private var _viewControllerHolder: UIViewController?
+    @State private var _degrees = 0.0
 
     private let _viewConfig: ViewConfig
     private let _entity: PokemonEntity
@@ -24,7 +24,7 @@ struct ModalPopUpView: View {
             PokemonContentView(viewModel: PokemonContentViewModel(
                 viewConfig: _viewConfig, pokemonEntity: _entity, isApp: true, isNew: false))
             Button(action: {
-                self.viewControllerHolder?.dismiss(animated: true, completion: nil)
+                self._viewControllerHolder?.dismiss(animated: true, completion: nil)
             }) {
                 Text("Close")
                     .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
@@ -41,12 +41,12 @@ struct ModalPopUpView: View {
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .shadow(radius: 3)
         .rotation3DEffect(
-            .degrees(degrees),
+            .degrees(_degrees),
             axis: (x: 0, y: 1, z: 0)
         )
         .onAppear {
             withAnimation {
-                degrees += 360
+                _degrees += 360
             }
         }
     }
@@ -54,14 +54,14 @@ struct ModalPopUpView: View {
 
 struct ModalPopUpView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
-    private static var colorScheme
+    private static var _colorScheme
     private static let _domainConfig = DomainConfig()
     
     static var previews: some View {
         ModalPopUpView(
             viewConfig: ViewConfig(
                 locale: Locale(identifier: "ja_jp"),
-                isDarkMode: colorScheme == .dark,
+                isDarkMode: _colorScheme == .dark,
                 domainConfig: _domainConfig),
             entity: PokemonEntityPreviewFactory.createPreviewEntity()
         )
@@ -70,7 +70,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
         ModalPopUpView(
             viewConfig: ViewConfig(
                 locale: Locale(identifier: "en_jp"),
-                isDarkMode: colorScheme == .dark,
+                isDarkMode: _colorScheme == .dark,
                 domainConfig: _domainConfig),
             entity: PokemonEntityPreviewFactory.createPreviewEntity()
         )

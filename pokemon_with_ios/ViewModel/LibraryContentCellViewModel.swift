@@ -44,6 +44,11 @@ struct LibraryContentCellViewModel: Identifiable {
         return 0.8
     }
     
+    public var entity: PokemonEntity? {
+        guard let value = _entity else { return nil }
+        return value.createInstance()
+    }
+    
     init(id: Int, entity: PokemonEntity?, viewConfig: ViewConfig) {
         _id = id
         _entity = entity

@@ -10,7 +10,7 @@ import Foundation
 struct LibraryContentCellViewModel: Identifiable {
     let id = UUID()
     private let _id: Int
-    let _entity: PokemonEntity?
+    private let _entity: PokemonEntity?
     private let _viewConfig: ViewConfig
     
     public var no: String {

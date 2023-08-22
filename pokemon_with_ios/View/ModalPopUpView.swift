@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ModalPopUpView: View {
-    @Environment(\.viewController) private var _viewControllerHolder: UIViewController?
-    @State private var _degrees = 0.0
-
+    @Environment(\.viewController)
+    private var _viewControllerHolder: UIViewController?
+    @State
+    private var _degrees = 0.0
     private let _viewConfig: ViewConfig
     private let _entity: PokemonEntity
 
@@ -56,6 +57,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
     private static var _colorScheme
     private static let _domainConfig = DomainConfig()
+    private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
     
     static var previews: some View {
         ModalPopUpView(
@@ -63,7 +65,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
                 locale: Locale(identifier: "ja_jp"),
                 isDarkMode: _colorScheme == .dark,
                 domainConfig: _domainConfig),
-            entity: PokemonEntityPreviewFactory.createPreviewEntity()
+            entity: _entity
         )
         .environment(\.locale, .init(identifier: "ja"))
         
@@ -72,7 +74,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
                 locale: Locale(identifier: "en_jp"),
                 isDarkMode: _colorScheme == .dark,
                 domainConfig: _domainConfig),
-            entity: PokemonEntityPreviewFactory.createPreviewEntity()
+            entity: _entity
         )
         .environment(\.locale, .init(identifier: "en"))
     }

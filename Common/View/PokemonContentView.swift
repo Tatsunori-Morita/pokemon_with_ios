@@ -120,6 +120,7 @@ struct PokemonContentView: View {
 struct WidgetContentView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
     private static var _colorScheme
+    private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
     
     static var previews: some View {
         Group {
@@ -128,7 +129,7 @@ struct WidgetContentView_Previews: PreviewProvider {
                     locale: Locale(identifier: "ja_jp"),
                     isDarkMode: _colorScheme == .dark,
                     domainConfig: DomainConfig()),
-                pokemonEntity: PokemonEntityPreviewFactory.createPreviewEntity(),
+                pokemonEntity: _entity,
                 isApp: false, isNew: true))
                 .environment(\.locale, .init(identifier: "ja"))
             
@@ -137,7 +138,7 @@ struct WidgetContentView_Previews: PreviewProvider {
                     locale: Locale(identifier: "en_jp"),
                     isDarkMode: _colorScheme == .dark,
                     domainConfig: DomainConfig()),
-                pokemonEntity: PokemonEntityPreviewFactory.createPreviewEntity(),
+                pokemonEntity: _entity,
                 isApp: false, isNew: true))
                 .environment(\.locale, .init(identifier: "en"))
         }

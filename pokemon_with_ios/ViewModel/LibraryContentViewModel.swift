@@ -8,7 +8,8 @@
 import Foundation
 
 class LibraryContentViewModel: ObservableObject {
-    @Published private(set) var cellViewModels: [LibraryContentCellViewModel] = []
+    @Published
+    private(set) var cellViewModels: [LibraryContentCellViewModel] = []
     
     private let _viewConfig: ViewConfig
     private let _pokemonEntities: [PokemonEntity]

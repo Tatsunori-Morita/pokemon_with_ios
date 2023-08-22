@@ -9,12 +9,12 @@ import Foundation
 
 struct ViewConfig {
     private let _locale: Locale
-    private let _isDartModel: Bool
+    private let _isDartMode: Bool
     private let _domainConfig: DomainConfig
     
     init(locale: Locale, isDarkMode: Bool, domainConfig: DomainConfig) {
         _locale = locale
-        _isDartModel = isDarkMode
+        _isDartMode = isDarkMode
         _domainConfig = domainConfig
     }
     
@@ -23,7 +23,7 @@ struct ViewConfig {
     }
     
     public var isDarkMode: Bool {
-        _isDartModel
+        _isDartMode
     }
     
     public var language: String {

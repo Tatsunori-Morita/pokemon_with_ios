@@ -119,14 +119,14 @@ struct PokemonContentView: View {
 
 struct WidgetContentView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
-    private static var colorScheme
+    private static var _colorScheme
     
     static var previews: some View {
         Group {
             PokemonContentView(viewModel: PokemonContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: "ja_jp"),
-                    isDarkMode: colorScheme == .dark,
+                    isDarkMode: _colorScheme == .dark,
                     domainConfig: DomainConfig()),
                 pokemonEntity: PokemonEntityPreviewFactory.createPreviewEntity(),
                 isApp: false, isNew: true))
@@ -135,7 +135,7 @@ struct WidgetContentView_Previews: PreviewProvider {
             PokemonContentView(viewModel: PokemonContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: "en_jp"),
-                    isDarkMode: colorScheme == .dark,
+                    isDarkMode: _colorScheme == .dark,
                     domainConfig: DomainConfig()),
                 pokemonEntity: PokemonEntityPreviewFactory.createPreviewEntity(),
                 isApp: false, isNew: true))

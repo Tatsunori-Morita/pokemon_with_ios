@@ -8,13 +8,13 @@
 import Foundation
 
 struct DomainConfig {
-    private let POKEMON_AMOUNT = 1010
-    private let POKEMON_URL = "https://pokeapi.co/api/v2/pokemon/"
-    private let POKEMON_SPECIES_URL = "https://pokeapi.co/api/v2/pokemon-species/"
+    private let _pokemonAmount = 1010
+    private let _pokemonUrl = "https://pokeapi.co/api/v2/pokemon/"
+    private let _pokemonSpeciesUrl = "https://pokeapi.co/api/v2/pokemon-species/"
     private let _number: Int
     
     init() {
-        _number = Int.random(in: 1 ... POKEMON_AMOUNT)
+        _number = Int.random(in: 1 ... _pokemonAmount)
     }
     
     public var number: Int {
@@ -22,14 +22,14 @@ struct DomainConfig {
     }
     
     public var amount: Int {
-        POKEMON_AMOUNT
+        _pokemonAmount
     }
     
     public var pokemonUrl: String {
-        "\(POKEMON_URL)\(_number)"
+        "\(_pokemonUrl)\(_number)"
     }
     
     public var speciesUrl: String {
-        "\(POKEMON_SPECIES_URL)\(_number)"
+        "\(_pokemonSpeciesUrl)\(_number)"
     }
 }

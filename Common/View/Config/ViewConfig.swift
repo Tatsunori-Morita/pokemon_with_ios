@@ -11,6 +11,7 @@ struct ViewConfig {
     private let _locale: Locale
     private let _isDartMode: Bool
     private let _domainConfig: DomainConfig
+    private let _version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
     
     init(locale: Locale, isDarkMode: Bool, domainConfig: DomainConfig) {
         _locale = locale
@@ -32,5 +33,10 @@ struct ViewConfig {
     
     public var isJapanese: Bool {
         _locale.identifier.hasPrefix("ja")
+    }
+    
+    public var version: String {
+        guard let value = _version as? String else { return "" }
+        return value
     }
 }

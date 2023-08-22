@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct SettingContentView: View {
-    private let _version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     private let _viewModel: SettingContentViewModel
-    
     
     init(viewModel: SettingContentViewModel) {
         _viewModel = viewModel
@@ -41,7 +39,7 @@ struct SettingContentView: View {
                         .font(.custom("HiraginoSans-W3", size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
-                    Text(_version)
+                    Text(_viewModel.version)
                         .font(.system(size: 16))
                         .foregroundColor(Color.text)
                 }

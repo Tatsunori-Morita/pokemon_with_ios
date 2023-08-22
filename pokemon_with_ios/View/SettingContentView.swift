@@ -65,7 +65,7 @@ struct SettingContentView: View {
 struct ContentView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
     private static var _colorScheme
-    private static let _entities = RealmRepository().select()
+    private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
     private static let _domainConfig = DomainConfig()
     
     static var previews: some View {

@@ -12,6 +12,8 @@ struct ViewConfig {
     private let _isDartMode: Bool
     private let _domainConfig: DomainConfig
     private let _version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
+    private let _initialNumberOfPokemon = 21
+    private let _additionalNumberOfPokemon = 11
     
     init(locale: Locale, isDarkMode: Bool, domainConfig: DomainConfig) {
         _locale = locale
@@ -42,5 +44,13 @@ struct ViewConfig {
     
     public var frontDefault: String {
         _domainConfig.frontDefault
+    }
+    
+    public var initialNumberOfPokemon: Int {
+        _initialNumberOfPokemon
+    }
+    
+    public var additionalNumberOfPokemon: Int {
+        _additionalNumberOfPokemon
     }
 }

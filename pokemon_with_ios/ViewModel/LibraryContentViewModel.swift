@@ -18,7 +18,7 @@ class LibraryContentViewModel: ObservableObject {
         _viewConfig = viewConfig
         _pokemonEntities = pokemonEntities
         
-        for i in 1..<21 {
+        for i in 1..<_viewConfig.initialNumberOfPokemon {
             cellViewModels.append(LibraryContentCellViewModel(
                 id: i,
                 entity: getPokemonEntity(num: i),
@@ -53,8 +53,16 @@ class LibraryContentViewModel: ObservableObject {
         cellViewModels.count < _viewConfig.amount
     }
     
+    private var nextNumberOfPokemon: Int {
+        cellViewModels.count + 1
+    }
+    
+    public var maxNumberOfPokemon: Int {
+        cellViewModels.count + _viewConfig.additionalNumberOfPokemon
+    }
+    
     public func loadMore() {
-        for i in cellViewModels.count + 1..<cellViewModels.count + 11 {
+        for i in nextNumberOfPokemon..<maxNumberOfPokemon {
             cellViewModels.append(LibraryContentCellViewModel(
                 id: i,
                 entity: getPokemonEntity(num: i),

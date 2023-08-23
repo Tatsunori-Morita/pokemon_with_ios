@@ -30,18 +30,7 @@ class LibraryContentViewModel: ObservableObject {
     public var viewConfig: ViewConfig {
         _viewConfig
     }
-    
-    public func pokemonViewModel(num: Int) -> PokemonContentViewModel {
-        guard let pokemon = _pokemonEntities.first(where: { $0.id == num }) else {
-            fatalError("Pokemon not found")
-        }
-        return PokemonContentViewModel(
-            viewConfig: _viewConfig,
-            pokemonEntity: pokemon,
-            isApp: true,
-            isNew: false)
-    }
-    
+
     public func getPokemonEntity(idValue: PokemonEntity.IdValue) -> PokemonEntity? {
         guard let pokemon = _pokemonEntities.first(where: { $0.id == idValue.id }) else {
             return nil
@@ -69,12 +58,5 @@ class LibraryContentViewModel: ObservableObject {
                 viewConfig: _viewConfig)
             )
         }
-    }
-    
-    public func isExist(num: Int) -> Bool {
-        guard _pokemonEntities.firstIndex(where: { $0.id == num }) != nil else {
-            return false
-        }
-        return true
     }
 }

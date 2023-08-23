@@ -85,7 +85,7 @@ struct LibraryContentView: View {
         .onOpenURL(perform: { url in
             guard
                 let num = Int(url.description),
-                let entity = _viewModel.getPokemonEntity(num: num)
+                let entity = _viewModel.getPokemonEntity(idValue: try! PokemonEntity.IdValue(id: num))
             else { return }
             self._viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
                 ModalPopUpView(viewConfig: _viewModel.viewConfig, entity: entity)

@@ -39,4 +39,8 @@ struct ViewConfig {
         guard let value = _version as? String else { return "" }
         return value
     }
+    
+    public var frontDefault: String {
+        _domainConfig.frontDefault
+    }
 }

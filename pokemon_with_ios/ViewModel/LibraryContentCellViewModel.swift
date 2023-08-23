@@ -29,7 +29,7 @@ struct LibraryContentCellViewModel: Identifiable {
     
     public var url: String {
         guard let entity = _entity else {
-            return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(_id).png"
+            return String(format: _viewConfig.frontDefault, _id.description)
         }
         return entity.frontDefault
     }

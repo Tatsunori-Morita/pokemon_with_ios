@@ -45,9 +45,12 @@ struct MainContentView: View {
 
 struct MainContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainContentView()
-            .environment(\.locale, .init(identifier: "ja"))
-        MainContentView()
-            .environment(\.locale, .init(identifier: "en"))
+        Group {
+            MainContentView()
+                .environment(\.locale, .init(identifier: "ja"))
+            
+            MainContentView()
+                .environment(\.locale, .init(identifier: "en"))
+        }
     }
 }

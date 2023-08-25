@@ -98,24 +98,25 @@ struct LibraryContentView_Previews: PreviewProvider {
     private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
     @Environment(\.colorScheme)
     private static var _colorScheme
+    private static let _domainConfig = DomainConfig()
     
     static var previews: some View {
         LibraryContentView(
             viewModel: LibraryContentViewModel(
                 viewConfig: ViewConfig(
-                    locale: Locale(identifier: "ja_jp"),
+                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
                     isDarkMode: _colorScheme == .dark,
-                    domainConfig: DomainConfig()),
+                    domainConfig: _domainConfig),
                 pokemonEntities: _entities))
-            .environment(\.locale, .init(identifier: "ja"))
+        .environment(\.locale, .init(identifier: _domainConfig.japanese))
         
         LibraryContentView(
             viewModel: LibraryContentViewModel(
                 viewConfig: ViewConfig(
-                    locale: Locale(identifier: "en_jp"),
+                    locale: Locale(identifier: _domainConfig.englishInJapane),
                     isDarkMode: _colorScheme == .dark,
-                    domainConfig: DomainConfig()),
+                    domainConfig: _domainConfig),
                 pokemonEntities: _entities))
-            .environment(\.locale, .init(identifier: "en"))
+        .environment(\.locale, .init(identifier: _domainConfig.english))
     }
 }

@@ -44,13 +44,15 @@ struct MainContentView: View {
 }
 
 struct MainContentView_Previews: PreviewProvider {
+    private static let _domainConfig = DomainConfig()
+    
     static var previews: some View {
         Group {
             MainContentView()
-                .environment(\.locale, .init(identifier: "ja"))
+                .environment(\.locale, .init(identifier: _domainConfig.japanese))
             
             MainContentView()
-                .environment(\.locale, .init(identifier: "en"))
+                .environment(\.locale, .init(identifier: _domainConfig.english))
         }
     }
 }

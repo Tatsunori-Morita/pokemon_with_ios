@@ -30,11 +30,11 @@ struct ViewConfig {
     }
     
     public var language: String {
-        isJapanese ? "ja" : "en"
+        isJapanese ? _domainConfig.japanese : _domainConfig.english
     }
     
     public var isJapanese: Bool {
-        _locale.identifier.hasPrefix("ja")
+        _locale.identifier.hasPrefix(_domainConfig.japanese)
     }
     
     public var version: String {

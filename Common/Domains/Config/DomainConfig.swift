@@ -37,4 +37,20 @@ struct DomainConfig {
     public var frontDefault: String {
         _pokemonFrontDefault
     }
+    
+    public var japanese: String {
+        return "ja"
+    }
+    
+    public var english: String {
+        return "en"
+    }
+    
+    public var japaneseInJapan: String {
+        return "\(japanese)_jp"
+    }
+    
+    public var englishInJapane: String {
+        return "\(english)_jp"
+    }
 }

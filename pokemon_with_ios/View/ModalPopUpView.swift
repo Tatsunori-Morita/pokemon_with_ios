@@ -62,20 +62,20 @@ struct ModalPopUpView_Previews: PreviewProvider {
     static var previews: some View {
         ModalPopUpView(
             viewConfig: ViewConfig(
-                locale: Locale(identifier: "ja_jp"),
+                locale: Locale(identifier: _domainConfig.japaneseInJapan),
                 isDarkMode: _colorScheme == .dark,
                 domainConfig: _domainConfig),
             entity: _entity
         )
-        .environment(\.locale, .init(identifier: "ja"))
+        .environment(\.locale, .init(identifier: _domainConfig.japanese))
         
         ModalPopUpView(
             viewConfig: ViewConfig(
-                locale: Locale(identifier: "en_jp"),
+                locale: Locale(identifier: _domainConfig.englishInJapane),
                 isDarkMode: _colorScheme == .dark,
                 domainConfig: _domainConfig),
             entity: _entity
         )
-        .environment(\.locale, .init(identifier: "en"))
+        .environment(\.locale, .init(identifier: _domainConfig.english))
     }
 }

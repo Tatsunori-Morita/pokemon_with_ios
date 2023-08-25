@@ -72,19 +72,19 @@ struct ContentView_Previews: PreviewProvider {
         Group {
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
-                    locale: Locale(identifier: "ja_jp"),
+                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
                     isDarkMode: _colorScheme == .dark,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
-            .environment(\.locale, .init(identifier: "ja"))
+            .environment(\.locale, .init(identifier: _domainConfig.japanese))
             
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
-                    locale: Locale(identifier: "en_jp"),
+                    locale: Locale(identifier: _domainConfig.englishInJapane),
                     isDarkMode: _colorScheme == .dark,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
-            .environment(\.locale, .init(identifier: "en"))
+            .environment(\.locale, .init(identifier: _domainConfig.english))
         }
     }
 }

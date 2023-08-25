@@ -129,12 +129,14 @@ struct pokemon_with_ios_widget: Widget {
 }
 
 struct pokemon_with_ios_widget_Previews: PreviewProvider {
+    private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
+    
     static var previews: some View {
         Group {
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
                     date: Date(),
-                    entity: PokemonEntityPreviewFactory.createPreviewEntity(),
+                    entity: _entity,
                     isNew: true,
                     configuration: ConfigurationIntent()))
             .background(Color.layout)
@@ -144,7 +146,7 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
                     date: Date(),
-                    entity: PokemonEntityPreviewFactory.createPreviewEntity(),
+                    entity: _entity,
                     isNew: true,
                     configuration: ConfigurationIntent()))
             .background(Color.layout)

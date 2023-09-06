@@ -20,4 +20,8 @@ struct SettingContentViewModel {
     public var amount: String {
         "\(_pokemonEntities.count) / \(_viewConfig.amount)"
     }
+    
+    public var version: String {
+        _viewConfig.version
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 struct LibraryContentCellViewModel: Identifiable {
     let id = UUID()
     private let _id: Int
-    let _entity: PokemonEntity?
+    private let _entity: PokemonEntity?
     private let _viewConfig: ViewConfig
     
     public var no: String {
@@ -29,7 +29,7 @@ struct LibraryContentCellViewModel: Identifiable {
     
     public var url: String {
         guard let entity = _entity else {
-            return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(_id).png"
+            return String(format: _viewConfig.frontDefault, _id.description)
         }
         return entity.frontDefault
     }
@@ -42,6 +42,11 @@ struct LibraryContentCellViewModel: Identifiable {
         if isExist { return 0 }
         if _viewConfig.isDarkMode { return 0.9 }
         return 0.8
+    }
+    
+    public var entity: PokemonEntity? {
+        guard let value = _entity else { return nil }
+        return value.createInstance()
     }
     
     init(id: Int, entity: PokemonEntity?, viewConfig: ViewConfig) {

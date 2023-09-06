@@ -119,32 +119,29 @@ struct PokemonContentView: View {
 
 struct WidgetContentView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
-    private static var colorScheme
-    
-    static let factory = PokemonEntityFactory(
-        pokemon: LocalDataManager.shared.load(Pokemon.identifier),
-        pokemonSpecies: LocalDataManager.shared.load(PokemonSpecies.identifier),
-        pokemonTypes: LocalDataManager.shared.load(PokemonType.identifier))
+    private static var _colorScheme
+    private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
+    private static let _domainConfig = DomainConfig()
     
     static var previews: some View {
         Group {
             PokemonContentView(viewModel: PokemonContentViewModel(
                 viewConfig: ViewConfig(
-                    locale: Locale(identifier: "ja_jp"),
-                    isDarkMode: colorScheme == .dark,
-                    domainConfig: DomainConfig()),
-                pokemonEntity: factory.createEntity(),
+                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
+                    isDarkMode: _colorScheme == .dark,
+                    domainConfig: _domainConfig),
+                pokemonEntity: _entity,
                 isApp: false, isNew: true))
-                .environment(\.locale, .init(identifier: "ja"))
+            .environment(\.locale, .init(identifier: _domainConfig.japanese))
             
             PokemonContentView(viewModel: PokemonContentViewModel(
                 viewConfig: ViewConfig(
-                    locale: Locale(identifier: "en_jp"),
-                    isDarkMode: colorScheme == .dark,
-                    domainConfig: DomainConfig()),
-                pokemonEntity: factory.createEntity(),
+                    locale: Locale(identifier: _domainConfig.englishInJapane),
+                    isDarkMode: _colorScheme == .dark,
+                    domainConfig: _domainConfig),
+                pokemonEntity: _entity,
                 isApp: false, isNew: true))
-                .environment(\.locale, .init(identifier: "en"))
+            .environment(\.locale, .init(identifier: _domainConfig.english))
         }
     }
 }

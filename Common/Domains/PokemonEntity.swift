@@ -56,6 +56,14 @@ class PokemonEntity {
     public var pokemonTypeValues: [PokemonTypeValue] {
         _pokemonTypeValues
     }
+    
+    public func createInstance() -> PokemonEntity {
+        PokemonEntity(
+            id: self._idValue, names: self._nameValues,
+            weight: self._weightValue, height: self._heightValue,
+            genera: self._generaValues, flavorTextEntries: self._flavorTextEntryValues,
+            frontDefault: self._frontDefaultValue, pokemonTypeValues: self._pokemonTypeValues)
+    }
 
     init(id: IdValue, names: [NameValue], weight: WeightValue, height: HeightValue,
          genera: [GenusValue], flavorTextEntries: [FlavorTextEntryValue],

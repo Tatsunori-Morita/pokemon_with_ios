@@ -67,7 +67,7 @@ struct PokemonContentViewModel {
     
     public var flavorTextEntry: String {
         guard
-            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _viewConfig.language }).last
+            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _viewConfig.language }).first
         else {
             return "未確認"
         }

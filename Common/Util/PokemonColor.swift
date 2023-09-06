@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PokemonColor {
-    static let shared = PokemonColor()
+    public static let shared = PokemonColor()
     
     private let _typeValues: [ColorType] = [
         try! ColorType(jaName: "ノーマル", enName: "Normal", color: Color.normal),

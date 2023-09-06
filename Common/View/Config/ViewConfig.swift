@@ -9,12 +9,15 @@ import Foundation
 
 struct ViewConfig {
     private let _locale: Locale
-    private let _isDartModel: Bool
+    private let _isDartMode: Bool
     private let _domainConfig: DomainConfig
+    private let _version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
+    private let _initialNumberOfPokemon = 21
+    private let _additionalNumberOfPokemon = 11
     
     init(locale: Locale, isDarkMode: Bool, domainConfig: DomainConfig) {
         _locale = locale
-        _isDartModel = isDarkMode
+        _isDartMode = isDarkMode
         _domainConfig = domainConfig
     }
     
@@ -23,14 +26,31 @@ struct ViewConfig {
     }
     
     public var isDarkMode: Bool {
-        _isDartModel
+        _isDartMode
     }
     
     public var language: String {
-        isJapanese ? "ja" : "en"
+        isJapanese ? _domainConfig.japanese : _domainConfig.english
     }
     
     public var isJapanese: Bool {
-        _locale.identifier.hasPrefix("ja")
+        _locale.identifier.hasPrefix(_domainConfig.japanese)
+    }
+    
+    public var version: String {
+        guard let value = _version as? String else { return "" }
+        return value
+    }
+    
+    public var frontDefault: String {
+        _domainConfig.frontDefault
+    }
+    
+    public var initialNumberOfPokemon: Int {
+        _initialNumberOfPokemon
+    }
+    
+    public var additionalNumberOfPokemon: Int {
+        _additionalNumberOfPokemon
     }
 }

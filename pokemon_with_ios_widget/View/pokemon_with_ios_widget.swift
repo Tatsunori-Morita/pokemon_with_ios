@@ -142,6 +142,7 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
             .background(Color.layout)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
             .environment(\.locale, .init(identifier: "ja"))
+            .previewDisplayName("Japanese")
             
             pokemon_with_ios_widgetEntryView(
                 entry: PokemonEntry(
@@ -152,6 +153,19 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
             .background(Color.layout)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
             .environment(\.locale, .init(identifier: "en"))
+            .previewDisplayName("English")
+            
+            pokemon_with_ios_widgetEntryView(
+                entry: PokemonEntry(
+                    date: Date(),
+                    entity: _entity,
+                    isNew: true,
+                    configuration: ConfigurationIntent()))
+            .background(Color.layout)
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
+            .environment(\.locale, .init(identifier: "ja"))
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
         }
     }
 }

@@ -133,6 +133,7 @@ struct WidgetContentView_Previews: PreviewProvider {
                 pokemonEntity: _entity,
                 isApp: false, isNew: true))
             .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            .previewDisplayName("Japanese")
             
             PokemonContentView(viewModel: PokemonContentViewModel(
                 viewConfig: ViewConfig(
@@ -142,6 +143,18 @@ struct WidgetContentView_Previews: PreviewProvider {
                 pokemonEntity: _entity,
                 isApp: false, isNew: true))
             .environment(\.locale, .init(identifier: _domainConfig.english))
+            .previewDisplayName("English")
+            
+            PokemonContentView(viewModel: PokemonContentViewModel(
+                viewConfig: ViewConfig(
+                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
+                    isDarkMode: _colorScheme == .dark,
+                    domainConfig: _domainConfig),
+                pokemonEntity: _entity,
+                isApp: false, isNew: true))
+            .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
         }
     }
 }

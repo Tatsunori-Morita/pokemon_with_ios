@@ -77,6 +77,7 @@ struct ContentView_Previews: PreviewProvider {
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            .previewDisplayName("Japanese")
             
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
@@ -85,6 +86,17 @@ struct ContentView_Previews: PreviewProvider {
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: _domainConfig.english))
+            .previewDisplayName("English")
+            
+            SettingContentView(viewModel: SettingContentViewModel(
+                viewConfig: ViewConfig(
+                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
+                    isDarkMode: _colorScheme == .dark,
+                    domainConfig: _domainConfig),
+                pokemonEntities: _entities))
+            .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
         }
     }
 }

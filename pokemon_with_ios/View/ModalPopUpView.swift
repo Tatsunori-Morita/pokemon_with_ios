@@ -68,6 +68,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
             entity: _entity
         )
         .environment(\.locale, .init(identifier: _domainConfig.japanese))
+        .previewDisplayName("Japanese")
         
         ModalPopUpView(
             viewConfig: ViewConfig(
@@ -77,5 +78,17 @@ struct ModalPopUpView_Previews: PreviewProvider {
             entity: _entity
         )
         .environment(\.locale, .init(identifier: _domainConfig.english))
+        .previewDisplayName("English")
+        
+        ModalPopUpView(
+            viewConfig: ViewConfig(
+                locale: Locale(identifier: _domainConfig.japaneseInJapan),
+                isDarkMode: _colorScheme == .dark,
+                domainConfig: _domainConfig),
+            entity: _entity
+        )
+        .environment(\.locale, .init(identifier: _domainConfig.japanese))
+        .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+        .previewDisplayName("iPhone SE")
     }
 }

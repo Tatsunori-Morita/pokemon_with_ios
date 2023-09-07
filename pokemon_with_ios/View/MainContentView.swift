@@ -50,9 +50,16 @@ struct MainContentView_Previews: PreviewProvider {
         Group {
             MainContentView()
                 .environment(\.locale, .init(identifier: _domainConfig.japanese))
+                .previewDisplayName("Japanese")
             
             MainContentView()
                 .environment(\.locale, .init(identifier: _domainConfig.english))
+                .previewDisplayName("English")
+            
+            MainContentView()
+                .environment(\.locale, .init(identifier: _domainConfig.japanese))
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+                .previewDisplayName("iPhone SE")
         }
     }
 }

@@ -80,6 +80,7 @@
 		0E9D80E0288A7EFA009D93A4 /* PokemonType_pikachu.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E9D80DC288A7EFA009D93A4 /* PokemonType_pikachu.json */; };
 		0E9E15432A122E00003ACDE8 /* PokemonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9E15422A122E00003ACDE8 /* PokemonEntity.swift */; };
 		0E9E15462A122E00003ACDE8 /* PokemonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9E15422A122E00003ACDE8 /* PokemonEntity.swift */; };
+		0E9F7D1F2AAC6D2A00B8BE59 /* ColorSchemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9E70D2A9B589E00C7BB38 /* ColorSchemeMode.swift */; };
 		0EA9D9F22A8F65D9000A56E4 /* LibraryContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D9F12A8F65D9000A56E4 /* LibraryContentViewModelTests.swift */; };
 		0EA9E70E2A9B589E00C7BB38 /* ColorSchemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9E70D2A9B589E00C7BB38 /* ColorSchemeMode.swift */; };
 		0EA9E70F2A9B589E00C7BB38 /* ColorSchemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9E70D2A9B589E00C7BB38 /* ColorSchemeMode.swift */; };
@@ -811,6 +812,7 @@
 				0E64081F2A5BCC9200AAF180 /* Extension_Color.swift in Sources */,
 				0E36EDDC2A91E46800E37762 /* PokemonType.swift in Sources */,
 				0E4A01E92A73435200CEF82F /* PokemonColorTests.swift in Sources */,
+				0E9F7D1F2AAC6D2A00B8BE59 /* ColorSchemeMode.swift in Sources */,
 				0E36EDD92A91E40C00E37762 /* PokemonContentViewModel.swift in Sources */,
 				0E4A01EA2A73474900CEF82F /* PokemonColor.swift in Sources */,
 				0E36EDDB2A91E46000E37762 /* PokemonSpecies.swift in Sources */,

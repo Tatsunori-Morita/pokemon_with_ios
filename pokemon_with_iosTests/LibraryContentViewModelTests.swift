@@ -12,7 +12,7 @@ import Foundation
 final class LibraryContentViewModelTests: QuickSpec {
     static let viewConfig = ViewConfig(
         locale: Locale(identifier: "ja_jp"),
-        isDarkMode: false,
+        colorSchemeMode: .dark,
         domainConfig: DomainConfig())
     static let entities = PokemonEntityPreviewFactory.createPreviewEntities()
     

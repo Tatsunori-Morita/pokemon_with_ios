@@ -107,7 +107,7 @@ struct pokemon_with_ios_widgetEntryView : View {
                 PokemonContentView(viewModel: PokemonContentViewModel(
                     viewConfig: ViewConfig(
                         locale: locale,
-                        isDarkMode: colorScheme == .dark,
+                        colorSchemeMode: _selectedColorSchemeMode,
                         domainConfig: DomainConfig()),
                     pokemonEntity: entry.entity,
                     isApp: false, isNew: entry.isNew))

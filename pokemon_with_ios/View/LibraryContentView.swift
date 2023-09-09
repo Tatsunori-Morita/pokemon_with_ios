@@ -99,13 +99,14 @@ struct LibraryContentView_Previews: PreviewProvider {
     @Environment(\.colorScheme)
     private static var _colorScheme
     private static let _domainConfig = DomainConfig()
+    private static let _selectedColorSchemeMode = (_colorScheme == .dark) ? ColorSchemeMode.dark : ColorSchemeMode.light
     
     static var previews: some View {
         LibraryContentView(
             viewModel: LibraryContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
         .environment(\.locale, .init(identifier: _domainConfig.japanese))
@@ -115,7 +116,7 @@ struct LibraryContentView_Previews: PreviewProvider {
             viewModel: LibraryContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.englishInJapane),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
         .environment(\.locale, .init(identifier: _domainConfig.english))
@@ -125,7 +126,7 @@ struct LibraryContentView_Previews: PreviewProvider {
             viewModel: LibraryContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
         .environment(\.locale, .init(identifier: _domainConfig.japanese))

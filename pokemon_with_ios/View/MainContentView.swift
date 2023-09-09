@@ -12,8 +12,6 @@ struct MainContentView: View {
     private var _selectedColorSchemeMode: ColorSchemeMode = .light
     @Environment(\.locale)
     private var _locale: Locale
-    @Environment(\.colorScheme)
-    private var _colorScheme
     private let _pokemonEntities = RealmRepository().select()
     private let _domainConfig = DomainConfig()
     
@@ -22,7 +20,7 @@ struct MainContentView: View {
             LibraryContentView(viewModel: LibraryContentViewModel(
                 viewConfig: ViewConfig(
                     locale: _locale,
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _pokemonEntities))
                 .tabItem {
@@ -33,7 +31,7 @@ struct MainContentView: View {
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
                     locale: _locale,
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _pokemonEntities))
                 .tabItem {

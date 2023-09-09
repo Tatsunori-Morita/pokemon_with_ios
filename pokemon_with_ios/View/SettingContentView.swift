@@ -90,13 +90,14 @@ struct ContentView_Previews: PreviewProvider {
     private static var _colorScheme
     private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
     private static let _domainConfig = DomainConfig()
+    private static let _selectedColorSchemeMode = (_colorScheme == .dark) ? ColorSchemeMode.dark : ColorSchemeMode.light
     
     static var previews: some View {
         Group {
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: _domainConfig.japanese))
@@ -105,7 +106,7 @@ struct ContentView_Previews: PreviewProvider {
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.englishInJapane),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: _domainConfig.english))
@@ -114,7 +115,7 @@ struct ContentView_Previews: PreviewProvider {
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: _domainConfig.japanese))

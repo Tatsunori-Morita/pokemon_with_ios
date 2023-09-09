@@ -53,6 +53,7 @@ struct PokemonContentView: View {
                             .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
                     }
                 }
+                
                 VStack (alignment: .leading, spacing: 0) {
                     HStack {
                         Text("Type")
@@ -104,14 +105,13 @@ struct PokemonContentView: View {
                         .padding(.top, 8)
                     }
                 }
-                .padding(.top, 0)
             }
             Text(_viewModel.flavorTextEntry)
-                .fixedSize(horizontal: false, vertical: true)
                 .font(.custom("HiraginoSans-W3", size: 16))
                 .lineSpacing(7)
                 .padding(.top, 32)
                 .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
         }
         .padding(24)
         .background(Color.layout)

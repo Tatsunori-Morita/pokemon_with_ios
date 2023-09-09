@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainContentView: View {
+    @AppStorage("colorSchemeMode", store: UserDefaults(suiteName: "group.com.tatsunori.morita.pokemon-with-ios"))
+    private var _selectedColorSchemeMode: ColorSchemeMode = .light
     @Environment(\.locale)
     private var _locale: Locale
     @Environment(\.colorScheme)
@@ -40,6 +42,7 @@ struct MainContentView: View {
                 }
         }
         .accentColor(.accent)
+        .preferredColorScheme(_selectedColorSchemeMode == .dark ? .dark : .light)
     }
 }
 

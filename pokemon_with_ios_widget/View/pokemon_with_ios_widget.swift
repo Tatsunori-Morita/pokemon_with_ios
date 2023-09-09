@@ -93,6 +93,8 @@ struct PokemonEntry: TimelineEntry {
 }
 
 struct pokemon_with_ios_widgetEntryView : View {
+    @AppStorage("colorSchemeMode", store: UserDefaults(suiteName: "group.com.tatsunori.morita.pokemon-with-ios"))
+    private var _selectedColorSchemeMode: ColorSchemeMode = .light
     @Environment(\.locale)
     private var locale: Locale
     @Environment(\.colorScheme)
@@ -100,15 +102,18 @@ struct pokemon_with_ios_widgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        GeometryReader { geometry in
-            PokemonContentView(viewModel: PokemonContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: locale,
-                    isDarkMode: colorScheme == .dark,
-                    domainConfig: DomainConfig()),
-                pokemonEntity: entry.entity,
-                isApp: false, isNew: entry.isNew))
+        GeometryReader { geo in
+            ZStack {
+                PokemonContentView(viewModel: PokemonContentViewModel(
+                    viewConfig: ViewConfig(
+                        locale: locale,
+                        isDarkMode: colorScheme == .dark,
+                        domainConfig: DomainConfig()),
+                    pokemonEntity: entry.entity,
+                    isApp: false, isNew: entry.isNew))
+            }
         }
+        .environment(\.colorScheme, _selectedColorSchemeMode == .dark ? .dark : .light)
         .widgetURL(URL(string: "\(entry.entity.id)"))
     }
 }
@@ -120,7 +125,6 @@ struct pokemon_with_ios_widget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             pokemon_with_ios_widgetEntryView(entry: entry)
-                .background(Color.layout)
         }
         .configurationDisplayName("configurationDisplayName")
         .description("description")

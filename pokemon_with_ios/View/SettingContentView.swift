@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct SettingContentView: View {
+    @AppStorage("colorSchemeMode", store: UserDefaults(suiteName: "group.com.tatsunori.morita.pokemon-with-ios"))
+    private var _selectedColorSchemeMode: ColorSchemeMode = .light
     private let _viewModel: SettingContentViewModel
     
     init(viewModel: SettingContentViewModel) {
@@ -35,6 +38,20 @@ struct SettingContentView: View {
                 }
                 .listRowBackground(Color.layout)
                 HStack {
+                    Picker("Appearance", selection: $_selectedColorSchemeMode) {
+                        Text("Light").tag(ColorSchemeMode.light)
+                            .foregroundColor(Color.text)
+                        Text("Dark").tag(ColorSchemeMode.dark)
+                            .foregroundColor(Color.text)
+                    }
+                    .onChange(of: _selectedColorSchemeMode) { _ in
+                        reloadAllTimelines()
+                    }
+                    .font(.custom("HiraginoSans-W3", size: 16))
+                    .pickerStyle(.menu)
+                }
+                .listRowBackground(Color.layout)
+                HStack {
                     Text("Version")
                         .font(.custom("HiraginoSans-W3", size: 16))
                         .foregroundColor(Color.text)
@@ -59,6 +76,12 @@ struct SettingContentView: View {
             .background(Color.layout)
             .navigationTitle("Setting")
         }
+    }
+    
+    private func reloadAllTimelines() {
+#if DEBUG
+        WidgetCenter.shared.reloadAllTimelines()
+#endif
     }
 }
 

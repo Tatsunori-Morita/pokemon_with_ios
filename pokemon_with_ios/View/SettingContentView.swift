@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct SettingContentView: View {
+    @AppStorage("colorSchemeMode", store: UserDefaults(suiteName: "group.com.tatsunori.morita.pokemon-with-ios"))
+    private var _selectedColorSchemeMode: ColorSchemeMode = .light
     private let _viewModel: SettingContentViewModel
     
     init(viewModel: SettingContentViewModel) {
@@ -32,6 +35,20 @@ struct SettingContentView: View {
                     Text(_viewModel.amount)
                         .font(.system(size: 16))
                         .foregroundColor(Color.text)
+                }
+                .listRowBackground(Color.layout)
+                HStack {
+                    Picker("Appearance", selection: $_selectedColorSchemeMode) {
+                        Text("Light").tag(ColorSchemeMode.light)
+                            .foregroundColor(Color.text)
+                        Text("Dark").tag(ColorSchemeMode.dark)
+                            .foregroundColor(Color.text)
+                    }
+                    .onChange(of: _selectedColorSchemeMode) { _ in
+                        reloadAllTimelines()
+                    }
+                    .font(.custom("HiraginoSans-W3", size: 16))
+                    .pickerStyle(.menu)
                 }
                 .listRowBackground(Color.layout)
                 HStack {
@@ -60,6 +77,12 @@ struct SettingContentView: View {
             .navigationTitle("Setting")
         }
     }
+    
+    private func reloadAllTimelines() {
+#if DEBUG
+        WidgetCenter.shared.reloadAllTimelines()
+#endif
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -67,24 +90,37 @@ struct ContentView_Previews: PreviewProvider {
     private static var _colorScheme
     private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
     private static let _domainConfig = DomainConfig()
+    private static let _selectedColorSchemeMode = (_colorScheme == .dark) ? ColorSchemeMode.dark : ColorSchemeMode.light
     
     static var previews: some View {
         Group {
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            .previewDisplayName("Japanese")
             
             SettingContentView(viewModel: SettingContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.englishInJapane),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntities: _entities))
             .environment(\.locale, .init(identifier: _domainConfig.english))
+            .previewDisplayName("English")
+            
+            SettingContentView(viewModel: SettingContentViewModel(
+                viewConfig: ViewConfig(
+                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
+                    colorSchemeMode: _selectedColorSchemeMode,
+                    domainConfig: _domainConfig),
+                pokemonEntities: _entities))
+            .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
         }
     }
 }

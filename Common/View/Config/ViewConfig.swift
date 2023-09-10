@@ -9,15 +9,15 @@ import Foundation
 
 struct ViewConfig {
     private let _locale: Locale
-    private let _isDartMode: Bool
+    private let _colorSchemeMode: ColorSchemeMode
     private let _domainConfig: DomainConfig
     private let _version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
     private let _initialNumberOfPokemon = 21
     private let _additionalNumberOfPokemon = 11
     
-    init(locale: Locale, isDarkMode: Bool, domainConfig: DomainConfig) {
+    init(locale: Locale, colorSchemeMode: ColorSchemeMode, domainConfig: DomainConfig) {
         _locale = locale
-        _isDartMode = isDarkMode
+        _colorSchemeMode = colorSchemeMode
         _domainConfig = domainConfig
     }
     
@@ -26,7 +26,7 @@ struct ViewConfig {
     }
     
     public var isDarkMode: Bool {
-        _isDartMode
+        _colorSchemeMode == .dark
     }
     
     public var language: String {

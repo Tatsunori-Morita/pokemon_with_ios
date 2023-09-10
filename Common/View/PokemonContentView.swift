@@ -107,13 +107,18 @@ struct PokemonContentView: View {
                 .padding(.top, 0)
             }
             Text(_viewModel.flavorTextEntry)
-                .fixedSize(horizontal: false, vertical: true)
+                .fixedSize(horizontal: false, vertical: _viewModel.isApp)
                 .font(.custom("HiraginoSans-W3", size: 16))
                 .lineSpacing(7)
                 .padding(.top, 32)
                 .frame(maxWidth: .infinity, alignment: .leading)
+            
+            if !_viewModel.isApp {
+                Spacer()
+            }
         }
         .padding(24)
+        .background(Color.layout)
     }
 }
 
@@ -122,26 +127,40 @@ struct WidgetContentView_Previews: PreviewProvider {
     private static var _colorScheme
     private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
     private static let _domainConfig = DomainConfig()
+    private static let _selectedColorSchemeMode = (_colorScheme == .dark) ? ColorSchemeMode.dark : ColorSchemeMode.light
     
     static var previews: some View {
         Group {
             PokemonContentView(viewModel: PokemonContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntity: _entity,
                 isApp: false, isNew: true))
             .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            .previewDisplayName("Japanese")
             
             PokemonContentView(viewModel: PokemonContentViewModel(
                 viewConfig: ViewConfig(
                     locale: Locale(identifier: _domainConfig.englishInJapane),
-                    isDarkMode: _colorScheme == .dark,
+                    colorSchemeMode: _selectedColorSchemeMode,
                     domainConfig: _domainConfig),
                 pokemonEntity: _entity,
                 isApp: false, isNew: true))
             .environment(\.locale, .init(identifier: _domainConfig.english))
+            .previewDisplayName("English")
+            
+            PokemonContentView(viewModel: PokemonContentViewModel(
+                viewConfig: ViewConfig(
+                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
+                    colorSchemeMode: _selectedColorSchemeMode,
+                    domainConfig: _domainConfig),
+                pokemonEntity: _entity,
+                isApp: false, isNew: true))
+            .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDisplayName("iPhone SE")
         }
     }
 }

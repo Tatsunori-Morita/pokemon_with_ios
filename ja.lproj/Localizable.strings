@@ -16,3 +16,6 @@
 "configurationDisplayName" = "ポケモン WITH";
 "description" = "かわいいポケモンをランダム表示します。";
 "Close" = "閉じる";
+"Appearance" = "表示モード";
+"Light" = "ライトモード";
+"Dark" = "ダークモード";

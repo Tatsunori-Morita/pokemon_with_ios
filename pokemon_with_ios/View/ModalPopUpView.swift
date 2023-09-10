@@ -58,24 +58,38 @@ struct ModalPopUpView_Previews: PreviewProvider {
     private static var _colorScheme
     private static let _domainConfig = DomainConfig()
     private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
+    private static let _selectedColorSchemeMode = (_colorScheme == .dark) ? ColorSchemeMode.dark : ColorSchemeMode.light
     
     static var previews: some View {
         ModalPopUpView(
             viewConfig: ViewConfig(
                 locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                isDarkMode: _colorScheme == .dark,
+                colorSchemeMode: _selectedColorSchemeMode,
                 domainConfig: _domainConfig),
             entity: _entity
         )
         .environment(\.locale, .init(identifier: _domainConfig.japanese))
+        .previewDisplayName("Japanese")
         
         ModalPopUpView(
             viewConfig: ViewConfig(
                 locale: Locale(identifier: _domainConfig.englishInJapane),
-                isDarkMode: _colorScheme == .dark,
+                colorSchemeMode: _selectedColorSchemeMode,
                 domainConfig: _domainConfig),
             entity: _entity
         )
         .environment(\.locale, .init(identifier: _domainConfig.english))
+        .previewDisplayName("English")
+        
+        ModalPopUpView(
+            viewConfig: ViewConfig(
+                locale: Locale(identifier: _domainConfig.japaneseInJapan),
+                colorSchemeMode: _selectedColorSchemeMode,
+                domainConfig: _domainConfig),
+            entity: _entity
+        )
+        .environment(\.locale, .init(identifier: _domainConfig.japanese))
+        .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+        .previewDisplayName("iPhone SE")
     }
 }

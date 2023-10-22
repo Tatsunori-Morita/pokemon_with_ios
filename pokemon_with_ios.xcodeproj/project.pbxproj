@@ -16,6 +16,8 @@
 		0E0D0CE12A4D7A23001697FF /* LibraryContentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D0CE02A4D7A23001697FF /* LibraryContentCellViewModel.swift */; };
 		0E10803F2A2750F000E94515 /* IAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E10803E2A2750F000E94515 /* IAPIManager.swift */; };
 		0E1080422A2750F000E94515 /* IAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E10803E2A2750F000E94515 /* IAPIManager.swift */; };
+		0E2C1C522AB3CC0000D9F73B /* PokemonRealmFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1C512AB3CC0000D9F73B /* PokemonRealmFactory.swift */; };
+		0E2C1C532AB3CE4D00D9F73B /* PokemonRealmFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1C512AB3CC0000D9F73B /* PokemonRealmFactory.swift */; };
 		0E36EDBA2A91AE6900E37762 /* Pokemon_bulbasaur.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E36EDB92A91AE6900E37762 /* Pokemon_bulbasaur.json */; };
 		0E36EDBC2A91AE9F00E37762 /* PokemonSpecies_bulbasaur.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E36EDBB2A91AE9F00E37762 /* PokemonSpecies_bulbasaur.json */; };
 		0E36EDBE2A91B11300E37762 /* Pokemon_bulbasaur.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E36EDB92A91AE6900E37762 /* Pokemon_bulbasaur.json */; };
@@ -158,6 +160,7 @@
 		0E0D0CDE2A4D716F001697FF /* Extension_UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIViewController.swift; sourceTree = "<group>"; };
 		0E0D0CE02A4D7A23001697FF /* LibraryContentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryContentCellViewModel.swift; sourceTree = "<group>"; };
 		0E10803E2A2750F000E94515 /* IAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPIManager.swift; sourceTree = "<group>"; };
+		0E2C1C512AB3CC0000D9F73B /* PokemonRealmFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonRealmFactory.swift; sourceTree = "<group>"; };
 		0E36EDB92A91AE6900E37762 /* Pokemon_bulbasaur.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Pokemon_bulbasaur.json; sourceTree = "<group>"; };
 		0E36EDBB2A91AE9F00E37762 /* PokemonSpecies_bulbasaur.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PokemonSpecies_bulbasaur.json; sourceTree = "<group>"; };
 		0E36EDC02A91B1F700E37762 /* PokemonType_bulbasaur.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PokemonType_bulbasaur.json; sourceTree = "<group>"; };
@@ -301,6 +304,14 @@
 				0ED2DD43287680570082D4C4 /* APIAlamofireManager.swift */,
 			);
 			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		0E2C1C502AB3CBE700D9F73B /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				0E2C1C512AB3CC0000D9F73B /* PokemonRealmFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		0E36EDB72A91A76300E37762 /* Pikachu */ = {
@@ -489,6 +500,7 @@
 		0EAE1AA42A138425009D0529 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				0E2C1C502AB3CBE700D9F73B /* Factory */,
 				0EAE1AA52A138438009D0529 /* Model */,
 				0EB9C4B829FFA34B00817997 /* RealmRepository.swift */,
 			);
@@ -760,6 +772,7 @@
 				0EB9C4B429FFA29B00817997 /* PokemonRealmModel.swift in Sources */,
 				0EE72C0E2A4716910053F47B /* LibraryContentView.swift in Sources */,
 				0EBF3D8A287D5B07002A8CCF /* PokemonEntityFactory.swift in Sources */,
+				0E2C1C522AB3CC0000D9F73B /* PokemonRealmFactory.swift in Sources */,
 				0EE72C132A49093B0053F47B /* LibraryContentViewModel.swift in Sources */,
 				0E0D0CE12A4D7A23001697FF /* LibraryContentCellViewModel.swift in Sources */,
 				0EB8E6AC2A16F59A00E643C1 /* IRepository.swift in Sources */,
@@ -802,6 +815,7 @@
 				0E9161A02A7091750074A4D3 /* PokemonColor.swift in Sources */,
 				0ED2DD3E287679320082D4C4 /* PokemonApiService.swift in Sources */,
 				0E95E6D7288992DE00F05B05 /* Extension_Color.swift in Sources */,
+				0E2C1C532AB3CE4D00D9F73B /* PokemonRealmFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

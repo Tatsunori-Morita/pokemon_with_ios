@@ -18,57 +18,6 @@ class PokemonRealmModel: Object {
     @Persisted var frontDefault: String = ""
     @Persisted var officialArtwork: OfficialArtworkRealmModel?
     @Persisted var pokemonTypes: List<PokemonTypeRealmModel>
-
-    convenience init(entity: PokemonEntity) {
-        self.init()
-        self.no = entity.id
-        entity.names.forEach { name in
-            if name.language == "ja" || name.language == "en" {
-                self.names.append(NameRealmModel(idValue: entity.idValue, nameValue: name))
-            }
-        }
-        self.weight = entity.weight
-        self.height = entity.height
-        entity.genera.forEach { genus in
-            if genus.language == "ja" || genus.language == "en" {
-                self.genera.append(GenusRealmModel(idValue: entity.idValue, genusValue: genus))
-            }
-        }
-        
-        // 各言語でバージョンによって複数存在するため、最初の１件だけ取得
-        if let jaText = entity.flavorTextEntries.filter({ $0.language == "ja" }).first {
-            self.flavorTextEntries.append(FlavorTextEntryRealmModel(idValue: entity.idValue, flavorTextEntryValue: jaText))
-        }
-        
-        if let enText = entity.flavorTextEntries.filter({ $0.language == "en" }).first {
-            self.flavorTextEntries.append(FlavorTextEntryRealmModel(idValue: entity.idValue, flavorTextEntryValue: enText))
-        }
-        
-        self.frontDefault = entity.frontDefault
-        self.officialArtwork = OfficialArtworkRealmModel(entity: entity)
-        entity.pokemonTypeValues.forEach { pokemonType in
-            if pokemonType.language == "ja" || pokemonType.language == "en" {
-                self.pokemonTypes.append(PokemonTypeRealmModel(idValue: entity.idValue, pokemonTypeValue: pokemonType))
-            }
-        }
-    }
-
-    public func createPokemonEntity() -> PokemonEntity {
-        do {
-            let id = try PokemonEntity.IdValue(id: self.no)
-            let names = try names.map { try PokemonEntity.NameValue(name: $0.name, language: try PokemonEntity.LanguageValue(language: $0.language)) }
-            let weight = try PokemonEntity.WeightValue(weight: weight)
-            let height = try PokemonEntity.HeightValue(height: height)
-            let genera = try genera.map { try PokemonEntity.GenusValue(genus: $0.genus, language: try PokemonEntity.LanguageValue(language: $0.language))}
-            let flavorTextEntries = try flavorTextEntries.map { try PokemonEntity.FlavorTextEntryValue(flavorTextEntry: $0.flavorText, language: try PokemonEntity.LanguageValue(language: $0.language)) }
-            let frontDefault = try PokemonEntity.FrontDefaultValue(frontDefault: frontDefault)
-            let types = try pokemonTypes.map { try PokemonEntity.PokemonTypeValue(name: $0.name, language: try PokemonEntity.LanguageValue(language: $0.language))}
-            let entity = PokemonEntity(id: id, names: Array(names), weight: weight, height: height, genera: Array(genera), flavorTextEntries: Array(flavorTextEntries), frontDefault: frontDefault, pokemonTypeValues: Array(types))
-            return entity
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
 }
 
 class NameRealmModel: Object {

@@ -20,7 +20,7 @@ class RealmRepository: IRepository {
     }
 
     public func add(entity: PokemonEntity) {
-        let model = PokemonRealmModel(entity: entity)
+        let model = PokemonRealmFactory.createModel(entity: entity)
         try! _realm.write {
             _realm.add(model)
         }
@@ -30,7 +30,7 @@ class RealmRepository: IRepository {
         guard let model = _getRealmModelBy(no: no) else {
             return nil
         }
-        return model.createPokemonEntity()
+        return PokemonRealmFactory.createEntity(model: model)
     }
 
     private func _getRealmModelBy(no: PokemonEntity.IdValue) -> PokemonRealmModel? {
@@ -43,7 +43,7 @@ class RealmRepository: IRepository {
     
     func select() -> [PokemonEntity] {
         let result = _realm.objects(PokemonRealmModel.self).sorted(byKeyPath: "no", ascending: true)
-        return Array(result.map { $0.createPokemonEntity() })
+        return Array(result.map { PokemonRealmFactory.createEntity(model: $0) })
     }
 
     func delete(entity: PokemonEntity) {

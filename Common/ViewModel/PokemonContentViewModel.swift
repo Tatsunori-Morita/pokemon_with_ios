@@ -51,7 +51,7 @@ class PokemonContentViewModel: IPokemonContentViewModel {
 
     public var name: String {
         guard
-            let name = _pokemonEntity.names.filter({ $0.language == _systemConfig.getLanguageMode }).first
+            let name = _pokemonEntity.names.filter({ $0.language == _systemConfig.getLanguage }).first
         else {
             return ""
         }
@@ -60,7 +60,7 @@ class PokemonContentViewModel: IPokemonContentViewModel {
 
     public var genera: String {
         guard
-            let genus = _pokemonEntity.genera.filter({ $0.language == _systemConfig.getLanguageMode }).first
+            let genus = _pokemonEntity.genera.filter({ $0.language == _systemConfig.getLanguage }).first
         else {
             return "未確認"
         }
@@ -78,12 +78,12 @@ class PokemonContentViewModel: IPokemonContentViewModel {
     }
 
     public var types: [PokemonEntity.PokemonTypeValue] {
-        _pokemonEntity.pokemonTypeValues.filter { $0.language == _systemConfig.getLanguageMode}
+        _pokemonEntity.pokemonTypeValues.filter { $0.language == _systemConfig.getLanguage}
     }
     
     public var flavorTextEntry: String {
         guard
-            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _systemConfig.getLanguageMode }).first
+            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _systemConfig.getLanguage }).first
         else {
             return "未確認"
         }
@@ -106,7 +106,7 @@ class PokemonContentViewModel: IPokemonContentViewModel {
     }
     
     var getLanguageMode: String {
-        _systemConfig.getLanguageMode
+        _systemConfig.getLanguage
     }
     
     var getColorScheme: ColorScheme {
@@ -144,7 +144,7 @@ class PreviewPokemonContentViewModel: IPokemonContentViewModel {
 
     public var name: String {
         guard
-            let name = _pokemonEntity.names.filter({ $0.language == _systemConfig.getLanguageMode }).first
+            let name = _pokemonEntity.names.filter({ $0.language == _systemConfig.getLanguage }).first
         else {
             return ""
         }
@@ -153,7 +153,7 @@ class PreviewPokemonContentViewModel: IPokemonContentViewModel {
 
     public var genera: String {
         guard
-            let genus = _pokemonEntity.genera.filter({ $0.language == _systemConfig.getLanguageMode }).first
+            let genus = _pokemonEntity.genera.filter({ $0.language == _systemConfig.getLanguage }).first
         else {
             return "未確認"
         }
@@ -171,12 +171,12 @@ class PreviewPokemonContentViewModel: IPokemonContentViewModel {
     }
 
     public var types: [PokemonEntity.PokemonTypeValue] {
-        _pokemonEntity.pokemonTypeValues.filter { $0.language == _systemConfig.getLanguageMode}
+        _pokemonEntity.pokemonTypeValues.filter { $0.language == _systemConfig.getLanguage}
     }
     
     public var flavorTextEntry: String {
         guard
-            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _systemConfig.getLanguageMode }).first
+            let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _systemConfig.getLanguage }).first
         else {
             return "未確認"
         }
@@ -199,7 +199,7 @@ class PreviewPokemonContentViewModel: IPokemonContentViewModel {
     }
     
     var getLanguageMode: String {
-        _systemConfig.getLanguageMode
+        _systemConfig.getLanguage
     }
     
     var getColorScheme: ColorScheme {

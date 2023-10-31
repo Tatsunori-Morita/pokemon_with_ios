@@ -55,7 +55,7 @@ class PreviewMainContentViewModel: IMainContentViewModel {
     init(systemConfig: SystemConfig, pokemonEntities: [PokemonEntity]) {
 //        _systemConfig = systemConfig
         colorSchemeMode = systemConfig.getColorScheme == .light ? .light : .dark
-        languageMode = systemConfig.getLanguageMode == "ja" ? .ja : .en
+        languageMode = systemConfig.getLanguage == "ja" ? .ja : .en
         _pokemonEntities = pokemonEntities
     }
     

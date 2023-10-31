@@ -21,7 +21,7 @@ struct LibraryContentCellViewModel: Identifiable {
     public var name: String {
         guard
             let entity = _entity,
-            let name = entity.names.first(where: { $0.language == _systemConfig.getLanguageMode })
+            let name = entity.names.first(where: { $0.language == _systemConfig.getLanguage })
         else {
             return "????"
         }

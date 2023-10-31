@@ -94,7 +94,7 @@ struct LibraryContentView: View {
                 ModalPopUpView(systemConfig: systemConfig, entity: entity)
             }
         })
-        .environment(\.locale, .init(identifier: systemConfig.getLanguageMode))
+        .environment(\.locale, .init(identifier: systemConfig.getLanguage))
         .environment(\.colorScheme, systemConfig.getColorScheme)
     }
 }

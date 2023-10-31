@@ -53,7 +53,7 @@ struct ModalPopUpView: View {
                 _degrees += 360
             }
         }
-        .environment(\.locale, .init(identifier: _systemConfig.getLanguageMode))
+        .environment(\.locale, .init(identifier: _systemConfig.getLanguage))
         .environment(\.colorScheme, _systemConfig.getColorScheme)
     }
 }

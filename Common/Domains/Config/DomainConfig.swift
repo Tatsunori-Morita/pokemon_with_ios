@@ -20,7 +20,7 @@ class SystemConfig {
         return 1010
     }
     
-    var getLanguageMode: String {
+    var getLanguage: String {
         _languageMode.rawValue
     }
     

@@ -24,6 +24,14 @@ class SystemConfig {
         _languageMode.rawValue
     }
     
+    var getLanguageMode: LanguageMode {
+        _languageMode
+    }
+    
+    var getColorSchemeMode: ColorSchemeMode {
+        _colorSchemeMode
+    }
+    
     var getColorScheme: ColorScheme {
         if _colorSchemeMode == .light {
             return .light

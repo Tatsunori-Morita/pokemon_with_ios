@@ -43,8 +43,8 @@ class PreviewWidgetViewModel: IWidgetViewModel {
     var languageMode: LanguageMode = .ja
     
     init(systemConfig: SystemConfig) {
-        colorSchemeMode = systemConfig.getColorScheme == .light ? .light : .dark
-        languageMode = systemConfig.getLanguage == "ja" ? .ja : .en
+        colorSchemeMode = systemConfig.getColorSchemeMode
+        languageMode = systemConfig.getLanguageMode
     }
     
     var getColorScheme: ColorScheme {

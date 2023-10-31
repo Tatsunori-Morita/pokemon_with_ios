@@ -5,23 +5,89 @@
 //  Created by Tatsunori on 2023/07/02.
 //
 
-import Foundation
+import SwiftUI
 
-struct SettingContentViewModel {
-    private let _viewConfig: ViewConfig
+protocol ISettingContentViewModel: ObservableObject {
+    var amount: String { get }
+    var version: String { get }
+    var colorSchemeMode: ColorSchemeMode { get set }
+    var languageMode: LanguageMode { get set }
+    var getColorScheme: ColorScheme { get }
+    var getLanguageMode: String { get }
+}
+
+class SettingContentViewModel: ISettingContentViewModel {
+    private let _systemConfig: SystemConfig
     private let _pokemonEntities: [PokemonEntity]
     
+    @AppStorage("colorSchemeMode", store: UserDefaults(suiteName: "group.com.tatsunori.morita.pokemon-with-ios"))
+    var colorSchemeMode: ColorSchemeMode = .light
     
-    init(viewConfig: ViewConfig, pokemonEntities: [PokemonEntity]) {
-        _viewConfig = viewConfig
+    @AppStorage("languageMode", store: UserDefaults(suiteName: "group.com.tatsunori.morita.pokemon-with-ios"))
+    var languageMode: LanguageMode = .ja
+    
+    var getColorScheme: ColorScheme {
+        if colorSchemeMode == .light {
+            return .light
+        }
+        return .dark
+    }
+    
+    var getLanguageMode: String {
+        languageMode.rawValue
+    }
+    
+    init(systemConfig: SystemConfig, pokemonEntities: [PokemonEntity]) {
+        _systemConfig = systemConfig
         _pokemonEntities = pokemonEntities
     }
     
     public var amount: String {
-        "\(_pokemonEntities.count) / \(_viewConfig.amount)"
+        "\(_pokemonEntities.count) / \(_systemConfig.getAmount)"
     }
     
     public var version: String {
-        _viewConfig.version
+        guard
+            let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+        else {
+            return ""
+        }
+        return version
+    }
+}
+
+class PreviewSettingContentViewModel: ISettingContentViewModel {
+    private let _systemConfig: SystemConfig
+    private let _pokemonEntities: [PokemonEntity]
+    
+    @Published var colorSchemeMode: ColorSchemeMode = .light
+    @Published var languageMode: LanguageMode
+
+    var getColorScheme: ColorScheme {
+        if colorSchemeMode == .light {
+            return .light
+        }
+        return .dark
+    }
+    
+    var getLanguageMode: String {
+        languageMode.rawValue
+    }
+    
+    init(
+        systemConfig: SystemConfig, pokemonEntities: [PokemonEntity],
+        languageMode: LanguageMode, colorSchemeMode: ColorSchemeMode) {
+        _systemConfig = systemConfig
+        _pokemonEntities = pokemonEntities
+        self.languageMode = languageMode
+        self.colorSchemeMode = colorSchemeMode
+    }
+    
+    var amount: String {
+        "999 / \(_systemConfig.getAmount)"
+    }
+    
+    var version: String {
+        "9.9.9"
     }
 }

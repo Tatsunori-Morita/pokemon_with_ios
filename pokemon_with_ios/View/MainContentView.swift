@@ -7,58 +7,55 @@
 
 import SwiftUI
 
-struct MainContentView: View {
-    @AppStorage("colorSchemeMode", store: UserDefaults(suiteName: "group.com.tatsunori.morita.pokemon-with-ios"))
-    private var _selectedColorSchemeMode: ColorSchemeMode = .light
-    @Environment(\.locale)
-    private var _locale: Locale
-    private let _pokemonEntities = RealmRepository().select()
-    private let _domainConfig = DomainConfig()
+struct MainContentView<MainContentViewModel: IMainContentViewModel>: View {
+    @ObservedObject var viewModel: MainContentViewModel
     
     var body: some View {
+        let systemConfig = viewModel.getSystemConfig
+        let pokemonEntities = viewModel.getPokemonEntities
+        
         TabView {
             LibraryContentView(viewModel: LibraryContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: _locale,
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntities: _pokemonEntities))
+                systemConfig: systemConfig,
+                pokemonEntities: pokemonEntities))
                 .tabItem {
                     Label("Library", systemImage: "book")
                         .environment(\.symbolVariants, .none)
                 }
             
-            SettingContentView(viewModel: SettingContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: _locale,
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntities: _pokemonEntities))
+            SettingContentView<SettingContentViewModel>(viewModel: SettingContentViewModel(
+                systemConfig: systemConfig,
+                pokemonEntities: pokemonEntities))
                 .tabItem {
                     Label("Setting", systemImage: "gear")
                         .environment(\.symbolVariants, .none)
                 }
         }
         .accentColor(.accent)
-        .preferredColorScheme(_selectedColorSchemeMode == .dark ? .dark : .light)
+        .environment(\.locale, .init(identifier: viewModel.getLanguageMode))
+        .environment(\.colorScheme, viewModel.getColorScheme)
     }
 }
 
 struct MainContentView_Previews: PreviewProvider {
-    private static let _domainConfig = DomainConfig()
+    private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
     
     static var previews: some View {
+        let jaViewModel = PreviewMainContentViewModel(
+            systemConfig: SystemConfig(languageMode: .ja, colorSchemeMode: .light),
+            pokemonEntities: _entities)
+        let enViewModel = PreviewMainContentViewModel(
+            systemConfig: SystemConfig(languageMode: .en, colorSchemeMode: .dark),
+            pokemonEntities: _entities)
+        
         Group {
-            MainContentView()
-                .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            MainContentView<PreviewMainContentViewModel>(viewModel: jaViewModel)
                 .previewDisplayName("Japanese")
             
-            MainContentView()
-                .environment(\.locale, .init(identifier: _domainConfig.english))
+            MainContentView<PreviewMainContentViewModel>(viewModel: enViewModel)
                 .previewDisplayName("English")
             
-            MainContentView()
-                .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            MainContentView<PreviewMainContentViewModel>(viewModel: jaViewModel)
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
                 .previewDisplayName("iPhone SE")
         }

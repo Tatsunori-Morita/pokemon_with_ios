@@ -13,6 +13,7 @@ struct LibraryContentView: View {
     private var _viewControllerHolder: UIViewController?
     @ObservedObject
     private var _viewModel: LibraryContentViewModel
+    
     private let _columns = [GridItem(.flexible()),
                            GridItem(.flexible()),
                            GridItem(.flexible())]
@@ -29,6 +30,8 @@ struct LibraryContentView: View {
     }
     
     var body: some View {
+        let systemConfig = _viewModel.systemConfig
+        
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: _columns, spacing: 0) {
@@ -64,7 +67,7 @@ struct LibraryContentView: View {
                         .onTapGesture {
                             guard let entity = cellViewModel.entity else { return }
                             self._viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
-                                ModalPopUpView(viewConfig: _viewModel.viewConfig, entity: entity)
+                                ModalPopUpView(systemConfig: systemConfig, entity: entity)
                             }
                         }
                     }
@@ -88,48 +91,32 @@ struct LibraryContentView: View {
                 let entity = _viewModel.getPokemonEntity(idValue: try! PokemonEntity.IdValue(id: num))
             else { return }
             self._viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
-                ModalPopUpView(viewConfig: _viewModel.viewConfig, entity: entity)
+                ModalPopUpView(systemConfig: systemConfig, entity: entity)
             }
         })
+        .environment(\.locale, .init(identifier: systemConfig.getLanguageMode))
+        .environment(\.colorScheme, systemConfig.getColorScheme)
     }
 }
 
 struct LibraryContentView_Previews: PreviewProvider {
     private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
-    @Environment(\.colorScheme)
-    private static var _colorScheme
-    private static let _domainConfig = DomainConfig()
-    private static let _selectedColorSchemeMode = (_colorScheme == .dark) ? ColorSchemeMode.dark : ColorSchemeMode.light
     
     static var previews: some View {
-        LibraryContentView(
-            viewModel: LibraryContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntities: _entities))
-        .environment(\.locale, .init(identifier: _domainConfig.japanese))
+        let jaViewModel = LibraryContentViewModel(
+            systemConfig: SystemConfig(languageMode: .ja, colorSchemeMode: .light),
+            pokemonEntities: _entities)
+        let enViewModel = LibraryContentViewModel(
+            systemConfig: SystemConfig(languageMode: .en, colorSchemeMode: .dark),
+            pokemonEntities: _entities)
+        
+        LibraryContentView(viewModel: jaViewModel)
         .previewDisplayName("Japanese")
         
-        LibraryContentView(
-            viewModel: LibraryContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: Locale(identifier: _domainConfig.englishInJapane),
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntities: _entities))
-        .environment(\.locale, .init(identifier: _domainConfig.english))
+        LibraryContentView(viewModel: enViewModel)
         .previewDisplayName("English")
         
-        LibraryContentView(
-            viewModel: LibraryContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntities: _entities))
-        .environment(\.locale, .init(identifier: _domainConfig.japanese))
+        LibraryContentView(viewModel: jaViewModel)
         .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         .previewDisplayName("iPhone SE")
     }

@@ -8,13 +8,11 @@
 import SwiftUI
 import WidgetKit
 
-struct SettingContentView: View {
-    @AppStorage("colorSchemeMode", store: UserDefaults(suiteName: "group.com.tatsunori.morita.pokemon-with-ios"))
-    private var _selectedColorSchemeMode: ColorSchemeMode = .light
-    private let _viewModel: SettingContentViewModel
+struct SettingContentView<SettingContentViewModel: ISettingContentViewModel>: View {
+    @ObservedObject private var viewModel: SettingContentViewModel
     
     init(viewModel: SettingContentViewModel) {
-        _viewModel = viewModel
+        self.viewModel = viewModel
         
         UINavigationBar.appearance().titleTextAttributes = [
             .font : UIFont(name: "HiraginoSans-W6", size: 16)!
@@ -32,19 +30,33 @@ struct SettingContentView: View {
                         .font(.custom("HiraginoSans-W3", size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
-                    Text(_viewModel.amount)
+                    Text(viewModel.amount)
                         .font(.system(size: 16))
                         .foregroundColor(Color.text)
                 }
                 .listRowBackground(Color.layout)
                 HStack {
-                    Picker("Appearance", selection: $_selectedColorSchemeMode) {
+                    Picker("Appearance", selection: $viewModel.colorSchemeMode) {
                         Text("Light").tag(ColorSchemeMode.light)
                             .foregroundColor(Color.text)
                         Text("Dark").tag(ColorSchemeMode.dark)
                             .foregroundColor(Color.text)
                     }
-                    .onChange(of: _selectedColorSchemeMode) { _ in
+                    .onChange(of: viewModel.colorSchemeMode) { _ in
+                        reloadAllTimelines()
+                    }
+                    .font(.custom("HiraginoSans-W3", size: 16))
+                    .pickerStyle(.menu)
+                }
+                .listRowBackground(Color.layout)
+                HStack {
+                    Picker("Language", selection: $viewModel.languageMode) {
+                        Text("Japanese").tag(LanguageMode.ja)
+                            .foregroundColor(Color.text)
+                        Text("English").tag(LanguageMode.en)
+                            .foregroundColor(Color.text)
+                    }
+                    .onChange(of: viewModel.languageMode) { _ in
                         reloadAllTimelines()
                     }
                     .font(.custom("HiraginoSans-W3", size: 16))
@@ -56,7 +68,7 @@ struct SettingContentView: View {
                         .font(.custom("HiraginoSans-W3", size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
-                    Text(_viewModel.version)
+                    Text(viewModel.version)
                         .font(.system(size: 16))
                         .foregroundColor(Color.text)
                 }
@@ -76,6 +88,8 @@ struct SettingContentView: View {
             .background(Color.layout)
             .navigationTitle("Setting")
         }
+        .environment(\.locale, .init(identifier: viewModel.getLanguageMode))
+        .environment(\.colorScheme, viewModel.getColorScheme)
     }
     
     private func reloadAllTimelines() {
@@ -86,39 +100,28 @@ struct SettingContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    @Environment(\.colorScheme)
-    private static var _colorScheme
     private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
-    private static let _domainConfig = DomainConfig()
-    private static let _selectedColorSchemeMode = (_colorScheme == .dark) ? ColorSchemeMode.dark : ColorSchemeMode.light
     
     static var previews: some View {
+        let jaViewModel = PreviewSettingContentViewModel(
+            systemConfig: SystemConfig(languageMode: .ja, colorSchemeMode: .light),
+            pokemonEntities: _entities,
+            languageMode: .ja,
+            colorSchemeMode: .light)
+        let enViewModel = PreviewSettingContentViewModel(
+            systemConfig: SystemConfig(languageMode: .en, colorSchemeMode: .dark),
+            pokemonEntities: _entities,
+            languageMode: .en,
+            colorSchemeMode: .dark)
+        
         Group {
-            SettingContentView(viewModel: SettingContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntities: _entities))
-            .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            SettingContentView<PreviewSettingContentViewModel>(viewModel: jaViewModel)
             .previewDisplayName("Japanese")
             
-            SettingContentView(viewModel: SettingContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: Locale(identifier: _domainConfig.englishInJapane),
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntities: _entities))
-            .environment(\.locale, .init(identifier: _domainConfig.english))
+            SettingContentView<PreviewSettingContentViewModel>(viewModel: enViewModel)
             .previewDisplayName("English")
             
-            SettingContentView(viewModel: SettingContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntities: _entities))
-            .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            SettingContentView<PreviewSettingContentViewModel>(viewModel: jaViewModel)
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .previewDisplayName("iPhone SE")
         }

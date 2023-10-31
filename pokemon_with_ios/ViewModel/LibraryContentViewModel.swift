@@ -11,24 +11,26 @@ class LibraryContentViewModel: ObservableObject {
     @Published
     private(set) var cellViewModels: [LibraryContentCellViewModel] = []
     
-    private let _viewConfig: ViewConfig
+    private let _systemConfig: SystemConfig
     private let _pokemonEntities: [PokemonEntity]
+    private let _initialNumberOfPokemon = 21
+    private let _additionalNumberOfPokemon = 11
     
-    init(viewConfig: ViewConfig, pokemonEntities: [PokemonEntity]) {
-        _viewConfig = viewConfig
+    init(systemConfig: SystemConfig, pokemonEntities: [PokemonEntity]) {
+        _systemConfig = systemConfig
         _pokemonEntities = pokemonEntities
         
-        for i in 1..<_viewConfig.initialNumberOfPokemon {
+        for i in 1..<_initialNumberOfPokemon {
             cellViewModels.append(LibraryContentCellViewModel(
                 id: i,
                 entity: getPokemonEntity(idValue: try! PokemonEntity.IdValue(id: i)),
-                viewConfig: _viewConfig)
+                systemConfig: _systemConfig)
             )
         }
     }
     
-    public var viewConfig: ViewConfig {
-        _viewConfig
+    public var systemConfig: SystemConfig {
+        _systemConfig
     }
 
     public func getPokemonEntity(idValue: PokemonEntity.IdValue) -> PokemonEntity? {
@@ -39,7 +41,7 @@ class LibraryContentViewModel: ObservableObject {
     }
     
     public var canLoadMore: Bool {
-        cellViewModels.count < _viewConfig.amount
+        cellViewModels.count < _systemConfig.getAmount
     }
     
     private var nextNumberOfPokemon: Int {
@@ -47,7 +49,7 @@ class LibraryContentViewModel: ObservableObject {
     }
     
     public var maxNumberOfPokemon: Int {
-        cellViewModels.count + _viewConfig.additionalNumberOfPokemon
+        cellViewModels.count + _additionalNumberOfPokemon
     }
     
     public func loadMore() {
@@ -55,7 +57,7 @@ class LibraryContentViewModel: ObservableObject {
             cellViewModels.append(LibraryContentCellViewModel(
                 id: i,
                 entity: getPokemonEntity(idValue: try! PokemonEntity.IdValue(id: i)),
-                viewConfig: _viewConfig)
+                systemConfig: _systemConfig)
             )
         }
     }

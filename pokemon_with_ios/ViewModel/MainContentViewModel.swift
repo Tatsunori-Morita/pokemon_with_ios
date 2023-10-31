@@ -46,14 +46,12 @@ class MainContentViewModel: IMainContentViewModel {
 }
 
 class PreviewMainContentViewModel: IMainContentViewModel {
-//    private let _systemConfig: SystemConfig
     private let _pokemonEntities: [PokemonEntity]
     
     var colorSchemeMode: ColorSchemeMode = .light
     var languageMode: LanguageMode = .ja
     
     init(systemConfig: SystemConfig, pokemonEntities: [PokemonEntity]) {
-//        _systemConfig = systemConfig
         colorSchemeMode = systemConfig.getColorSchemeMode
         languageMode = systemConfig.getLanguageMode
         _pokemonEntities = pokemonEntities

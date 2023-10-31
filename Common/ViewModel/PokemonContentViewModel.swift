@@ -5,7 +5,6 @@
 //  Created by Tatsunori on 2023/06/02.
 //
 
-//import Foundation
 import SwiftUI
 
 protocol IPokemonContentViewModel {

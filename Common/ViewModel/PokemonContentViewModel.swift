@@ -86,7 +86,37 @@ class PokemonContentViewModel: IPokemonContentViewModel {
         else {
             return "未確認"
         }
-        return flavorTextEntry.flavorTextEntry.replacingOccurrences(of: "\n", with: "")
+        
+        if _systemConfig.getLanguage == "ja" {
+            return flavorTextEntry.flavorTextEntry.replacingOccurrences(of: "\n", with: " ")
+        }
+        
+        let originFlavorText = flavorTextEntry.flavorTextEntry
+            .replacingOccurrences(of: "\n", with: " ")
+            .replacingOccurrences(of: "POKéMON", with: "POKEMON")
+        guard
+            let originChars: [CChar] = originFlavorText.cString(using: .ascii)
+        else {
+            return "未確認"
+        }
+        
+        var skippedFFCodeChars: [CChar] = []
+        let FF_Code: CChar = 12
+        let SPACE_CODE: CChar = 32
+        for flavorChar in originChars {
+            if flavorChar == FF_Code {
+                skippedFFCodeChars.append(SPACE_CODE)
+                continue
+            }
+            skippedFFCodeChars.append(flavorChar)
+        }
+        
+        guard
+            let convertedFlavorText = String(cString: skippedFFCodeChars, encoding: .utf8)
+        else {
+            return "未確認"
+        }
+        return convertedFlavorText.replacingOccurrences(of: "POKEMON", with: "POKéMON")
     }
 
     // Widget can not use AsyncImage.

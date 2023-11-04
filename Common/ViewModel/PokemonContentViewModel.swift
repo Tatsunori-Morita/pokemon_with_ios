@@ -94,27 +94,15 @@ class PokemonContentViewModel: IPokemonContentViewModel {
         let originFlavorText = flavorTextEntry.flavorTextEntry
             .replacingOccurrences(of: "\n", with: " ")
             .replacingOccurrences(of: "POKéMON", with: "POKEMON")
-        guard
-            let originChars: [CChar] = originFlavorText.cString(using: .ascii)
-        else {
-            return "未確認"
-        }
         
-        var skippedFFCodeChars: [CChar] = []
         let FF_Code: CChar = 12
-        let SPACE_CODE: CChar = 32
-        for flavorChar in originChars {
-            if flavorChar == FF_Code {
-                skippedFFCodeChars.append(SPACE_CODE)
+        var convertedFlavorText = ""
+        for code in originFlavorText.unicodeScalars {
+            if code.value == FF_Code {
+                convertedFlavorText.append(String(" "))
                 continue
             }
-            skippedFFCodeChars.append(flavorChar)
-        }
-        
-        guard
-            let convertedFlavorText = String(cString: skippedFFCodeChars, encoding: .utf8)
-        else {
-            return "未確認"
+            convertedFlavorText.append(String(code))
         }
         return convertedFlavorText.replacingOccurrences(of: "POKEMON", with: "POKéMON")
     }
@@ -209,7 +197,25 @@ class PreviewPokemonContentViewModel: IPokemonContentViewModel {
         else {
             return "未確認"
         }
-        return flavorTextEntry.flavorTextEntry.replacingOccurrences(of: "\n", with: "")
+        
+        if _systemConfig.getLanguage == "ja" {
+            return flavorTextEntry.flavorTextEntry.replacingOccurrences(of: "\n", with: " ")
+        }
+        
+        let originFlavorText = flavorTextEntry.flavorTextEntry
+            .replacingOccurrences(of: "\n", with: " ")
+            .replacingOccurrences(of: "POKéMON", with: "POKEMON")
+        
+        let FF_Code: CChar = 12
+        var convertedFlavorText = ""
+        for code in originFlavorText.unicodeScalars {
+            if code.value == FF_Code {
+                convertedFlavorText.append(String(" "))
+                continue
+            }
+            convertedFlavorText.append(String(code))
+        }
+        return convertedFlavorText.replacingOccurrences(of: "POKEMON", with: "POKéMON")
     }
 
     // Widget can not use AsyncImage.

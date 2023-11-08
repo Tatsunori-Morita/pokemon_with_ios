@@ -5,7 +5,7 @@
 //  Created by Tatsunori on 2023/06/26.
 //
 
-import Foundation
+import SwiftUI
 
 class LibraryContentViewModel: ObservableObject {
     @Published
@@ -60,5 +60,9 @@ class LibraryContentViewModel: ObservableObject {
                 systemConfig: _systemConfig)
             )
         }
+    }
+    
+    func getFont(size: CGFloat) -> Font {
+        _systemConfig.getLanguageMode == .ja ? Font.custom("HiraginoSans-W3", size: size) : Font.system(size: size)
     }
 }

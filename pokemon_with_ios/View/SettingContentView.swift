@@ -27,7 +27,7 @@ struct SettingContentView<SettingContentViewModel: ISettingContentViewModel>: Vi
             List {
                 HStack {
                     Text("Library")
-                        .font(.custom("HiraginoSans-W3", size: 16))
+                        .font(viewModel.getFont(size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
                     Text(viewModel.amount)
@@ -45,7 +45,7 @@ struct SettingContentView<SettingContentViewModel: ISettingContentViewModel>: Vi
                     .onChange(of: viewModel.colorSchemeMode) { _ in
                         reloadAllTimelines()
                     }
-                    .font(.custom("HiraginoSans-W3", size: 16))
+                    .font(viewModel.getFont(size: 16))
                     .pickerStyle(.menu)
                 }
                 .listRowBackground(Color.layout)
@@ -59,13 +59,13 @@ struct SettingContentView<SettingContentViewModel: ISettingContentViewModel>: Vi
                     .onChange(of: viewModel.languageMode) { _ in
                         reloadAllTimelines()
                     }
-                    .font(.custom("HiraginoSans-W3", size: 16))
+                    .font(viewModel.getFont(size: 16))
                     .pickerStyle(.menu)
                 }
                 .listRowBackground(Color.layout)
                 HStack {
                     Text("Version")
-                        .font(.custom("HiraginoSans-W3", size: 16))
+                        .font(viewModel.getFont(size: 16))
                         .foregroundColor(Color.text)
                     Spacer()
                     Text(viewModel.version)

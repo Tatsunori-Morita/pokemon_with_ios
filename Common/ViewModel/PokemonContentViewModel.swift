@@ -21,6 +21,7 @@ protocol IPokemonContentViewModel {
     var frontDefault: String { get }
     var getLanguageMode: String { get }
     var getColorScheme: ColorScheme { get }
+    func getFont(size: CGFloat) -> Font
 }
 
 class PokemonContentViewModel: IPokemonContentViewModel {
@@ -132,6 +133,10 @@ class PokemonContentViewModel: IPokemonContentViewModel {
         }
         return .dark
     }
+    
+    func getFont(size: CGFloat) -> Font {
+        _systemConfig.getLanguageMode == .ja ? Font.custom("HiraginoSans-W3", size: size) : Font.system(size: size)
+    }
 }
 
 class PreviewPokemonContentViewModel: IPokemonContentViewModel {
@@ -242,5 +247,9 @@ class PreviewPokemonContentViewModel: IPokemonContentViewModel {
             return .light
         }
         return .dark
+    }
+    
+    func getFont(size: CGFloat) -> Font {
+        _systemConfig.getLanguageMode == .ja ? Font.custom("HiraginoSans-W3", size: size) : Font.system(size: size)
     }
 }

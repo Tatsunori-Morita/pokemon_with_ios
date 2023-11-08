@@ -14,6 +14,7 @@ protocol ISettingContentViewModel: ObservableObject {
     var languageMode: LanguageMode { get set }
     var getColorScheme: ColorScheme { get }
     var getLanguageMode: String { get }
+    func getFont(size: CGFloat) -> Font
 }
 
 class SettingContentViewModel: ISettingContentViewModel {
@@ -54,6 +55,10 @@ class SettingContentViewModel: ISettingContentViewModel {
         }
         return version
     }
+    
+    func getFont(size: CGFloat) -> Font {
+        _systemConfig.getLanguageMode == .ja ? Font.custom("HiraginoSans-W3", size: size) : Font.system(size: size)
+    }
 }
 
 class PreviewSettingContentViewModel: ISettingContentViewModel {
@@ -89,5 +94,9 @@ class PreviewSettingContentViewModel: ISettingContentViewModel {
     
     var version: String {
         "9.9.9"
+    }
+    
+    func getFont(size: CGFloat) -> Font {
+        _systemConfig.getLanguageMode == .ja ? Font.custom("HiraginoSans-W3", size: size) : Font.system(size: size)
     }
 }

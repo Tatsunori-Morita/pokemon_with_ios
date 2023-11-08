@@ -19,7 +19,7 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                         Text(viewModel.id)
                             .font(.system(size: 16))
                         Text(viewModel.name)
-                            .font(.custom("HiraginoSans-W6", size: 20))
+                            .font(viewModel.getFont(size: 20))
                             .bold()
                             .padding(.top, 4)
                         if viewModel.isNew {
@@ -52,13 +52,13 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                 VStack (alignment: .leading, spacing: 0) {
                     HStack {
                         Text("Type")
-                            .font(.custom("HiraginoSans-W6", size: 16))
+                            .font(viewModel.getFont(size: 16))
                             .bold()
                             .padding(.trailing, 16)
                         HStack (spacing: 8) {
                             ForEach(viewModel.types) { pokemonTypeValue in
                                 Text(pokemonTypeValue.name)
-                                    .font(.custom("HiraginoSans-W6", size: 10))
+                                    .font(viewModel.getFont(size: 10))
                                     .foregroundColor(.white)
                                     .padding(.top, 4)
                                     .padding(.leading, 10)
@@ -72,17 +72,17 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                     .padding(.top, 8)
                     HStack (spacing: 0) {
                         Text("Genre")
-                            .font(.custom("HiraginoSans-W6", size: 16))
+                            .font(viewModel.getFont(size: 16))
                             .bold()
                             .padding(.trailing, 16)
                         Text(viewModel.genera)
-                            .font(.custom("HiraginoSans-W3", size: 16))
+                            .font(viewModel.getFont(size: 16))
                     }
                     .padding(.top, 12)
                     if viewModel.isApp {
                         HStack (spacing: 0) {
                             Text("Height")
-                                .font(.custom("HiraginoSans-W6", size: 16))
+                                .font(viewModel.getFont(size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
                             Text(viewModel.height)
@@ -91,7 +91,7 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                         .padding(.top, 8)
                         HStack (spacing: 0) {
                             Text("Weight")
-                                .font(.custom("HiraginoSans-W6", size: 16))
+                                .font(viewModel.getFont(size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
                             Text(viewModel.weight)
@@ -104,7 +104,7 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
             }
             Text(viewModel.flavorTextEntry)
                 .fixedSize(horizontal: false, vertical: viewModel.isApp)
-                .font(.custom("HiraginoSans-W3", size: 16))
+                .font(viewModel.getFont(size: 16))
                 .lineSpacing(7)
                 .padding(.top, 32)
                 .frame(maxWidth: .infinity, alignment: .leading)

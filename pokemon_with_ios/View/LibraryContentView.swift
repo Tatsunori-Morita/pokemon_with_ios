@@ -55,7 +55,7 @@ struct LibraryContentView: View {
                                 .font(.system(size: 16))
                                 .foregroundColor(Color.text)
                             Text(cellViewModel.name)
-                                .font(.custom("HiraginoSans-W6", size: 16))
+                                .font(_viewModel.getFont(size: 16))
                                 .foregroundColor(Color.text)
                                 .bold()
                                 .padding(.top, 4)
@@ -73,7 +73,7 @@ struct LibraryContentView: View {
                     }
                     if _viewModel.canLoadMore {
                         Text("Loading...")
-                            .font(.custom("HiraginoSans-W6", size: 16))
+                            .font(_viewModel.getFont(size: 16))
                             .foregroundColor(Color.text)
                             .bold()
                             .onAppear {

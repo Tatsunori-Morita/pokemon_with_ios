@@ -28,15 +28,13 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let config = DomainConfig()
+        let apiService = PokemonApiService()
         let repository: IRepository = RealmRepository()
-        let savedEntity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: config.number))
+        let savedEntity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: apiService.getNumber))
         let isNew = (savedEntity == nil)
         if !isNew {
             repository.delete(entity: savedEntity!)
         }
-
-        let apiService = PokemonApiService(domainConfig: config)
 
         apiService.fetch(url: apiService.pokemonURL) { (pokemon: Pokemon) in
             var pokemonTypes: [PokemonType] = []

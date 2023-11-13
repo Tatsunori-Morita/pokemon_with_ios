@@ -12,7 +12,6 @@ struct LibraryContentCellViewModel: Identifiable {
     private let _id: Int
     private let _entity: PokemonEntity?
     private let _systemConfig: SystemConfig
-    private let _frontDefault = DomainConfig().frontDefault
     
     public var no: String {
         "No." + String(format: "%04d", _id)
@@ -30,7 +29,7 @@ struct LibraryContentCellViewModel: Identifiable {
     
     public var url: String {
         guard let entity = _entity else {
-            return String(format: _frontDefault, _id.description)
+            return String(format: Const.shared.getPokemonFrontDefault, _id.description)
         }
         return entity.frontDefault
     }

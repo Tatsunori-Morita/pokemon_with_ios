@@ -1,5 +1,5 @@
 //
-//  DomainConfig.swift
+//  Config.swift
 //  pokemon_with_ios
 //
 //  Created by Tatsunori on 2023/07/13.

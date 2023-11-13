@@ -62,6 +62,13 @@ class LibraryContentViewModel: ObservableObject {
         }
     }
     
+    func getNaviFont(size: CGFloat) -> UIFont {
+        if _systemConfig.getLanguageMode == .ja {
+            return UIFont(name: "HiraginoSans-W6", size: size)!
+        }
+        return UIFont.systemFont(ofSize: size)
+    }
+    
     func getFont(size: CGFloat) -> Font {
         _systemConfig.getLanguageMode == .ja ? Font.custom("HiraginoSans-W3", size: size) : Font.system(size: size)
     }

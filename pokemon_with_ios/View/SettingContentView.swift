@@ -15,10 +15,10 @@ struct SettingContentView<SettingContentViewModel: ISettingContentViewModel>: Vi
         self.viewModel = viewModel
         
         UINavigationBar.appearance().titleTextAttributes = [
-            .font : UIFont(name: "HiraginoSans-W6", size: 16)!
+            .font : viewModel.getNaviFont(size: 16)
         ]
         UINavigationBar.appearance().largeTitleTextAttributes = [
-            .font : UIFont(name: "HiraginoSans-W6", size: 32)!
+            .font : viewModel.getNaviFont(size: 32)
         ]
     }
 

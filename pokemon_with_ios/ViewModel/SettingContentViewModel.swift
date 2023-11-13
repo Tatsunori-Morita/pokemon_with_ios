@@ -14,6 +14,7 @@ protocol ISettingContentViewModel: ObservableObject {
     var languageMode: LanguageMode { get set }
     var getColorScheme: ColorScheme { get }
     var getLanguageMode: String { get }
+    func getNaviFont(size: CGFloat) -> UIFont
     func getFont(size: CGFloat) -> Font
 }
 
@@ -56,6 +57,13 @@ class SettingContentViewModel: ISettingContentViewModel {
         return version
     }
     
+    func getNaviFont(size: CGFloat) -> UIFont {
+        if _systemConfig.getLanguageMode == .ja {
+            return UIFont(name: "HiraginoSans-W6", size: size)!
+        }
+        return UIFont.systemFont(ofSize: size)
+    }
+    
     func getFont(size: CGFloat) -> Font {
         _systemConfig.getLanguageMode == .ja ? Font.custom("HiraginoSans-W3", size: size) : Font.system(size: size)
     }
@@ -94,6 +102,13 @@ class PreviewSettingContentViewModel: ISettingContentViewModel {
     
     var version: String {
         "9.9.9"
+    }
+    
+    func getNaviFont(size: CGFloat) -> UIFont {
+        if _systemConfig.getLanguageMode == .ja {
+            return UIFont(name: "HiraginoSans-W6", size: size)!
+        }
+        return UIFont.systemFont(ofSize: size)
     }
     
     func getFont(size: CGFloat) -> Font {

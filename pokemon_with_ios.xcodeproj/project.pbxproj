@@ -469,12 +469,19 @@
 			path = Const;
 			sourceTree = "<group>";
 		};
+		0E7F08B32B01F5D400DD9011 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				0EA9E70D2A9B589E00C7BB38 /* ColorSchemeMode.swift */,
+				0E08D5B12AE9DF2E0096FD89 /* LanguageMode.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		0E9161A12A7093650074A4D3 /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				0E91619E2A7091750074A4D3 /* PokemonColor.swift */,
-				0EA9E70D2A9B589E00C7BB38 /* ColorSchemeMode.swift */,
-				0E08D5B12AE9DF2E0096FD89 /* LanguageMode.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -536,6 +543,7 @@
 		0EB8E6AA2A16E9F900E643C1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0E7F08B32B01F5D400DD9011 /* Enum */,
 				0ED9F2592A5F75A600159E66 /* Config */,
 				0E7F08AE2B01F43E00DD9011 /* Const */,
 				0E9161A12A7093650074A4D3 /* Util */,

@@ -478,12 +478,12 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
-		0E9161A12A7093650074A4D3 /* Util */ = {
+		0E9161A12A7093650074A4D3 /* Color */ = {
 			isa = PBXGroup;
 			children = (
 				0E91619E2A7091750074A4D3 /* PokemonColor.swift */,
 			);
-			path = Util;
+			path = Color;
 			sourceTree = "<group>";
 		};
 		0E95E6CD2889810D00F05B05 /* Extension */ = {
@@ -546,7 +546,7 @@
 				0E7F08B32B01F5D400DD9011 /* Enum */,
 				0ED9F2592A5F75A600159E66 /* Config */,
 				0E7F08AE2B01F43E00DD9011 /* Const */,
-				0E9161A12A7093650074A4D3 /* Util */,
+				0E9161A12A7093650074A4D3 /* Color */,
 				0E0D0CE22A4D7ED3001697FF /* View */,
 				0E0D0CE32A4D7EDC001697FF /* ViewModel */,
 				0ED2DD42287680450082D4C4 /* API */,

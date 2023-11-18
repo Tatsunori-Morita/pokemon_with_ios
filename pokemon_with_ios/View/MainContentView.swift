@@ -38,15 +38,15 @@ struct MainContentView<MainContentViewModel: IMainContentViewModel>: View {
 }
 
 struct MainContentView_Previews: PreviewProvider {
-    private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
+    private static let entities = PokemonEntityPreviewFactory.createPreviewEntities()
     
     static var previews: some View {
         let jaViewModel = PreviewMainContentViewModel(
             systemConfig: SystemConfig(languageMode: .ja, colorSchemeMode: .light),
-            pokemonEntities: _entities)
+            pokemonEntities: entities)
         let enViewModel = PreviewMainContentViewModel(
             systemConfig: SystemConfig(languageMode: .en, colorSchemeMode: .dark),
-            pokemonEntities: _entities)
+            pokemonEntities: entities)
         
         Group {
             MainContentView<PreviewMainContentViewModel>(viewModel: jaViewModel)

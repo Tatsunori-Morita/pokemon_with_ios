@@ -121,16 +121,16 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
 }
 
 struct WidgetContentView_Previews: PreviewProvider {
-    private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
+    private static let entity = PokemonEntityPreviewFactory.createPreviewEntity()
     
     static var previews: some View {
         let jaViewModel = PreviewPokemonContentViewModel(
             systemConfig: SystemConfig(languageMode: .ja, colorSchemeMode: .light),
-            pokemonEntity: _entity,
+            pokemonEntity: entity,
             isNew: true)
         let enViewModel = PreviewPokemonContentViewModel(
             systemConfig: SystemConfig(languageMode: .en, colorSchemeMode: .light),
-            pokemonEntity: _entity,
+            pokemonEntity: entity,
             isNew: true)
         
         Group {

@@ -10,16 +10,16 @@ import SDWebImageSwiftUI
 
 struct LibraryContentView: View {
     @Environment(\.viewController)
-    private var _viewControllerHolder: UIViewController?
+    private var viewControllerHolder: UIViewController?
     @ObservedObject
-    private var _viewModel: LibraryContentViewModel
+    private var viewModel: LibraryContentViewModel
     
-    private let _columns = [GridItem(.flexible()),
+    private let columns = [GridItem(.flexible()),
                            GridItem(.flexible()),
                            GridItem(.flexible())]
     
     init(viewModel: LibraryContentViewModel) {
-        _viewModel = viewModel
+        self.viewModel = viewModel
         
         UINavigationBar.appearance().titleTextAttributes = [
             .font : viewModel.getNaviFont(size: 16)
@@ -30,12 +30,12 @@ struct LibraryContentView: View {
     }
     
     var body: some View {
-        let systemConfig = _viewModel.systemConfig
+        let systemConfig = viewModel.systemConfig
         
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: _columns, spacing: 0) {
-                    ForEach(_viewModel.cellViewModels) { cellViewModel in
+                LazyVGrid(columns: columns, spacing: 0) {
+                    ForEach(viewModel.cellViewModels) { cellViewModel in
                         VStack(alignment: .leading, spacing: 0) {
                             ZStack {
                                 WebImage(url: URL(string: cellViewModel.url))
@@ -55,7 +55,7 @@ struct LibraryContentView: View {
                                 .font(.system(size: 16))
                                 .foregroundColor(Color.text)
                             Text(cellViewModel.name)
-                                .font(_viewModel.getFont(size: 16))
+                                .font(viewModel.getFont(size: 16))
                                 .foregroundColor(Color.text)
                                 .bold()
                                 .padding(.top, 4)
@@ -66,18 +66,18 @@ struct LibraryContentView: View {
                         .padding(.trailing, 16)
                         .onTapGesture {
                             guard let entity = cellViewModel.entity else { return }
-                            self._viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
+                            self.viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
                                 ModalPopUpView(systemConfig: systemConfig, entity: entity)
                             }
                         }
                     }
-                    if _viewModel.canLoadMore {
+                    if viewModel.canLoadMore {
                         Text("Loading...")
-                            .font(_viewModel.getFont(size: 16))
+                            .font(viewModel.getFont(size: 16))
                             .foregroundColor(Color.text)
                             .bold()
                             .onAppear {
-                                _viewModel.loadMore()
+                                viewModel.loadMore()
                             }
                     }
                 }
@@ -88,9 +88,9 @@ struct LibraryContentView: View {
         .onOpenURL(perform: { url in
             guard
                 let num = Int(url.description),
-                let entity = _viewModel.getPokemonEntity(idValue: try! PokemonEntity.IdValue(id: num))
+                let entity = viewModel.getPokemonEntity(idValue: try! PokemonEntity.IdValue(id: num))
             else { return }
-            self._viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
+            self.viewControllerHolder?.present(style: UIModalPresentationStyle.overCurrentContext, transitionStyle: UIModalTransitionStyle.crossDissolve) {
                 ModalPopUpView(systemConfig: systemConfig, entity: entity)
             }
         })
@@ -100,15 +100,15 @@ struct LibraryContentView: View {
 }
 
 struct LibraryContentView_Previews: PreviewProvider {
-    private static let _entities = PokemonEntityPreviewFactory.createPreviewEntities()
+    private static let entities = PokemonEntityPreviewFactory.createPreviewEntities()
     
     static var previews: some View {
         let jaViewModel = LibraryContentViewModel(
             systemConfig: SystemConfig(languageMode: .ja, colorSchemeMode: .light),
-            pokemonEntities: _entities)
+            pokemonEntities: entities)
         let enViewModel = LibraryContentViewModel(
             systemConfig: SystemConfig(languageMode: .en, colorSchemeMode: .dark),
-            pokemonEntities: _entities)
+            pokemonEntities: entities)
         
         LibraryContentView(viewModel: jaViewModel)
         .previewDisplayName("Japanese")

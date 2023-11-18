@@ -97,10 +97,10 @@ struct pokemon_with_ios_widgetEntryView<WidgetViewModel: IWidgetViewModel>: View
 
     var body: some View {
         let systemConfig = viewModel.getSystemConfig
-        let viewModel = PokemonContentViewModel(
+        let viewModel = PokemonWidgetContentViewModel(
             systemConfig: systemConfig,
             pokemonEntity: entry.entity,
-            isApp: false, isNew: entry.isNew)
+            isNew: entry.isNew)
         
         GeometryReader { geo in
             ZStack {

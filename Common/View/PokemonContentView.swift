@@ -127,11 +127,11 @@ struct WidgetContentView_Previews: PreviewProvider {
         let jaViewModel = PreviewPokemonContentViewModel(
             systemConfig: SystemConfig(languageMode: .ja, colorSchemeMode: .light),
             pokemonEntity: _entity,
-            isApp: false, isNew: true)
+            isNew: true)
         let enViewModel = PreviewPokemonContentViewModel(
             systemConfig: SystemConfig(languageMode: .en, colorSchemeMode: .light),
             pokemonEntity: _entity,
-            isApp: false, isNew: true)
+            isNew: true)
         
         Group {
             PokemonContentView<PreviewPokemonContentViewModel>(viewModel: jaViewModel)

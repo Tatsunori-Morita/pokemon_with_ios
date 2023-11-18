@@ -23,7 +23,7 @@ struct ModalPopUpView: View {
 
     var body: some View {
         let viewModel = PokemonContentViewModel(
-            systemConfig: _systemConfig, pokemonEntity: _entity, isApp: true, isNew: false)
+            systemConfig: _systemConfig, pokemonEntity: _entity, isNew: false)
         
         VStack(alignment: .center) {
             PokemonContentView(viewModel: viewModel)

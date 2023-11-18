@@ -27,13 +27,11 @@ protocol IPokemonContentViewModel {
 class PokemonContentViewModel: IPokemonContentViewModel {
     private let _systemConfig: SystemConfig
     private let _pokemonEntity: PokemonEntity
-    private let _isApp: Bool
     private let _isNew: Bool
 
-    init(systemConfig: SystemConfig, pokemonEntity: PokemonEntity, isApp: Bool, isNew: Bool) {
+    init(systemConfig: SystemConfig, pokemonEntity: PokemonEntity, isNew: Bool) {
         _systemConfig = systemConfig
         _pokemonEntity = pokemonEntity
-        _isApp = isApp
         _isNew = isNew
     }
 
@@ -42,7 +40,7 @@ class PokemonContentViewModel: IPokemonContentViewModel {
     }
     
     public var isApp: Bool {
-        _isApp
+        true
     }
 
     public var id: String {
@@ -139,5 +137,10 @@ class PokemonContentViewModel: IPokemonContentViewModel {
     }
 }
 
+class PokemonWidgetContentViewModel: PokemonContentViewModel {
+    override public var isApp: Bool {
+        false
+    }
+}
 
 class PreviewPokemonContentViewModel: PokemonContentViewModel {}

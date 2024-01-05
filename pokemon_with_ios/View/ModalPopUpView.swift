@@ -9,23 +9,26 @@ import SwiftUI
 
 struct ModalPopUpView: View {
     @Environment(\.viewController)
-    private var _viewControllerHolder: UIViewController?
+    private var viewControllerHolder: UIViewController?
     @State
-    private var _degrees = 0.0
-    private let _viewConfig: ViewConfig
-    private let _entity: PokemonEntity
+    private var degrees = 0.0
+    
+    private let systemConfig: SystemConfig
+    private let entity: PokemonEntity
 
-    init(viewConfig: ViewConfig, entity: PokemonEntity) {
-        _viewConfig = viewConfig
-        _entity = entity
+    init(systemConfig: SystemConfig, entity: PokemonEntity) {
+        self.systemConfig = systemConfig
+        self.entity = entity
     }
 
     var body: some View {
+        let viewModel = PokemonContentViewModel(
+            systemConfig: systemConfig, pokemonEntity: entity, isNew: false)
+        
         VStack(alignment: .center) {
-            PokemonContentView(viewModel: PokemonContentViewModel(
-                viewConfig: _viewConfig, pokemonEntity: _entity, isApp: true, isNew: false))
+            PokemonContentView(viewModel: viewModel)
             Button(action: {
-                self._viewControllerHolder?.dismiss(animated: true, completion: nil)
+                self.viewControllerHolder?.dismiss(animated: true, completion: nil)
             }) {
                 Text("Close")
                     .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
@@ -42,53 +45,39 @@ struct ModalPopUpView: View {
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .shadow(radius: 3)
         .rotation3DEffect(
-            .degrees(_degrees),
+            .degrees(degrees),
             axis: (x: 0, y: 1, z: 0)
         )
         .onAppear {
             withAnimation {
-                _degrees += 360
+                degrees += 360
             }
         }
+        .environment(\.locale, .init(identifier: systemConfig.getLanguage))
+        .environment(\.colorScheme, systemConfig.getColorScheme)
     }
 }
 
 struct ModalPopUpView_Previews: PreviewProvider {
-    @Environment(\.colorScheme)
-    private static var _colorScheme
-    private static let _domainConfig = DomainConfig()
-    private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
-    private static let _selectedColorSchemeMode = (_colorScheme == .dark) ? ColorSchemeMode.dark : ColorSchemeMode.light
+    private static let entity = PokemonEntityPreviewFactory.createPreviewEntity()
     
     static var previews: some View {
+        let jaConfig = SystemConfig(languageMode: .ja, colorSchemeMode: .light)
+        let enConfig = SystemConfig(languageMode: .en, colorSchemeMode: .dark)
+        
         ModalPopUpView(
-            viewConfig: ViewConfig(
-                locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                colorSchemeMode: _selectedColorSchemeMode,
-                domainConfig: _domainConfig),
-            entity: _entity
-        )
-        .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            systemConfig: jaConfig,
+            entity: entity)
         .previewDisplayName("Japanese")
         
         ModalPopUpView(
-            viewConfig: ViewConfig(
-                locale: Locale(identifier: _domainConfig.englishInJapane),
-                colorSchemeMode: _selectedColorSchemeMode,
-                domainConfig: _domainConfig),
-            entity: _entity
-        )
-        .environment(\.locale, .init(identifier: _domainConfig.english))
+            systemConfig: enConfig,
+            entity: entity)
         .previewDisplayName("English")
         
         ModalPopUpView(
-            viewConfig: ViewConfig(
-                locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                colorSchemeMode: _selectedColorSchemeMode,
-                domainConfig: _domainConfig),
-            entity: _entity
-        )
-        .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            systemConfig: jaConfig,
+            entity: entity)
         .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         .previewDisplayName("iPhone SE")
     }

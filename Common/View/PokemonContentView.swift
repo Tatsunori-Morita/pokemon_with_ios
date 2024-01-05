@@ -8,25 +8,21 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct PokemonContentView: View {
-    private let _viewModel: PokemonContentViewModel
-    
-    init(viewModel: PokemonContentViewModel) {
-        _viewModel = viewModel
-    }
+struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: View {
+    let viewModel: PokemonContentViewModel
     
     var body: some View {
         VStack (spacing: 0) {
             VStack (alignment: .leading, spacing: 0) {
                 HStack (alignment: .top) {
                     VStack (alignment: .leading, spacing: 0) {
-                        Text(_viewModel.id)
+                        Text(viewModel.id)
                             .font(.system(size: 16))
-                        Text(_viewModel.name)
-                            .font(.custom("HiraginoSans-W6", size: 20))
+                        Text(viewModel.name)
+                            .font(viewModel.getFont(size: 20))
                             .bold()
                             .padding(.top, 4)
-                        if _viewModel.isNew {
+                        if viewModel.isNew {
                             Text("New")
                                 .font(.system(size: 12))
                                 .bold()
@@ -41,13 +37,13 @@ struct PokemonContentView: View {
                         }
                     }
                     Spacer()
-                    if _viewModel.isApp {
-                        WebImage(url: URL(string: _viewModel.frontDefault))
+                    if viewModel.isApp {
+                        WebImage(url: URL(string: viewModel.frontDefault))
                             .resizable()
                             .scaledToFit()
                             .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
                     } else {
-                        _viewModel.image
+                        viewModel.image
                             .resizable()
                             .scaledToFit()
                             .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
@@ -56,13 +52,13 @@ struct PokemonContentView: View {
                 VStack (alignment: .leading, spacing: 0) {
                     HStack {
                         Text("Type")
-                            .font(.custom("HiraginoSans-W6", size: 16))
+                            .font(viewModel.getFont(size: 16))
                             .bold()
                             .padding(.trailing, 16)
                         HStack (spacing: 8) {
-                            ForEach(_viewModel.types) { pokemonTypeValue in
+                            ForEach(viewModel.types) { pokemonTypeValue in
                                 Text(pokemonTypeValue.name)
-                                    .font(.custom("HiraginoSans-W6", size: 10))
+                                    .font(viewModel.getFont(size: 10))
                                     .foregroundColor(.white)
                                     .padding(.top, 4)
                                     .padding(.leading, 10)
@@ -76,29 +72,29 @@ struct PokemonContentView: View {
                     .padding(.top, 8)
                     HStack (spacing: 0) {
                         Text("Genre")
-                            .font(.custom("HiraginoSans-W6", size: 16))
+                            .font(viewModel.getFont(size: 16))
                             .bold()
                             .padding(.trailing, 16)
-                        Text(_viewModel.genera)
-                            .font(.custom("HiraginoSans-W3", size: 16))
+                        Text(viewModel.genera)
+                            .font(viewModel.getFont(size: 16))
                     }
                     .padding(.top, 12)
-                    if _viewModel.isApp {
+                    if viewModel.isApp {
                         HStack (spacing: 0) {
                             Text("Height")
-                                .font(.custom("HiraginoSans-W6", size: 16))
+                                .font(viewModel.getFont(size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
-                            Text(_viewModel.height)
+                            Text(viewModel.height)
                                 .font(.system(size: 16))
                         }
                         .padding(.top, 8)
                         HStack (spacing: 0) {
                             Text("Weight")
-                                .font(.custom("HiraginoSans-W6", size: 16))
+                                .font(viewModel.getFont(size: 16))
                                 .bold()
                                 .padding(.trailing, 16)
-                            Text(_viewModel.weight)
+                            Text(viewModel.weight)
                                 .font(.system(size: 16))
                         }
                         .padding(.top, 8)
@@ -106,59 +102,45 @@ struct PokemonContentView: View {
                 }
                 .padding(.top, 0)
             }
-            Text(_viewModel.flavorTextEntry)
-                .fixedSize(horizontal: false, vertical: _viewModel.isApp)
-                .font(.custom("HiraginoSans-W3", size: 16))
+            Text(viewModel.flavorTextEntry)
+                .fixedSize(horizontal: false, vertical: viewModel.isApp)
+                .font(viewModel.getFont(size: 16))
                 .lineSpacing(7)
                 .padding(.top, 32)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            if !_viewModel.isApp {
+            if !viewModel.isApp {
                 Spacer()
             }
         }
         .padding(24)
         .background(Color.layout)
+        .environment(\.locale, .init(identifier: viewModel.getLanguageMode))
+        .environment(\.colorScheme, viewModel.getColorScheme)
     }
 }
 
 struct WidgetContentView_Previews: PreviewProvider {
-    @Environment(\.colorScheme)
-    private static var _colorScheme
-    private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
-    private static let _domainConfig = DomainConfig()
-    private static let _selectedColorSchemeMode = (_colorScheme == .dark) ? ColorSchemeMode.dark : ColorSchemeMode.light
+    private static let entity = PokemonEntityPreviewFactory.createPreviewEntity()
     
     static var previews: some View {
+        let jaViewModel = PreviewPokemonContentViewModel(
+            systemConfig: SystemConfig(languageMode: .ja, colorSchemeMode: .light),
+            pokemonEntity: entity,
+            isNew: true)
+        let enViewModel = PreviewPokemonContentViewModel(
+            systemConfig: SystemConfig(languageMode: .en, colorSchemeMode: .light),
+            pokemonEntity: entity,
+            isNew: true)
+        
         Group {
-            PokemonContentView(viewModel: PokemonContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntity: _entity,
-                isApp: false, isNew: true))
-            .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            PokemonContentView<PreviewPokemonContentViewModel>(viewModel: jaViewModel)
             .previewDisplayName("Japanese")
             
-            PokemonContentView(viewModel: PokemonContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: Locale(identifier: _domainConfig.englishInJapane),
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntity: _entity,
-                isApp: false, isNew: true))
-            .environment(\.locale, .init(identifier: _domainConfig.english))
+            PokemonContentView<PreviewPokemonContentViewModel>(viewModel: enViewModel)
             .previewDisplayName("English")
             
-            PokemonContentView(viewModel: PokemonContentViewModel(
-                viewConfig: ViewConfig(
-                    locale: Locale(identifier: _domainConfig.japaneseInJapan),
-                    colorSchemeMode: _selectedColorSchemeMode,
-                    domainConfig: _domainConfig),
-                pokemonEntity: _entity,
-                isApp: false, isNew: true))
-            .environment(\.locale, .init(identifier: _domainConfig.japanese))
+            PokemonContentView<PreviewPokemonContentViewModel>(viewModel: jaViewModel)
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .previewDisplayName("iPhone SE")
         }

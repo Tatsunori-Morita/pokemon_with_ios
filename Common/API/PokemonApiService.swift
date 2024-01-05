@@ -9,18 +9,22 @@ import Foundation
 
 final class PokemonApiService {
     private let _api: IAPIManager = APIAlamofireManager()
-    private let _domainConfig: DomainConfig
+    private let _number: Int
+    
+    init() {
+        _number = Int.random(in: 1 ... Const.shared.getPokemonAmount)
+    }
+    
+    public var getNumber: Int {
+        _number
+    }
 
     public var pokemonURL: String {
-        _domainConfig.pokemonUrl
+        "\(Const.shared.getPokemonUrl)\(_number)"
     }
 
     public var pokemonSpeciesURL: String {
-        _domainConfig.speciesUrl
-    }
-
-    init(domainConfig: DomainConfig) {
-        _domainConfig = domainConfig
+        "\(Const.shared.getPokemonSpeciesUrl)\(_number)"
     }
 
     public func fetch<T: Decodable>(url: String, completion: @escaping (T) -> ()) {

@@ -28,15 +28,13 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let config = DomainConfig()
+        let apiService = PokemonApiService()
         let repository: IRepository = RealmRepository()
-        let savedEntity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: config.number))
+        let savedEntity = repository.getEntityBy(no: try! PokemonEntity.IdValue(id: apiService.getNumber))
         let isNew = (savedEntity == nil)
         if !isNew {
             repository.delete(entity: savedEntity!)
         }
-
-        let apiService = PokemonApiService(domainConfig: config)
 
         apiService.fetch(url: apiService.pokemonURL) { (pokemon: Pokemon) in
             var pokemonTypes: [PokemonType] = []
@@ -92,28 +90,23 @@ struct PokemonEntry: TimelineEntry {
     let configuration: ConfigurationIntent
 }
 
-struct pokemon_with_ios_widgetEntryView : View {
-    @AppStorage("colorSchemeMode", store: UserDefaults(suiteName: "group.com.tatsunori.morita.pokemon-with-ios"))
-    private var _selectedColorSchemeMode: ColorSchemeMode = .light
-    @Environment(\.locale)
-    private var locale: Locale
-    @Environment(\.colorScheme)
-    private var colorScheme
+struct pokemon_with_ios_widgetEntryView<WidgetViewModel: IWidgetViewModel>: View {
+    @ObservedObject var viewModel: WidgetViewModel
+    
     var entry: Provider.Entry
 
     var body: some View {
+        let systemConfig = viewModel.getSystemConfig
+        let viewModel = PokemonWidgetContentViewModel(
+            systemConfig: systemConfig,
+            pokemonEntity: entry.entity,
+            isNew: entry.isNew)
+        
         GeometryReader { geo in
             ZStack {
-                PokemonContentView(viewModel: PokemonContentViewModel(
-                    viewConfig: ViewConfig(
-                        locale: locale,
-                        colorSchemeMode: _selectedColorSchemeMode,
-                        domainConfig: DomainConfig()),
-                    pokemonEntity: entry.entity,
-                    isApp: false, isNew: entry.isNew))
+                PokemonContentView<PokemonContentViewModel>(viewModel: viewModel)
             }
         }
-        .environment(\.colorScheme, _selectedColorSchemeMode == .dark ? .dark : .light)
         .widgetURL(URL(string: "\(entry.entity.id)"))
     }
 }
@@ -124,7 +117,9 @@ struct pokemon_with_ios_widget: Widget {
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            pokemon_with_ios_widgetEntryView(entry: entry)
+            pokemon_with_ios_widgetEntryView(
+                viewModel: WidgetViewModel(),
+                entry: entry)
         }
         .configurationDisplayName("configurationDisplayName")
         .description("description")
@@ -136,38 +131,34 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
     private static let _entity = PokemonEntityPreviewFactory.createPreviewEntity()
     
     static var previews: some View {
+        let widgetEntity = PokemonEntry(
+            date: Date(),
+            entity: _entity,
+            isNew: true,
+            configuration: ConfigurationIntent())
+        
+        let jaViewModel = PreviewWidgetViewModel(
+            systemConfig: SystemConfig(languageMode: .ja, colorSchemeMode: .light))
+        let enViewModel = PreviewWidgetViewModel(
+            systemConfig: SystemConfig(languageMode: .en, colorSchemeMode: .dark))
+        
         Group {
-            pokemon_with_ios_widgetEntryView(
-                entry: PokemonEntry(
-                    date: Date(),
-                    entity: _entity,
-                    isNew: true,
-                    configuration: ConfigurationIntent()))
-            .background(Color.layout)
+            pokemon_with_ios_widgetEntryView<PreviewWidgetViewModel>(
+                viewModel: jaViewModel,
+                entry: widgetEntity)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
-            .environment(\.locale, .init(identifier: "ja"))
             .previewDisplayName("Japanese")
             
-            pokemon_with_ios_widgetEntryView(
-                entry: PokemonEntry(
-                    date: Date(),
-                    entity: _entity,
-                    isNew: true,
-                    configuration: ConfigurationIntent()))
-            .background(Color.layout)
+            pokemon_with_ios_widgetEntryView<PreviewWidgetViewModel>(
+                viewModel: enViewModel,
+                entry: widgetEntity)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
-            .environment(\.locale, .init(identifier: "en"))
             .previewDisplayName("English")
-            
-            pokemon_with_ios_widgetEntryView(
-                entry: PokemonEntry(
-                    date: Date(),
-                    entity: _entity,
-                    isNew: true,
-                    configuration: ConfigurationIntent()))
-            .background(Color.layout)
+
+            pokemon_with_ios_widgetEntryView<PreviewWidgetViewModel>(
+                viewModel: jaViewModel,
+                entry: widgetEntity)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
-            .environment(\.locale, .init(identifier: "ja"))
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .previewDisplayName("iPhone SE")
         }

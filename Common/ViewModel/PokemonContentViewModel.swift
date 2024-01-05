@@ -60,7 +60,7 @@ class PokemonContentViewModel: IPokemonContentViewModel {
         guard
             let genus = _pokemonEntity.genera.filter({ $0.language == _systemConfig.getLanguage }).first
         else {
-            return "未確認"
+            return _systemConfig.getLanguageMode == .ja ? "未確認" : "Unknown"
         }
         return genus.genus
     }
@@ -83,10 +83,10 @@ class PokemonContentViewModel: IPokemonContentViewModel {
         guard
             let flavorTextEntry = _pokemonEntity.flavorTextEntries.filter({ $0.language == _systemConfig.getLanguage }).first
         else {
-            return "未確認"
+            return _systemConfig.getLanguageMode == .ja ? "未確認" : "Unknown"
         }
         
-        if _systemConfig.getLanguage == "ja" {
+        if _systemConfig.getLanguageMode == .ja {
             return flavorTextEntry.flavorTextEntry.replacingOccurrences(of: "\n", with: " ")
         }
         

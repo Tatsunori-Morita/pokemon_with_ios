@@ -30,15 +30,12 @@ struct ModalPopUpView: View {
             Button(action: {
                 self.viewControllerHolder?.dismiss(animated: true, completion: nil)
             }) {
-                Text("Close")
-                    .font(.custom("Hiragino Kaku Gothic ProN", size: 16))
+                Image(systemName: "xmark.circle")
+                    .resizable()
+                    .frame(width: 30, height: 30)
                     .foregroundColor(Color.text)
             }
             .padding(24)
-            .padding(.top, 24)
-            .padding(.leading, 40)
-            .padding(.trailing, 40)
-            .padding(.bottom, 24)
         }
         .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
         .background(Color.layout)

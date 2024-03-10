@@ -20,7 +20,7 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                             .font(.system(size: 16))
                         Text(viewModel.name)
                             .font(viewModel.getFont(size: 20))
-                            .bold()
+                            .fontWeight(.medium)
                             .padding(.top, 4)
                         if viewModel.isNew {
                             Text("New")
@@ -53,7 +53,6 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                     HStack {
                         Text("Type")
                             .font(viewModel.getFont(size: 16))
-                            .bold()
                             .padding(.trailing, 16)
                         HStack (spacing: 8) {
                             ForEach(viewModel.types) { pokemonTypeValue in
@@ -73,7 +72,6 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                     HStack (spacing: 0) {
                         Text("Genre")
                             .font(viewModel.getFont(size: 16))
-                            .bold()
                             .padding(.trailing, 16)
                         Text(viewModel.genera)
                             .font(viewModel.getFont(size: 16))
@@ -83,7 +81,6 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                         HStack (spacing: 0) {
                             Text("Height")
                                 .font(viewModel.getFont(size: 16))
-                                .bold()
                                 .padding(.trailing, 16)
                             Text(viewModel.height)
                                 .font(.system(size: 16))
@@ -92,7 +89,6 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                         HStack (spacing: 0) {
                             Text("Weight")
                                 .font(viewModel.getFont(size: 16))
-                                .bold()
                                 .padding(.trailing, 16)
                             Text(viewModel.weight)
                                 .font(.system(size: 16))

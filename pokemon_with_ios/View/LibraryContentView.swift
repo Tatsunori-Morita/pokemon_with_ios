@@ -56,8 +56,8 @@ struct LibraryContentView: View {
                                 .foregroundColor(Color.text)
                             Text(cellViewModel.name)
                                 .font(viewModel.getFont(size: 16))
+                                .fontWeight(.medium)
                                 .foregroundColor(Color.text)
-                                .bold()
                                 .padding(.top, 4)
                         }
                         .padding(.top, 40)

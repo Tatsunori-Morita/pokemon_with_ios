@@ -10,7 +10,29 @@ import SDWebImageSwiftUI
 
 struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: View {
     let viewModel: PokemonContentViewModel
-    
+
+    @State private var offsetY: CGFloat = 0
+    @State private var rotationDegrees: Double = 0
+    @State private var shadowWidth: Double = 1.5
+
+    private var rotateAnimation: Animation {
+        .easeOut
+        .speed(0.3)
+        .repeatForever(autoreverses: false)
+    }
+
+    private var moveAnimation: Animation {
+        .easeOut
+        .speed(0.3)
+        .repeatForever(autoreverses: true)
+    }
+
+    private var shadowAnimation: Animation {
+        .easeOut
+        .speed(0.3)
+        .repeatForever(autoreverses: true)
+    }
+
     var body: some View {
         VStack (spacing: 0) {
             VStack (alignment: .leading, spacing: 0) {
@@ -40,6 +62,41 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                     if viewModel.isApp {
                         WebImage(url: URL(string: viewModel.frontDefault))
                             .resizable()
+                            .placeholder {
+                                VStack (spacing: 3) {
+                                    Spacer()
+                                    Image("Icon")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .cornerRadius(15)
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .stroke(.black, lineWidth: 2)
+                                        }
+                                        .rotationEffect(.degrees(rotationDegrees))
+                                        .offset(y: offsetY)
+                                        .onAppear {
+                                            withAnimation(rotateAnimation) {
+                                                rotationDegrees = 360
+                                            }
+
+                                            withAnimation(moveAnimation) {
+                                                offsetY = -50
+                                            }
+                                        }
+                                    Rectangle()
+                                        .fill(Color(red: 13/255, green: 1/255, blue: 22/255))
+                                        .frame(width: 13, height: 1)
+                                        .cornerRadius(5)
+                                        .scaleEffect(shadowWidth)
+                                        .onAppear {
+                                            withAnimation(shadowAnimation) {
+                                                shadowWidth = 1
+                                            }
+                                        }
+                                }
+                                .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+                            }
                             .scaledToFit()
                             .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
                     } else {

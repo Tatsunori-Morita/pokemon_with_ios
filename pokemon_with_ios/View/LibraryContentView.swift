@@ -40,15 +40,39 @@ struct LibraryContentView: View {
                             ZStack {
                                 WebImage(url: URL(string: cellViewModel.url))
                                     .resizable()
+                                    .placeholder {
+                                        GeometryReader { gm in
+                                            Image("Icon")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                                .cornerRadius(10)
+                                                .overlay {
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(.black, lineWidth: 1)
+                                                }
+                                                .position(x: gm.frame(in: .local).midX, y: gm.frame(in: .local).maxY - 30)
+                                        }
+                                    }
                                     .scaledToFit()
-                                    .foregroundColor(Color.image)
                                 Rectangle()
                                     .fill(.black.opacity(cellViewModel.opacity))
                                     .mask {
                                         WebImage(url: URL(string: cellViewModel.url))
                                             .resizable()
+                                            .placeholder {
+                                                GeometryReader { gm in
+                                                    Image("Icon")
+                                                        .resizable()
+                                                        .frame(width: 20, height: 20)
+                                                        .cornerRadius(10)
+                                                        .overlay {
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(.black, lineWidth: 1)
+                                                        }
+                                                        .position(x: gm.frame(in: .local).midX, y: gm.frame(in: .local).maxY - 30)
+                                                }
+                                            }
                                             .scaledToFit()
-                                            .foregroundColor(Color.image)
                                     }
                             }
                             Text(cellViewModel.no)

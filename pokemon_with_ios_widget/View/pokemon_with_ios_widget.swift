@@ -101,12 +101,7 @@ struct pokemon_with_ios_widgetEntryView<WidgetViewModel: IWidgetViewModel>: View
             systemConfig: systemConfig,
             pokemonEntity: entry.entity,
             isNew: entry.isNew)
-        
-        GeometryReader { geo in
-            ZStack {
-                PokemonContentView<PokemonContentViewModel>(viewModel: viewModel)
-            }
-        }
+        PokemonContentView<PokemonContentViewModel>(viewModel: viewModel)
         .widgetURL(URL(string: "\(entry.entity.id)"))
     }
 }
@@ -114,12 +109,14 @@ struct pokemon_with_ios_widgetEntryView<WidgetViewModel: IWidgetViewModel>: View
 @main
 struct pokemon_with_ios_widget: Widget {
     let kind: String = "pokemon_with_ios_widget"
+    let viewModel = WidgetViewModel()
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             pokemon_with_ios_widgetEntryView(
-                viewModel: WidgetViewModel(),
+                viewModel: viewModel,
                 entry: entry)
+            .widgetBackground(viewModel.getSystemConfig.getColorScheme == .light ? Color.layoutLight : Color.layoutDark)
         }
         .configurationDisplayName("configurationDisplayName")
         .description("description")
@@ -146,21 +143,36 @@ struct pokemon_with_ios_widget_Previews: PreviewProvider {
             pokemon_with_ios_widgetEntryView<PreviewWidgetViewModel>(
                 viewModel: jaViewModel,
                 entry: widgetEntity)
+            .widgetBackground(Color.layoutLight)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
             .previewDisplayName("Japanese")
             
             pokemon_with_ios_widgetEntryView<PreviewWidgetViewModel>(
                 viewModel: enViewModel,
                 entry: widgetEntity)
+            .widgetBackground(Color.layoutLight)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
             .previewDisplayName("English")
 
             pokemon_with_ios_widgetEntryView<PreviewWidgetViewModel>(
                 viewModel: jaViewModel,
                 entry: widgetEntity)
+            .widgetBackground(Color.layoutLight)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .previewDisplayName("iPhone SE")
+        }
+    }
+}
+
+extension View {
+    // ウィジェットのbackgroundを設定する
+    @ViewBuilder
+    func widgetBackground(_ color: Color) -> some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            self.containerBackground(color, for: .widget)
+        } else {
+            self.background(color)
         }
     }
 }

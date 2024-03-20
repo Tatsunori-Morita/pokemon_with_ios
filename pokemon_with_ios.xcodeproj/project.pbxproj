@@ -1052,7 +1052,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.5.0;
+				MARKETING_VERSION = 2.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tatsunori.morita.pokemonwith;
 				PRODUCT_NAME = pokemon_with_ios;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1084,7 +1084,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.5.0;
+				MARKETING_VERSION = 2.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tatsunori.morita.pokemonwith;
 				PRODUCT_NAME = pokemon_with_ios;
 				SWIFT_EMIT_LOC_STRINGS = YES;

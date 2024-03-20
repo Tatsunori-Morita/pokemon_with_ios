@@ -37,6 +37,7 @@ struct ModalPopUpView: View {
             }
             .padding(24)
         }
+        .padding(24)
         .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
         .background(Color.layout)
         .clipShape(RoundedRectangle(cornerRadius: 15))

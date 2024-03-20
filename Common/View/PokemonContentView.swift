@@ -166,7 +166,6 @@ struct PokemonContentView<PokemonContentViewModel: IPokemonContentViewModel>: Vi
                 Spacer()
             }
         }
-        .padding(24)
         .background(Color.layout)
         .environment(\.locale, .init(identifier: viewModel.getLanguageMode))
         .environment(\.colorScheme, viewModel.getColorScheme)

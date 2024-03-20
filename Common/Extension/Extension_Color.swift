@@ -15,7 +15,9 @@ extension Color {
     public static let image = Color("Image")
     public static let accent = Color("Accent")
     public static let new = Color("New")
-    
+    public static let layoutLight = Color("Layout_light")
+    public static let layoutDark = Color("Layout_dark")
+
     // Pokemon type
     public static let normal = Color("Normal")
     public static let fire = Color("Fire")

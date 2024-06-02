@@ -27,6 +27,11 @@
 親世代が知らない「ポケモン」について、こどもに教えてもらう。  
 逆に親世代も知っている「ポケモン」について、共通の話題として楽しむ、そんな時間を作り出せれば嬉しいです。
 
+![trim 70F78260-7149-4283-BDF3-14F19B33F136](https://github.com/Tatsunori-Morita/pokemon_with_ios/assets/56668897/31725bd6-33d2-4aa0-bfaa-6989c365e2ff)
+![trim A25E2588-40A3-4F1C-BEE8-58D2C6D490A1](https://github.com/Tatsunori-Morita/pokemon_with_ios/assets/56668897/a7f3c712-e600-423a-971e-19929da0d6fc)
+![trim FC2F39B1-1043-44F7-A455-68FEA9854207](https://github.com/Tatsunori-Morita/pokemon_with_ios/assets/56668897/e80a47ea-ae8c-4b9e-8c66-9549d985c594)
+
+
 ## メイン機能
 - ウィジェットにポケモンをランダム表示
 - ポケモン図鑑の閲覧
